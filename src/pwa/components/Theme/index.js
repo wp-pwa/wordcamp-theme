@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { inject } from 'mobx-react';
+import { connect } from 'react-redux';
+import { compose } from 'recompose';
+import { dep } from 'worona-deps';
 import { injectGlobal } from 'react-emotion';
 import { ThemeProvider } from 'emotion-theming';
 import Slider from '../Slider';
@@ -19,28 +22,68 @@ const theme = {
   color: 'steelblue',
 };
 
-const Theme = ({ columns, selectedColumnIndex }) => (
-  <ThemeProvider theme={theme}>
-    <Slider key="slider" index={selectedColumnIndex}>
-      {columns.map(({ selectedItem: { type, id, mstId } }) => {
-        if (type === 'page') {
-          if (id === 13) return <OnNow key={mstId} />;
-          if (id === 15) return <UpNext key={mstId} />;
-          if (id === 17) return <Schedule key={mstId} />;
-        }
+class Theme extends Component {
+  constructor() {
+    super();
 
-        return null;
-      })}
-    </Slider>
-  </ThemeProvider>
-);
+    this.handleOnTransitionEnd = this.handleOnTransitionEnd.bind(this);
+  }
+
+  handleOnTransitionEnd({ index, fromProps }) {
+    if (fromProps) return;
+
+    const { routeChangeRequested, columns } = this.props;
+    const { type, id } = columns[index].selectedItem;
+
+    routeChangeRequested({
+      selectedItem: {
+        type,
+        id,
+      },
+      method: 'push',
+    });
+  }
+
+  render() {
+    const { contextName, columns, selectedColumnIndex } = this.props;
+
+    return (
+      <ThemeProvider theme={theme}>
+        {contextName === 'home' ? (
+          <Slider
+            key="slider"
+            index={selectedColumnIndex}
+            onTransitionEnd={this.handleOnTransitionEnd}
+          >
+            {columns.map(({ selectedItem: { id, mstId } }) => {
+              if (id === 13) return <OnNow key={mstId} />;
+              if (id === 15) return <UpNext key={mstId} />;
+              return <Schedule key={mstId} />;
+            })}
+          </Slider>
+        ) : null}
+      </ThemeProvider>
+    );
+  }
+}
 
 Theme.propTypes = {
+  contextName: PropTypes.string.isRequired,
   columns: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   selectedColumnIndex: PropTypes.number.isRequired,
+  routeChangeRequested: PropTypes.func.isRequired,
 };
 
-export default inject(({ connection }) => ({
-  columns: connection.selectedContext.columns,
-  selectedColumnIndex: connection.selectedColumn.index,
-}))(Theme);
+const mapDispatchToProps = dispatch => ({
+  routeChangeRequested: payload =>
+    dispatch(dep('connection', 'actions', 'routeChangeRequested')(payload)),
+});
+
+export default compose(
+  connect(null, mapDispatchToProps),
+  inject(({ connection }) => ({
+    contextName: connection.selectedContext.options.name,
+    columns: connection.selectedContext.columns,
+    selectedColumnIndex: connection.selectedColumn.index,
+  })),
+)(Theme);

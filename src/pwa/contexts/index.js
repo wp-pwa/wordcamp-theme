@@ -21,4 +21,7 @@ export const homeContext = {
       },
     ],
   ],
+  options: {
+    name: 'home',
+  },
 };
