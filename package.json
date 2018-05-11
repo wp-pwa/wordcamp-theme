@@ -8,7 +8,12 @@
     "type": "git",
     "url": "git+https://github.com/frontity/wordcamp-theme.git"
   },
-  "keywords": ["wordcamp", "theme", "frontity", "package"],
+  "keywords": [
+    "wordcamp",
+    "theme",
+    "frontity",
+    "package"
+  ],
   "author": "eduardo@frontity.com, luis@frontity.com, david@frontity.com",
   "license": "MIT",
   "dependencies": {},
