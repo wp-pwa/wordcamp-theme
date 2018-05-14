@@ -11,6 +11,7 @@ import OnNow from '../OnNow';
 import UpNext from '../UpNext';
 import Schedule from '../Schedule';
 import Nav from '../Nav';
+import Menu from '../Menu';
 
 // eslint-disable-next-line
 injectGlobal`
@@ -20,7 +21,12 @@ injectGlobal`
 `;
 
 const theme = {
-  color: 'steelblue',
+  sizes: {
+    button: '54px',
+  },
+  paddings: {
+    menu: '0 15px',
+  },
 };
 
 class Theme extends Component {
@@ -64,6 +70,7 @@ class Theme extends Component {
               })}
             </Slider>
             <Nav key="nav" />
+            <Menu key="menu" />
           </Fragment>
         ) : null}
       </ThemeProvider>

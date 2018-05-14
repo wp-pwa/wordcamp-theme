@@ -16,7 +16,9 @@
   ],
   "author": "eduardo@frontity.com, luis@frontity.com, david@frontity.com",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "rc-switch": "^1.6.0"
+  },
   "devDependencies": {},
   "bugs": {
     "url": "https://github.com/frontity/wordcamp-theme/issues"

@@ -18,13 +18,13 @@ const Container = styled.div`
   bottom: 0;
   left: 0;
   width: 100vw;
-  height: 54px;
+  height: ${({ theme }) => theme.sizes.button};
   background: orange;
   display: flex;
 `;
 
 const MenuButton = styled.div`
-  width: 54px;
+  width: ${({ theme }) => theme.sizes.button};
   flex-shrink: 0;
   display: flex;
   justify-content: center;

@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unused-state */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import fastdom from 'fastdom/';
+import fastdom from 'fastdom';
 import fdPromised from 'fastdom/extensions/fastdom-promised';
 
 const fastdomPromised = fastdom.extend(fdPromised);
@@ -71,8 +71,9 @@ class Slider extends Component {
 
   static slideStyle = {
     width: '100%',
-    display: 'inline-block',
+    display: 'block',
     left: '0px',
+    top: '0px',
   };
 
   // HELPERS

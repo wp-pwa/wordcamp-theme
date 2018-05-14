@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { inject } from 'mobx-react';
+import { connect } from 'react-redux';
+import { compose } from 'recompose';
+import { dep } from 'worona-deps';
 import styled from 'react-emotion';
 
 const labels = {
@@ -21,8 +24,8 @@ const labels = {
   },
 };
 
-const NavItem = ({ label, isSelected }) => (
-  <Container isSelected={isSelected} label={label}>
+const NavItem = ({ label, isSelected, routeChangeRequested }) => (
+  <Container isSelected={isSelected} label={label} onClick={routeChangeRequested}>
     {labels[label].text}
   </Container>
 );
@@ -30,12 +33,26 @@ const NavItem = ({ label, isSelected }) => (
 NavItem.propTypes = {
   label: PropTypes.string.isRequired,
   isSelected: PropTypes.bool.isRequired,
+  routeChangeRequested: PropTypes.func.isRequired,
 };
 
-export default inject(({ connection }, { label }) => ({
-  isSelected: connection.selectedContext.getItem({ item: { type: 'page', id: labels[label].id } })
-    .isSelected,
-}))(NavItem);
+const mapDispatchToProps = (dispatch, { label }) => ({
+  routeChangeRequested: () =>
+    dispatch(
+      dep('connection', 'actions', 'routeChangeRequested')({
+        selectedItem: { type: 'page', id: labels[label].id },
+        method: 'push',
+      }),
+    ),
+});
+
+export default compose(
+  connect(null, mapDispatchToProps),
+  inject(({ connection }, { label }) => ({
+    isSelected: connection.selectedContext.getItem({ item: { type: 'page', id: labels[label].id } })
+      .isSelected,
+  })),
+)(NavItem);
 
 const Container = styled.div`
   box-sizing: border-box;

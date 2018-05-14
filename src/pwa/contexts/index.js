@@ -1,5 +1,3 @@
-/* eslint-disable import/prefer-default-export */
-
 export const homeContext = {
   columns: [
     [
@@ -23,5 +21,68 @@ export const homeContext = {
   ],
   options: {
     name: 'home',
+  },
+};
+
+export const venueContext = {
+  columns: [
+    [
+      {
+        type: 'page',
+        id: 23,
+      },
+      {
+        type: 'page',
+        id: 26,
+      },
+      {
+        type: 'page',
+        id: 28,
+      },
+      {
+        type: 'page',
+        id: 30,
+      },
+      {
+        type: 'page',
+        id: 32,
+      },
+      {
+        type: 'page',
+        id: 34,
+      },
+    ],
+  ],
+  options: {
+    name: 'venue',
+  },
+};
+
+export const announcementsContext = {
+  columns: [
+    [
+      {
+        type: 'latest',
+        id: 'post',
+        page: 1,
+      },
+    ],
+  ],
+  options: {
+    name: 'announcements',
+  },
+};
+
+export const creditsContext = {
+  columns: [
+    [
+      {
+        type: 'page',
+        id: 36,
+      },
+    ],
+  ],
+  options: {
+    name: 'credits',
   },
 };
