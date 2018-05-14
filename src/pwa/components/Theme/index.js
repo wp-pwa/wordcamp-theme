@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { inject } from 'mobx-react';
 import { connect } from 'react-redux';
@@ -10,6 +10,7 @@ import Slider from '../Slider';
 import OnNow from '../OnNow';
 import UpNext from '../UpNext';
 import Schedule from '../Schedule';
+import Nav from '../Nav';
 
 // eslint-disable-next-line
 injectGlobal`
@@ -50,17 +51,20 @@ class Theme extends Component {
     return (
       <ThemeProvider theme={theme}>
         {contextName === 'home' ? (
-          <Slider
-            key="slider"
-            index={selectedColumnIndex}
-            onTransitionEnd={this.handleOnTransitionEnd}
-          >
-            {columns.map(({ selectedItem: { id, mstId } }) => {
-              if (id === 13) return <OnNow key={mstId} />;
-              if (id === 15) return <UpNext key={mstId} />;
-              return <Schedule key={mstId} />;
-            })}
-          </Slider>
+          <Fragment>
+            <Slider
+              key="slider"
+              index={selectedColumnIndex}
+              onTransitionEnd={this.handleOnTransitionEnd}
+            >
+              {columns.map(({ selectedItem: { id, mstId } }) => {
+                if (id === 13) return <OnNow key={mstId} />;
+                if (id === 15) return <UpNext key={mstId} />;
+                return <Schedule key={mstId} />;
+              })}
+            </Slider>
+            <Nav key="nav" />
+          </Fragment>
         ) : null}
       </ThemeProvider>
     );
