@@ -7,6 +7,7 @@ import Andromeda from './Andromeda';
 import Hayabusa from './Hayabusa';
 import Cassini from './Cassini';
 import Rosetta from './Rosetta';
+import Nav from './Nav';
 
 const Venue = ({ columns, selectedColumnIndex, handleOnTransitionEnd }) => (
   <Fragment>
@@ -20,6 +21,7 @@ const Venue = ({ columns, selectedColumnIndex, handleOnTransitionEnd }) => (
         return <Rosetta key={mstId} />;
       })}
     </Slider>
+    <Nav />
   </Fragment>
 );
 

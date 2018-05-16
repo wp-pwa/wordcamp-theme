@@ -22,6 +22,7 @@ const theme = {
   },
   paddings: {
     menu: '0 15px',
+    venueNav: '0 15px',
   },
 };
 
