@@ -2,6 +2,9 @@ import { types, getParent } from 'mobx-state-tree';
 
 const Id = types.union(types.number, types.string);
 
+// Hours -- correction
+const hoursOffset = -2;
+
 const Session = types
   .model('Session')
   .props({
@@ -12,6 +15,8 @@ const Session = types
   })
   .views(self => {
     const getConnection = () => getParent(self, 3).connection;
+    const date = new Date();
+
     return {
       get entity() {
         return getConnection().entity('wcb_session', self.entityId);
@@ -24,6 +29,14 @@ const Session = types
       },
       get categories() {
         return self.categoryIds.map(id => getConnection().entity('wcb_session_category', id));
+      },
+      get time() {
+        const { _wcpt_session_time: time } = self.entity.meta;
+        return (time + hoursOffset * 3600) * 1000; // seconds to milliseconds
+      },
+      get date() {
+        date.setTime(self.time);
+        return date;
       },
     };
   });

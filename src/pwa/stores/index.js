@@ -12,43 +12,29 @@ export default types
   })
   .views(self => ({
     session(id) {
-      return self.sessions.get(id);
+      return self.sessions.get(id.toString());
     },
     track(id) {
-      return self.tracks.get(id);
+      return self.tracks.get(id.toString());
+    },
+    trackByName(name) {
+      return Array.from(self.tracks.values()).find(({ entity }) => entity.name === name);
     },
     sessionsOnNow(date) {
-      const currentTime = date || new Date();
-
-      return Array.from(self.tracks.values()).map(({ sessions }) => {
-        // First, order the sessions of each track by time (reverse ordered)
-        const sessionsByTime = sessions.sort((a, b) => {
-          const { _wcpt_session_time: timeA } = a.entity.meta;
-          const { _wcpt_session_time: timeB } = b.entity.meta;
-          return timeB - timeA; // reverse order
-        });
-
-        // Then, return the first session
-        return sessionsByTime.find(({ entity }) => {
-          const { _wcpt_session_time: time } = entity.meta;
-          return time < currentTime;
-        });
-      })
+      return Array.from(self.tracks.values()).map(track => track.sessionOnNow(date));
     },
-    // sessionsUpNext() {
-    //
-    // },
-    // sessionsBy(track, date, onlyFavourites = false) {
-    //
-    // }
+    sessionsUpNext(date) {
+      return Array.from(self.tracks.values()).map(track => track.sessionUpNext(date));
+    },
   }))
   .actions(self => ({
     addSession(session) {
-      self.sessions.set(session.entityId, session);
-      session.trackIds.forEach(id => {
+      self.sessions.set(session.entityId.toString(), session);
+      session.trackIds.forEach(trackId => {
         // initialize track if it does not exist yet
-        if (!self.tracks.has(id)) self.tracks.set(id, { entityId: id });
+        const id = trackId.toString(); // normalize id
+        if (!self.tracks.has(id)) self.tracks.set(id.toString(), { entityId: id });
         self.tracks.get(id).sessionIds.push(session.entityId);
-      })
+      });
     },
   }));
