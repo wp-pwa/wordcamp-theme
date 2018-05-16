@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { inject } from 'mobx-react';
-import { dep } from 'worona-deps';
 import styled from 'react-emotion';
 import { venueContext, announcementsContext, creditsContext } from '../../contexts';
+import Link from '../Link';
 
 const routes = {
   'venue-map': {
@@ -24,7 +24,7 @@ const routes = {
   },
 };
 
-const MenuRoute = ({ type, id, page, context, text, Link }) => (
+const MenuRoute = ({ type, id, page, context, text }) => (
   <Container>
     <Link type={type} id={id} page={page} context={context}>
       <A>{text}</A>
@@ -38,7 +38,6 @@ MenuRoute.propTypes = {
   page: PropTypes.number,
   context: PropTypes.shape({}).isRequired,
   text: PropTypes.string.isRequired,
-  Link: PropTypes.func.isRequired,
 };
 
 MenuRoute.defaultProps = {
@@ -54,7 +53,6 @@ export default inject(({ connection }, { name }) => {
     page,
     context,
     text: connection.entity(type, id).title,
-    Link: dep('connection', 'components', 'Link'),
   };
 })(MenuRoute);
 
