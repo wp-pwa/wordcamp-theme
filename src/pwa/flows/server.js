@@ -11,7 +11,10 @@ const speakersMiddleware = (call, next, abort) => {
 
     if (entity.type === 'wcb_session') {
       const { theme } = call.tree;
-      const { id, _links: { speakers = [] } } = entity;
+      const {
+        id,
+        _links: { speakers = [] },
+      } = entity;
       theme.addSpeakersBySession(id.toString(), speakers.map(({ href }) => extractId(href)));
     }
   }
@@ -55,11 +58,24 @@ export default self =>
       }),
     );
 
+    // Request needed pages:
+    store.dispatch(
+      customRequested({
+        custom: { name: 'pages', type: 'page', page: 1 },
+        params: {
+          per_page: 100,
+          _embed: false,
+          include: '15, 17, 19, 23, 26, 28, 30, 32, 34, 36',
+        },
+      }),
+    );
+
     yield when(
       () =>
         self.connection.entity(type, id).isReady &&
         self.connection.custom('sessions').isReady &&
         self.connection.custom('speakers').isReady &&
-        self.connection.custom('tracks').isReady,
+        self.connection.custom('tracks').isReady &&
+        self.connection.custom('pages').isReady,
     );
   });

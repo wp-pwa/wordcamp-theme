@@ -7,11 +7,17 @@ import { dep } from 'worona-deps';
 import { injectGlobal } from 'react-emotion';
 import { ThemeProvider } from 'emotion-theming';
 import Slider from '../Slider';
-import OnNow from '../OnNow';
-import UpNext from '../UpNext';
-import Schedule from '../Schedule';
-import Nav from '../Nav';
+import OnNow from '../Home/OnNow';
+import UpNext from '../Home/UpNext';
+import Schedule from '../Home/Schedule';
+import HomeNav from '../Home/Nav';
 import Menu from '../Menu';
+import Venue from '../Venue/Venue';
+import MilkyWay from '../Venue/MilkyWay';
+import Andromeda from '../Venue/Andromeda';
+import Hayabusa from '../Venue/Hayabusa';
+import Cassini from '../Venue/Cassini';
+import Rosetta from '../Venue/Rosetta';
 
 // eslint-disable-next-line
 injectGlobal`
@@ -56,23 +62,45 @@ class Theme extends Component {
 
     return (
       <ThemeProvider theme={theme}>
-        {contextName === 'home' ? (
-          <Fragment>
-            <Slider
-              key="slider"
-              index={selectedColumnIndex}
-              onTransitionEnd={this.handleOnTransitionEnd}
-            >
-              {columns.map(({ selectedItem: { id, mstId } }) => {
-                if (id === 13) return <OnNow key={mstId} />;
-                if (id === 15) return <UpNext key={mstId} />;
-                return <Schedule key={mstId} />;
-              })}
-            </Slider>
-            <Nav key="nav" />
-            <Menu key="menu" />
-          </Fragment>
-        ) : null}
+        <Fragment>
+          {contextName === 'home' ? (
+            <Fragment>
+              <Slider
+                key="slider"
+                index={selectedColumnIndex}
+                onTransitionEnd={this.handleOnTransitionEnd}
+              >
+                {columns.map(({ selectedItem: { id, mstId } }) => {
+                  if (id === 13) return <OnNow key={mstId} />;
+                  if (id === 15) return <UpNext key={mstId} />;
+                  return <Schedule key={mstId} />;
+                })}
+              </Slider>
+              <HomeNav key="nav" />
+              <Menu key="menu" />
+            </Fragment>
+          ) : null}
+          {contextName === 'venue' ? (
+            <Fragment>
+              <Slider
+                key="slider"
+                index={selectedColumnIndex}
+                onTransitionEnd={this.handleOnTransitionEnd}
+              >
+                {columns.map(({ selectedItem: { id, mstId } }) => {
+                  if (id === 23) return <Venue key={mstId} />;
+                  if (id === 26) return <MilkyWay key={mstId} />;
+                  if (id === 28) return <Andromeda key={mstId} />;
+                  if (id === 30) return <Hayabusa key={mstId} />;
+                  if (id === 32) return <Cassini key={mstId} />;
+                  return <Rosetta key={mstId} />;
+                })}
+              </Slider>
+            </Fragment>
+          ) : null}
+          {contextName === 'announcements' ? <div>announcements</div> : null}
+          {contextName === 'credits' ? <div>credits</div> : null}
+        </Fragment>
       </ThemeProvider>
     );
   }

@@ -16,6 +16,7 @@ const routes = {
     id: 'post',
     page: 1,
     context: announcementsContext,
+    text: 'Announcements',
   },
   credits: {
     type: 'page',
@@ -45,14 +46,14 @@ MenuRoute.defaultProps = {
 };
 
 export default inject(({ connection }, { name }) => {
-  const { type, id, page, context } = routes[name];
+  const { type, id, page, context, text } = routes[name];
 
   return {
     type,
     id,
     page,
     context,
-    text: connection.entity(type, id).title,
+    text: connection.entity(type, id).title || text,
   };
 })(MenuRoute);
 
