@@ -5,17 +5,30 @@ import { homeContext } from '../contexts';
 
 const extractId = href => /\/(\d+)$/g.exec(href)[1];
 
-const speakersMiddleware = (call, next, abort) => {
+const sessionMiddleware = (call, next) => {
   if (call.name === 'addEntity') {
     const [{ entity }] = call.args;
 
     if (entity.type === 'wcb_session') {
       const { theme } = call.tree;
+
       const {
-        id,
+        id: entityId,
+        session_track: trackIds,
+        session_category: categoryIds,
         _links: { speakers = [] },
       } = entity;
-      theme.addSpeakersBySession(id.toString(), speakers.map(({ href }) => extractId(href)));
+
+      const speakerIds = speakers.map(({ href }) => extractId(href));
+
+      const session = {
+        entityId,
+        trackIds,
+        categoryIds,
+        speakerIds,
+      };
+
+      theme.addSession(session);
     }
   }
   next(call);
@@ -23,7 +36,7 @@ const speakersMiddleware = (call, next, abort) => {
 
 export default self =>
   flow(function* ThemeServer({ selectedItem }) {
-    addMiddleware(self, speakersMiddleware);
+    addMiddleware(self, sessionMiddleware);
 
     const { store } = getEnv(self);
     const routeChangeSucceed = dep('connection', 'actions', 'routeChangeSucceed');
