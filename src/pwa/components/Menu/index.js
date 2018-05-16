@@ -6,10 +6,10 @@ import MenuHeader from './MenuHeader';
 import MenuList from './MenuList';
 import MenuNotifications from './MenuNotifications';
 
-const Menu = ({ isOpen }) =>
+const Menu = ({ isOpen, close }) =>
   isOpen ? (
     <Container>
-      <Overlay />
+      <Overlay onClick={close} />
       <InnerContainer>
         <MenuHeader />
         <MenuList />
@@ -20,10 +20,12 @@ const Menu = ({ isOpen }) =>
 
 Menu.propTypes = {
   isOpen: PropTypes.bool.isRequired,
+  close: PropTypes.func.isRequired,
 };
 
 export default inject(({ theme }) => ({
   isOpen: theme.menu.isOpen,
+  close: theme.menu.close,
 }))(Menu);
 
 const Container = styled.div`

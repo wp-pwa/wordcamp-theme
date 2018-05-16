@@ -1,14 +1,22 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { inject } from 'mobx-react';
 import styled from 'react-emotion';
 
-const MenuHeader = () => (
+const MenuHeader = ({ close }) => (
   <Container>
     <Title>WordCamp Europe 2018</Title>
-    <Close>Close</Close>
+    <Close onClick={close}>Close</Close>
   </Container>
 );
 
-export default MenuHeader;
+MenuHeader.propTypes = {
+  close: PropTypes.func.isRequired,
+};
+
+export default inject(({ theme }) => ({
+  close: theme.menu.close,
+}))(MenuHeader);
 
 const Container = styled.div`
   height: ${({ theme }) => theme.sizes.button};

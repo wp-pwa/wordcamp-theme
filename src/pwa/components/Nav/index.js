@@ -1,17 +1,25 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { inject } from 'mobx-react';
 import styled from 'react-emotion';
 import NavItem from './NavItem';
 
 const labels = ['on-now', 'up-next', 'schedule'];
 
-const Nav = () => (
+const Nav = ({ openMenu }) => (
   <Container>
     {labels.map(label => <NavItem key={label} label={label} />)}
-    <MenuButton>Menu</MenuButton>
+    <MenuButton onClick={openMenu}>Menu</MenuButton>
   </Container>
 );
 
-export default Nav;
+Nav.propTypes = {
+  openMenu: PropTypes.func.isRequired,
+};
+
+export default inject(({ theme }) => ({
+  openMenu: theme.menu.open,
+}))(Nav);
 
 const Container = styled.div`
   position: fixed;
