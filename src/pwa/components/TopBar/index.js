@@ -1,16 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { inject } from 'mobx-react';
 import { connect } from 'react-redux';
+import { compose } from 'recompose';
 import { dep } from 'worona-deps';
 import styled from 'react-emotion';
+import { homeContext } from '../../contexts';
+import Link from '../Link';
 
-const TopBar = ({ previousContextRequested }) => (
+const TopBar = ({ contextIndex, previousContextRequested }) => (
   <Container>
-    <CloseButton onClick={previousContextRequested}>Close</CloseButton>
+    {contextIndex ? (
+      <CloseButton onClick={previousContextRequested}>Close</CloseButton>
+    ) : (
+      <CloseButton>
+        <Link type="page" id={13} context={homeContext}>
+          <A>Close</A>
+        </Link>
+      </CloseButton>
+    )}
   </Container>
 );
 
 TopBar.propTypes = {
+  contextIndex: PropTypes.number.isRequired,
   previousContextRequested: PropTypes.func.isRequired,
 };
 
@@ -19,7 +32,12 @@ const mapDispatchToProps = dispatch => ({
     dispatch(dep('connection', 'actions', 'previousContextRequested')()),
 });
 
-export default connect(null, mapDispatchToProps)(TopBar);
+export default compose(
+  connect(null, mapDispatchToProps),
+  inject(({ connection }) => ({
+    contextIndex: connection.selectedContext.index,
+  })),
+)(TopBar);
 
 const Container = styled.div`
   position: fixed;
@@ -38,4 +56,12 @@ const CloseButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+const A = styled.a`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
