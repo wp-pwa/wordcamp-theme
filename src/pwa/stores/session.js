@@ -1,17 +1,18 @@
 import { types, getParent } from 'mobx-state-tree';
+import Speaker from './speaker';
+import Track from './track';
 
 const Id = types.union(types.number, types.string);
 
-// Hours -- correction
+// Hours -- correction - Take it from database
 const hoursOffset = -2;
 
 const Session = types
   .model('Session')
   .props({
     entityId: types.identifier(Id),
-    speakerIds: types.optional(types.array(Id), []),
-    trackIds: types.optional(types.array(Id), []),
-    categoryIds: types.optional(types.array(Id), []),
+    speakers: types.optional(types.array(types.reference(types.late(() => Speaker))), []),
+    tracks: types.optional(types.array(types.reference(types.late(() => Track))), []),
   })
   .views(self => {
     const getConnection = () => getParent(self, 3).connection;
@@ -21,14 +22,11 @@ const Session = types
       get entity() {
         return getConnection().entity('wcb_session', self.entityId);
       },
-      get speakers() {
-        return self.speakerIds.map(id => getConnection().entity('wcb_speaker', id));
+      get title() {
+        return self.entity.title;
       },
-      get tracks() {
-        return self.trackIds.map(id => getConnection().entity('wcb_track', id));
-      },
-      get categories() {
-        return self.categoryIds.map(id => getConnection().entity('wcb_session_category', id));
+      get link() {
+        return self.entity.link;
       },
       get time() {
         const { _wcpt_session_time: time } = self.entity.meta;
@@ -39,6 +37,12 @@ const Session = types
         return date;
       },
     };
-  });
+  })
+  .actions(self => ({
+    afterCreate() {
+      self.speakers.forEach(s => s.sessions.includes(self) || s.sessions.push(self));
+      self.tracks.forEach(s => s.rawSessions.includes(self) || s.rawSessions.push(self));
+    },
+  }));
 
 export default Session;

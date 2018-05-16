@@ -2,6 +2,7 @@ import { types } from 'mobx-state-tree';
 import Menu from './menu';
 import Session from './session';
 import Track from './track';
+import Speaker from './speaker';
 
 export default types
   .model('Wordcamp')
@@ -9,6 +10,7 @@ export default types
     menu: types.optional(Menu, {}),
     sessions: types.optional(types.map(Session), {}),
     tracks: types.optional(types.map(Track), {}),
+    speakers: types.optional(types.map(Speaker), {}),
   })
   .views(self => ({
     session(id) {
@@ -17,24 +19,24 @@ export default types
     track(id) {
       return self.tracks.get(id.toString());
     },
-    trackByName(name) {
-      return Array.from(self.tracks.values()).find(({ entity }) => entity.name === name);
-    },
-    sessionsOnNow(date) {
-      return Array.from(self.tracks.values()).map(track => track.sessionOnNow(date));
-    },
-    sessionsUpNext(date) {
-      return Array.from(self.tracks.values()).map(track => track.sessionUpNext(date));
+    speaker(id) {
+      return self.speakers.get(id.toString());
     },
   }))
   .actions(self => ({
-    addSession(session) {
-      self.sessions.set(session.entityId.toString(), session);
-      session.trackIds.forEach(trackId => {
-        // initialize track if it does not exist yet
-        const id = trackId.toString(); // normalize id
-        if (!self.tracks.has(id)) self.tracks.set(id.toString(), { entityId: id });
-        self.tracks.get(id).sessionIds.push(session.entityId);
+    addSession({ entityId, trackIds, speakerIds }) {
+      const tracks = trackIds.map(id => {
+        const strId = id.toString();
+        if (!self.tracks.has(strId)) self.tracks.set(strId, { entityId: id });
+        return self.tracks.get(strId);
       });
+
+      const speakers = speakerIds.map(id => {
+        const strId = id.toString();
+        if (!self.speakers.has(strId)) self.speakers.set(strId, { entityId: id });
+        return self.speakers.get(strId);
+      });
+
+      self.sessions.set(entityId.toString(), { entityId, tracks, speakers });
     },
   }));

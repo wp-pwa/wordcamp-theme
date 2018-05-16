@@ -15,7 +15,7 @@ const sessionMiddleware = (call, next) => {
       const {
         id: entityId,
         session_track: trackIds,
-        session_category: categoryIds,
+        // session_category: categoryIds,
         _links: { speakers = [] },
       } = entity;
 
@@ -24,7 +24,7 @@ const sessionMiddleware = (call, next) => {
       const session = {
         entityId,
         trackIds,
-        categoryIds,
+        // categoryIds,
         speakerIds,
       };
 
