@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import Top from './Top';
+import TopBar from '../TopBar';
 import Slider from '../Slider';
 import VenueMap from './VenueMap';
 import MilkyWay from './MilkyWay';
@@ -22,7 +22,7 @@ const Venue = ({ columns, selectedColumnIndex, handleOnTransitionEnd }) => (
         return <Rosetta key={mstId} />;
       })}
     </Slider>
-    <Top />
+    <TopBar />
     <Nav />
   </Fragment>
 );

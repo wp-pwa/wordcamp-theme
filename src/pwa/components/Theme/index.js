@@ -8,6 +8,8 @@ import { injectGlobal } from 'react-emotion';
 import { ThemeProvider } from 'emotion-theming';
 import Home from '../Home';
 import Venue from '../Venue';
+import Announcements from '../Announcements';
+import Credits from '../Credits';
 
 // eslint-disable-next-line
 injectGlobal`
@@ -24,6 +26,7 @@ const theme = {
     menu: '0 15px',
     venueNav: '0 15px',
     venue: '54px 0',
+    credits: '54px 0 0 0',
   },
 };
 
@@ -69,8 +72,8 @@ class Theme extends Component {
               handleOnTransitionEnd={this.handleOnTransitionEnd}
             />
           ) : null}
-          {contextName === 'announcements' ? <div>announcements</div> : null}
-          {contextName === 'credits' ? <div>credits</div> : null}
+          {contextName === 'announcements' ? <Announcements /> : null}
+          {contextName === 'credits' ? <Credits /> : null}
         </Fragment>
       </ThemeProvider>
     );

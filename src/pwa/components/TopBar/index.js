@@ -3,7 +3,7 @@ import styled from 'react-emotion';
 import { homeContext } from '../../contexts';
 import Link from '../Link';
 
-const Top = () => (
+const TopBar = () => (
   <Container>
     <CloseButton>
       <Link type="page" id={13} context={homeContext}>
@@ -13,7 +13,7 @@ const Top = () => (
   </Container>
 );
 
-export default Top;
+export default TopBar;
 
 const Container = styled.div`
   position: fixed;
