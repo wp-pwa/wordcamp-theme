@@ -1,19 +1,25 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { dep } from 'worona-deps';
 import styled from 'react-emotion';
-import { homeContext } from '../../contexts';
-import Link from '../Link';
 
-const TopBar = () => (
+const TopBar = ({ previousContextRequested }) => (
   <Container>
-    <CloseButton>
-      <Link type="page" id={13} context={homeContext}>
-        <A>Close</A>
-      </Link>
-    </CloseButton>
+    <CloseButton onClick={previousContextRequested}>Close</CloseButton>
   </Container>
 );
 
-export default TopBar;
+TopBar.propTypes = {
+  previousContextRequested: PropTypes.func.isRequired,
+};
+
+const mapDispatchToProps = dispatch => ({
+  previousContextRequested: () =>
+    dispatch(dep('connection', 'actions', 'previousContextRequested')()),
+});
+
+export default connect(null, mapDispatchToProps)(TopBar);
 
 const Container = styled.div`
   position: fixed;
@@ -29,11 +35,6 @@ const Container = styled.div`
 const CloseButton = styled.div`
   height: ${({ theme }) => theme.sizes.button};
   width: ${({ theme }) => theme.sizes.button};
-`;
-
-const A = styled.a`
-  height: 100%;
-  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
