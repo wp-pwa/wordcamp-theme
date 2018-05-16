@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { inject } from 'mobx-react';
 import styled from 'react-emotion';
 
 const links = {
@@ -13,8 +14,8 @@ const links = {
   },
 };
 
-const MenuLink = ({ name }) => (
-  <Container>
+const MenuLink = ({ name, closeMenu }) => (
+  <Container onClick={closeMenu}>
     <Link href={links[name].url} target="_blank" rel="noopener noreferrer">
       {links[name].text}
     </Link>
@@ -23,9 +24,12 @@ const MenuLink = ({ name }) => (
 
 MenuLink.propTypes = {
   name: PropTypes.string.isRequired,
+  closeMenu: PropTypes.func.isRequired,
 };
 
-export default MenuLink;
+export default inject(({ theme }) => ({
+  closeMenu: theme.menu.close,
+}))(MenuLink);
 
 const Container = styled.div`
   height: ${({ theme }) => theme.sizes.button};

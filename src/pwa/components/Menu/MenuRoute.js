@@ -25,8 +25,8 @@ const routes = {
   },
 };
 
-const MenuRoute = ({ type, id, page, context, text }) => (
-  <Container>
+const MenuRoute = ({ type, id, page, context, text, closeMenu }) => (
+  <Container onClick={closeMenu}>
     <Link type={type} id={id} page={page} context={context}>
       <A>{text}</A>
     </Link>
@@ -39,13 +39,14 @@ MenuRoute.propTypes = {
   page: PropTypes.number,
   context: PropTypes.shape({}).isRequired,
   text: PropTypes.string.isRequired,
+  closeMenu: PropTypes.func.isRequired,
 };
 
 MenuRoute.defaultProps = {
   page: null,
 };
 
-export default inject(({ connection }, { name }) => {
+export default inject(({ connection, theme }, { name }) => {
   const { type, id, page, context, text } = routes[name];
 
   return {
@@ -54,6 +55,7 @@ export default inject(({ connection }, { name }) => {
     page,
     context,
     text: connection.entity(type, id).title || text,
+    closeMenu: theme.menu.close,
   };
 })(MenuRoute);
 
