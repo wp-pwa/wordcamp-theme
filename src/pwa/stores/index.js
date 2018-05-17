@@ -33,19 +33,33 @@ export default types
     },
     sessionsOnNow(date) {
       return self.tracks
-        .slice(1)
+        .slice(1) // removes "Networking" track
         .map(t => t.sessionOnNow(date))
+        .filter(
+          // filters sessions in multiple tracks that are not
+          // taking place in all of them (like "Lunch").
+          (session, index, sArray) =>
+            (session && sArray.filter(s => s === session).length === 1) ||
+            sArray.filter(s => s === session).length === sArray.length,
+        )
         .reduce((all, s) => {
-          if (s && !all.includes(s)) all.push(s);
+          if (!all.includes(s)) all.push(s);
           return all;
         }, []);
     },
     sessionsUpNext(date) {
       return self.tracks
-        .slice(1)
+        .slice(1) // removes "Networking" track
         .map(t => t.sessionUpNext(date))
+        .filter(
+          // filters sessions in multiple tracks that are not
+          // taking place in all of them (like "Lunch").
+          (session, index, sArray) =>
+            (session && sArray.filter(s => s === session).length === 1) ||
+            sArray.filter(s => s === session).length === sArray.length,
+        )
         .reduce((all, s) => {
-          if (s && !all.includes(s)) all.push(s);
+          if (!all.includes(s)) all.push(s);
           return all;
         }, []);
     },
