@@ -38,15 +38,15 @@ const Session = types
       get link() {
         return self.entity.link;
       },
-      get time() {
+      get timestamp() {
         const { _wcpt_session_time: time } = self.entity.meta;
         return (time + hoursOffset * 3600) * 1000; // seconds to milliseconds
       },
       get date() {
-        date.setTime(self.time);
+        date.setTime(self.timestamp);
         return date;
       },
-      get hour() {
+      get time() {
         const hours = self.date.getHours().toString();
         const minutes = self.date.getMinutes().toString();
         return `${hours.padStart(2,'0')}:${minutes.padStart(2,'0')}`

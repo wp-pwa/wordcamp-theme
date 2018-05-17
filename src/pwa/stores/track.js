@@ -18,6 +18,9 @@ const Track = types
       get name() {
         return self.entity.name;
       },
+      get sessionsSorted() {
+        return self.sessions.sort(({ date: a }, { date: b }) => a.getTime() - b.getTime());
+      },
       sessionsBy(date, onlyFavorites = false) {
         const day = new Date(date); // Copy date passed as argument
         day.setHours(0);
@@ -28,8 +31,7 @@ const Track = types
         const nextDay = new Date(day);
         nextDay.setHours(24);
 
-        return self.sessions
-          .sort(({ date: a }, { date: b }) => a.getTime() - b.getTime())
+        return self.sessionsSorted
           .filter(
             session =>
               (!onlyFavorites || session.isFavorite) &&
@@ -43,7 +45,7 @@ const Track = types
       },
       sessionUpNext(date) {
         const currentTime = date || new Date();
-        return self.sessionsBy(currentTime).find(({ date: d }) => d > currentTime);
+        return self.sessionsSorted.find(({ date: d }) => d > currentTime);
       },
     };
   })
