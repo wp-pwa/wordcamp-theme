@@ -77,7 +77,7 @@ export default self =>
         params: {
           per_page: 100,
           _embed: false,
-          include: '15, 17, 19, 23, 26, 28, 30, 32, 34, 36',
+          include: '13, 15, 17, 19, 23, 26, 28, 30, 32, 34, 36',
         },
       }),
     ]);
