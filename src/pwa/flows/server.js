@@ -1,7 +1,7 @@
 import { flow, getEnv, addMiddleware } from 'mobx-state-tree';
 import { when } from 'mobx';
 import { dep } from 'worona-deps';
-import { homeContext } from '../contexts';
+import { homeContext, venueContext, announcementsContext, creditsContext } from '../contexts';
 
 const extractId = href => /\/(\d+)$/g.exec(href)[1];
 
@@ -42,8 +42,18 @@ export default self =>
     const routeChangeSucceed = dep('connection', 'actions', 'routeChangeSucceed');
     const customRequested = dep('connection', 'actions', 'customRequested');
 
-    const { type, id } = selectedItem;
-    const action = { selectedItem: { type, id }, context: homeContext };
+    const { type, id, page } = selectedItem;
+    const action = { selectedItem: { type, id, page } };
+
+    if (type === 'page') {
+      if ([23, 26, 28, 30, 32, 34].includes(id)) action.context = venueContext;
+      else if (id === 36) action.context = creditsContext;
+      else action.context = homeContext;
+    } else if (type === 'latest' && id === 'post') {
+      action.context = announcementsContext;
+    } else {
+      action.context = homeContext;
+    }
 
     store.dispatch(routeChangeSucceed(action));
 
