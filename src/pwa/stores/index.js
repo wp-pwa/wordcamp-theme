@@ -17,7 +17,7 @@ export default types
       return Array.from(self.sessionsMap.values());
     },
     get tracks() {
-      return Array.from(self.tracksMap.values());
+      return Array.from(self.tracksMap.values()).sort((a, b) => a.id - b.id);
     },
     get speakers() {
       return Array.from(self.speakersMap.values());
@@ -32,30 +32,36 @@ export default types
       return self.speakersMap.get(id) || self.speakersMap.get(id.toString());
     },
     sessionsOnNow(date) {
-      return self.tracks.slice(1).map(t => t.sessionOnNow(date)).reduce((all, s) => {
-        if (s && !all.includes(s)) all.push(s);
-        return all;
-      }, []);
+      return self.tracks
+        .slice(1)
+        .map(t => t.sessionOnNow(date))
+        .reduce((all, s) => {
+          if (s && !all.includes(s)) all.push(s);
+          return all;
+        }, []);
     },
     sessionsUpNext(date) {
-      return self.tracks.slice(1).map(t => t.sessionUpNext(date)).reduce((all, s) => {
-        if (s && !all.includes(s)) all.push(s);
-        return all;
-      }, []);
+      return self.tracks
+        .slice(1)
+        .map(t => t.sessionUpNext(date))
+        .reduce((all, s) => {
+          if (s && !all.includes(s)) all.push(s);
+          return all;
+        }, []);
     },
   }))
   .actions(self => ({
-    addSession({ entityId, trackIds, speakerIds }) {
+    addSession({ id: sessionId, trackIds, speakerIds }) {
       const tracks = trackIds.map(id => {
-        if (!self.track(id)) self.tracksMap.set(id, { entityId: id });
+        if (!self.track(id)) self.tracksMap.set(id, { id });
         return self.track(id);
       });
 
       const speakers = speakerIds.map(id => {
-        if (!self.speaker(id)) self.speakersMap.set(id, { entityId: id });
+        if (!self.speaker(id)) self.speakersMap.set(id, { id });
         return self.speaker(id);
       });
 
-      self.sessionsMap.set(entityId, { entityId, tracks, speakers });
+      self.sessionsMap.set(sessionId, { id: sessionId, tracks, speakers });
     },
   }));
