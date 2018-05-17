@@ -17,7 +17,7 @@ export default types
       return Array.from(self.sessionsMap.values());
     },
     get tracks() {
-      return Array.from(self.tracksMap.values());
+      return Array.from(self.tracksMap.values()).sort((a, b) => a.id - b.id);
     },
     get speakers() {
       return Array.from(self.speakersMap.values());
