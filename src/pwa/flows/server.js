@@ -42,8 +42,8 @@ export default self =>
     const routeChangeSucceed = dep('connection', 'actions', 'routeChangeSucceed');
     const customRequested = dep('connection', 'actions', 'customRequested');
 
-    const { type, id } = selectedItem;
-    const action = { selectedItem: { type, id } };
+    const { type, id, page } = selectedItem;
+    const action = { selectedItem: { type, id, page } };
 
     if (type === 'page') {
       if ([23, 26, 28, 30, 32, 34].includes(id)) action.context = venueContext;
