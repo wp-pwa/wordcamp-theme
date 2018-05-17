@@ -47,10 +47,17 @@ const Session = types
         date.setTime(self.timestamp);
         return date;
       },
-      get time() {
+      get startTime() {
         const hours = self.date.getHours().toString();
         const minutes = self.date.getMinutes().toString();
         return `${hours.padStart(2,'0')}:${minutes.padStart(2,'0')}`
+      },
+      get endTime() {
+        return self.nextSession.startTime;
+      },
+      get nextSession() {
+        const { sessionsSorted } = self.tracks[0];
+        return sessionsSorted[sessionsSorted.indexOf(self) + 1]
       },
       get isFavorite() {
         return false; // no favorites yet
@@ -58,6 +65,9 @@ const Session = types
     };
   })
   .actions(self => ({
+    setFavorite(value) {
+      self.isFavorite = value;
+    },
     afterCreate() {
       self.speakers.forEach(speaker => speaker && speaker.addSession(self));
       self.tracks.forEach(track => track && track.addSession(self));

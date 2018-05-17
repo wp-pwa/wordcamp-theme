@@ -13,7 +13,7 @@ const SessionCard = ({ session }) => (
     <Body>
       <h4 dangerouslySetInnerHTML={{ __html: session.title }} />
       <p>{session.speakers.map(speaker => speaker.name).join(', ')}</p>
-      <p>{session.time}</p>
+      <p>{session.startTime} - {session.endTime}</p>
     </Body>
   </Container>
 );
