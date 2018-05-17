@@ -8,19 +8,20 @@ const hoursOffset = -2;
 const Id = types.union(types.number, types.string);
 
 const SpeakerReference = types.reference(types.late(() => Speaker), {
-  get: (entityId, parent) => resolveIdentifier(Speaker, parent, entityId) || null,
-  set: speaker => speaker.entityId || speaker,
+  get: (id, parent) => resolveIdentifier(Speaker, parent, id) || null,
+  set: speaker => speaker.id || speaker,
 });
 
 const TrackReference = types.reference(types.late(() => Track), {
-  get: (entityId, parent) => resolveIdentifier(Track, parent, entityId) || null,
-  set: track => track.entityId || track,
+  get: (id, parent) => resolveIdentifier(Track, parent, id) || null,
+  set: track => track.id || track,
 });
 
 const Session = types
   .model('Session')
   .props({
-    entityId: types.identifier(Id),
+    id: types.identifier(Id),
+    type: types.optional(types.string, 'wcb_session'),
     speakers: types.optional(types.array(SpeakerReference), []),
     tracks: types.optional(types.array(TrackReference), []),
   })
@@ -30,7 +31,7 @@ const Session = types
 
     return {
       get entity() {
-        return getConnection().entity('wcb_session', self.entityId);
+        return getConnection().entity(self.type, self.id);
       },
       get title() {
         return self.entity.title;

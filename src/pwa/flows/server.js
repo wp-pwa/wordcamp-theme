@@ -11,7 +11,7 @@ const sessionMiddleware = (call, next) => {
       const { theme } = call.tree;
 
       const {
-        id: entityId,
+        id,
         session_track: trackIds,
         // session_category: categoryIds,
         _links: { speakers = [] },
@@ -20,7 +20,7 @@ const sessionMiddleware = (call, next) => {
       const speakerIds = speakers.map(({ href }) => parseInt(extractId(href), 10));
 
       const session = {
-        entityId,
+        id,
         trackIds,
         // categoryIds,
         speakerIds,
