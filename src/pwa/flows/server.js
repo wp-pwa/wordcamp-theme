@@ -36,8 +36,8 @@ export default self =>
   flow(function* ThemeServer({ selectedItem }) {
     addMiddleware(self, sessionMiddleware);
 
-    const { type, id } = selectedItem;
-    const action = { selectedItem: { type, id } };
+    const { type, id, page } = selectedItem;
+    const action = { selectedItem: { type, id, page } };
 
     if (type === 'page') {
       if ([23, 26, 28, 30, 32, 34].includes(id)) action.context = venueContext;
