@@ -6,7 +6,7 @@ import SessionCard from './SessionCard';
 
 const UpNext = ({ sessions }) => (
   <Container>
-    {sessions.map(session => <SessionCard key={session.entityId} session={session} />)}
+    {sessions.map(session => <SessionCard key={session.id} session={session} />)}
   </Container>
 );
 
