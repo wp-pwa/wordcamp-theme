@@ -1,3 +1,4 @@
+/* eslint-disable react/no-danger */
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'react-emotion';
@@ -10,7 +11,7 @@ const SessionCard = ({ session }) => (
       <FavoriteButton session={session} />
     </Header>
     <Body>
-      <h3>{session.title}</h3>
+      <h4 dangerouslySetInnerHTML={{ __html: session.title }} />
       <p>{session.speakers.map(speaker => speaker.name).join(', ')}</p>
       <p>{session.time}</p>
     </Body>
@@ -25,11 +26,11 @@ export default SessionCard;
 
 const Container = styled.div`
   box-sizing: border-box;
-  width: 80vw;
+  width: 90vw;
   height: auto;
   border-radius: 10px;
   overflow: hidden;
-  margin: 20px 0;
+  margin-top: 20px;
 `;
 
 const Header = styled.div`
