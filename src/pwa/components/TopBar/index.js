@@ -1,9 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { inject } from 'mobx-react';
-import { connect } from 'react-redux';
-import { compose } from 'recompose';
-import { dep } from 'worona-deps';
 import styled from 'react-emotion';
 import { homeContext } from '../../contexts';
 import Link from '../Link';
@@ -27,17 +24,10 @@ TopBar.propTypes = {
   previousContextRequested: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = dispatch => ({
-  previousContextRequested: () =>
-    dispatch(dep('connection', 'actions', 'previousContextRequested')()),
-});
-
-export default compose(
-  connect(null, mapDispatchToProps),
-  inject(({ connection }) => ({
-    contextIndex: connection.selectedContext.index,
-  })),
-)(TopBar);
+export default inject(({ connection }) => ({
+  previousContextRequested: connection.previousContextRequested,
+  contextIndex: connection.selectedContext.index,
+}))(TopBar);
 
 const Container = styled.div`
   position: fixed;
