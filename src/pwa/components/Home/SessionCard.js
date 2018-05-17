@@ -40,7 +40,6 @@ const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 15px;
   background-color: #888888;
 `;
 
@@ -55,7 +54,7 @@ const Body = styled.div`
   background-color: #cccccc;
 
   p,
-  h3 {
+  h4 {
     margin: 0;
     padding-top: 15px;
   }
