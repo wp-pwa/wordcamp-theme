@@ -1,18 +1,28 @@
-import { types, getParent } from 'mobx-state-tree';
+import { types, getParent, resolveIdentifier } from 'mobx-state-tree';
 import Speaker from './speaker';
 import Track from './track';
 
+// Hours -- correction - move this to database
+const hoursOffset = -2;
+
 const Id = types.union(types.number, types.string);
 
-// Hours -- correction - Take it from database
-const hoursOffset = -2;
+const SpeakerReference = types.reference(types.late(() => Speaker), {
+  get: (entityId, parent) => resolveIdentifier(Speaker, parent, entityId) || null,
+  set: speaker => speaker.entityId || speaker,
+});
+
+const TrackReference = types.reference(types.late(() => Track), {
+  get: (entityId, parent) => resolveIdentifier(Track, parent, entityId) || null,
+  set: track => track.entityId || track,
+});
 
 const Session = types
   .model('Session')
   .props({
     entityId: types.identifier(Id),
-    speakers: types.optional(types.array(types.reference(types.late(() => Speaker))), []),
-    tracks: types.optional(types.array(types.reference(types.late(() => Track))), []),
+    speakers: types.optional(types.array(SpeakerReference), []),
+    tracks: types.optional(types.array(TrackReference), []),
   })
   .views(self => {
     const getConnection = () => getParent(self, 3).connection;
@@ -36,12 +46,20 @@ const Session = types
         date.setTime(self.time);
         return date;
       },
+      get hour() {
+        const hours = self.date.getHours().toString();
+        const minutes = self.date.getMinutes().toString();
+        return `${hours.padStart(2,'0')}:${minutes.padStart(2,'0')}`
+      },
+      get isFavorite() {
+        return false; // no favorites yet
+      },
     };
   })
   .actions(self => ({
     afterCreate() {
-      self.speakers.forEach(s => s.sessions.includes(self) || s.sessions.push(self));
-      self.tracks.forEach(s => s.rawSessions.includes(self) || s.rawSessions.push(self));
+      self.speakers.forEach(speaker => speaker && speaker.addSession(self));
+      self.tracks.forEach(track => track && track.addSession(self));
     },
   }));
 

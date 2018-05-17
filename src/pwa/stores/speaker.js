@@ -22,6 +22,11 @@ const Speaker = types
         return self.entity.link;
       },
     };
-  });
+  })
+  .actions(self => ({
+    addSession(session) {
+      if (!self.sessions.includes(session)) self.sessions.push(session);
+    },
+  }));
 
 export default Speaker;

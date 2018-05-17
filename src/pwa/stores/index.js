@@ -14,29 +14,27 @@ export default types
   })
   .views(self => ({
     session(id) {
-      return self.sessions.get(id.toString());
+      return self.sessions.get(id) || self.sessions.get(id.toString());
     },
     track(id) {
-      return self.tracks.get(id.toString());
+      return self.tracks.get(id) || self.tracks.get(id.toString());
     },
     speaker(id) {
-      return self.speakers.get(id.toString());
+      return self.speakers.get(id) || self.speakers.get(id.toString());
     },
   }))
   .actions(self => ({
     addSession({ entityId, trackIds, speakerIds }) {
       const tracks = trackIds.map(id => {
-        const strId = id.toString();
-        if (!self.tracks.has(strId)) self.tracks.set(strId, { entityId: id });
-        return self.tracks.get(strId);
+        if (!self.track(id)) self.tracks.set(id, { entityId: id });
+        return self.track(id);
       });
 
       const speakers = speakerIds.map(id => {
-        const strId = id.toString();
-        if (!self.speakers.has(strId)) self.speakers.set(strId, { entityId: id });
-        return self.speakers.get(strId);
+        if (!self.speaker(id)) self.speakers.set(id, { entityId: id });
+        return self.speaker(id);
       });
 
-      self.sessions.set(entityId.toString(), { entityId, tracks, speakers });
+      self.sessions.set(entityId, { entityId, tracks, speakers });
     },
   }));

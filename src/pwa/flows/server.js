@@ -19,7 +19,7 @@ const sessionMiddleware = (call, next) => {
         _links: { speakers = [] },
       } = entity;
 
-      const speakerIds = speakers.map(({ href }) => extractId(href));
+      const speakerIds = speakers.map(({ href }) => parseInt(extractId(href), 10));
 
       const session = {
         entityId,
