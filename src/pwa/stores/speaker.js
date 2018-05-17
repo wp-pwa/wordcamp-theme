@@ -16,7 +16,7 @@ const Speaker = types
         return getConnection().entity('wcb_speaker', self.entityId);
       },
       get name() {
-        return self.entity.name;
+        return self.entity.title;
       },
       get link() {
         return self.entity.link;

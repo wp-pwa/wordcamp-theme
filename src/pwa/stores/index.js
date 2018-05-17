@@ -22,6 +22,16 @@ export default types
     speaker(id) {
       return self.speakers.get(id) || self.speakers.get(id.toString());
     },
+    sessionsOnNow(date) {
+      return Array.from(
+        new Set([...self.tracks.values()].slice(1).map(t => t.sessionOnNow(date))).values(),
+      );
+    },
+    sessionsUpNext(date) {
+      return [
+        ...new Set([...self.tracks.values()].slice(1).map(t => t.sessionUpNext(date))).values(),
+      ];
+    },
   }))
   .actions(self => ({
     addSession({ entityId, trackIds, speakerIds }) {
