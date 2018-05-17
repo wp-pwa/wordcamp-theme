@@ -15,16 +15,16 @@ const sessionMiddleware = (call, next) => {
       const {
         id: entityId,
         session_track: trackIds,
-        session_category: categoryIds,
+        // session_category: categoryIds,
         _links: { speakers = [] },
       } = entity;
 
-      const speakerIds = speakers.map(({ href }) => extractId(href));
+      const speakerIds = speakers.map(({ href }) => parseInt(extractId(href), 10));
 
       const session = {
         entityId,
         trackIds,
-        categoryIds,
+        // categoryIds,
         speakerIds,
       };
 
