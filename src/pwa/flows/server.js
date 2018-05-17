@@ -53,19 +53,27 @@ export default self =>
 
     yield Promise.all([
       self.connection.fetchCustomPage({
-        custom: { name: 'sessions', type: 'wcb_session', page: 1 },
+        name: 'sessions',
+        type: 'wcb_session',
+        page: 1,
         params: { per_page: 100, _embed: false },
       }),
       self.connection.fetchCustomPage({
-        custom: { name: 'speakers', type: 'wcb_speaker', page: 1 },
+        name: 'speakers',
+        type: 'wcb_speaker',
+        page: 1,
         params: { per_page: 100, _embed: false },
       }),
       self.connection.fetchCustomPage({
-        custom: { name: 'tracks', type: 'wcb_track', page: 1 },
+        name: 'tracks',
+        type: 'wcb_track',
+        page: 1,
         params: { per_page: 100, _embed: false },
       }),
       self.connection.fetchCustomPage({
-        custom: { name: 'pages', type: 'page', page: 1 },
+        name: 'pages',
+        type: 'page',
+        page: 1,
         params: {
           per_page: 100,
           _embed: false,
