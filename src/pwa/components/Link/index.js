@@ -1,10 +1,7 @@
 /* global window */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { compose } from 'recompose';
 import { inject } from 'mobx-react';
-import { connect } from 'react-redux';
-import { dep } from 'worona-deps';
 
 class Link extends Component {
   static propTypes = {
@@ -55,14 +52,7 @@ class Link extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  routeChangeRequested: payload =>
-    dispatch(dep('connection', 'actions', 'routeChangeRequested')(payload)),
-});
-
-export default compose(
-  inject(({ connection }, { type, id, page }) => ({
-    href: page ? connection.entity(type, id).pagedLink(page) : connection.entity(type, id).link,
-  })),
-  connect(null, mapDispatchToProps),
-)(Link);
+export default inject(({ connection }, { type, id, page }) => ({
+  routeChangeRequested: connection.routeChangeRequested,
+  href: page ? connection.entity(type, id).pagedLink(page) : connection.entity(type, id).link,
+}))(Link);
