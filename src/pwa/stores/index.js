@@ -68,17 +68,19 @@ export default types
     },
   }))
   .actions(self => ({
-    addSession({ id: sessionId, trackIds, speakerIds }) {
-      const tracks = trackIds.map(id => {
-        if (!self.track(id)) self.tracksMap.set(id, { id });
-        return self.track(id);
-      });
+    createSession(session) {
+      // Init tracks
+      if (session.tracks)
+        session.tracks.forEach(id => {
+          if (!self.track(id)) self.tracksMap.set(id, { id });
+        });
 
-      const speakers = speakerIds.map(id => {
-        if (!self.speaker(id)) self.speakersMap.set(id, { id });
-        return self.speaker(id);
-      });
+      // Init speakers
+      if (session.speakers)
+        session.speakers.forEach(id => {
+          if (!self.speaker(id)) self.speakersMap.set(id, { id });
+        });
 
-      self.sessionsMap.set(sessionId, { id: sessionId, tracks, speakers });
+      self.sessionsMap.set(session.id, session);
     },
   }));

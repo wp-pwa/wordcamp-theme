@@ -22,6 +22,8 @@ const Session = types
   .props({
     id: types.identifier(Id),
     type: types.optional(types.string, 'wcb_session'),
+    sessionTitle: types.maybe(types.string),
+    sessionTimestamp: types.maybe(types.number),
     isFavorite: types.optional(types.boolean, false),
     speakers: types.optional(types.array(SpeakerReference), []),
     tracks: types.optional(types.array(TrackReference), []),
@@ -35,14 +37,15 @@ const Session = types
         return getConnection().entity(self.type, self.id);
       },
       get title() {
-        return self.entity.title;
+        return self.sessionTitle || self.entity.title;
       },
       get link() {
         return self.entity.link;
       },
       get timestamp() {
         const { _wcpt_session_time: time } = self.entity.meta;
-        return (time + hoursOffset * 3600) * 1000; // seconds to milliseconds
+        // seconds to milliseconds
+        return self.sessionTimestamp || (time + hoursOffset * 3600) * 1000;
       },
       get date() {
         date.setTime(self.timestamp);
@@ -54,11 +57,13 @@ const Session = types
         return `${hours.padStart(2, '0')}:${minutes.padStart(2, '0')}`;
       },
       get endTime() {
-        return self.nextSession.startTime;
+        const { nextSessions } = self;
+        return nextSessions.length
+          ? nextSessions.sort((a, b) => a.timestamp - b.timestamp)[0].startTime
+          : null;
       },
-      get nextSession() {
-        const { sessionsSorted } = self.tracks[0];
-        return sessionsSorted[sessionsSorted.indexOf(self) + 1]
+      get nextSessions() {
+        return self.tracks.map(t => t.sessions[t.sessions.indexOf(self) + 1]).filter(s => !!s);
       },
     };
   })

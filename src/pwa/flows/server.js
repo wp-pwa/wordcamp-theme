@@ -12,21 +12,14 @@ const sessionMiddleware = (call, next) => {
 
       const {
         id,
-        session_track: trackIds,
-        // session_category: categoryIds,
-        _links: { speakers = [] },
+        session_track: tracks,
+        session_category: categories,
+        _links: { speakers: speakerHrefs = [] },
       } = entity;
 
-      const speakerIds = speakers.map(({ href }) => parseInt(extractId(href), 10));
+      const speakers = speakerHrefs.map(({ href }) => parseInt(extractId(href), 10));
 
-      const session = {
-        id,
-        trackIds,
-        // categoryIds,
-        speakerIds,
-      };
-
-      theme.addSession(session);
+      theme.createSession({ id, tracks, categories, speakers });
     }
   }
   next(call);
@@ -84,4 +77,57 @@ export default self =>
 
     const track = self.theme.tracks.find(t => t.name === 'Milky Way Track') || self.theme.tracks[0];
     self.theme.schedule.setSelected(track);
+
+    const allTrackIds = self.theme.tracks.map(t => t.id);
+
+    // Adds custom sessions
+    const before = {
+      type: 'page',
+      id: 1101101101,
+      sessionTitle: 'BEFORE',
+      sessionTimestamp: new Date('2018-05-01T00:00:00+02:00').getTime(),
+      tracks: allTrackIds,
+    };
+    const contributors = {
+      type: 'page',
+      id: 1101101102,
+      sessionTitle: 'CONTRIBUTORS',
+      sessionTimestamp: new Date('2018-06-14T08:00:00+02:00').getTime(), // check time
+      tracks: allTrackIds,
+    };
+    const thursdayNight = {
+      type: 'page',
+      id: 1101101103,
+      sessionTitle: 'THURSDAY NIGHT',
+      sessionTimestamp: new Date('2018-06-14T18:00:00+02:00').getTime(), // check time
+      tracks: allTrackIds,
+    };
+    const fridayNight = {
+      type: 'page',
+      id: 1101101104,
+      sessionTitle: 'FRIDAY NIGHT',
+      sessionTimestamp: new Date('2018-06-15T18:00:00+02:00').getTime(), // check time
+      tracks: allTrackIds,
+    };
+    const afterParty = {
+      type: 'page',
+      id: 1101101105,
+      sessionTitle: 'AFTER PARTY',
+      sessionTimestamp: new Date('2018-06-16T20:00:00+02:00').getTime(), // check time
+      tracks: allTrackIds,
+    };
+    const after = {
+      type: 'page',
+      id: 1101101106,
+      sessionTitle: 'AFTER',
+      sessionTimestamp: new Date('2018-06-17T02:00:00+02:00').getTime(),
+      tracks: allTrackIds,
+    };
+
+    self.theme.createSession(before);
+    self.theme.createSession(contributors);
+    self.theme.createSession(thursdayNight);
+    self.theme.createSession(fridayNight);
+    self.theme.createSession(afterParty);
+    self.theme.createSession(after);
   });

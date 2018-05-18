@@ -18,9 +18,6 @@ const Track = types
       get name() {
         return self.entity.name;
       },
-      get sessionsSorted() {
-        return self.sessions.sort(({ date: a }, { date: b }) => a.getTime() - b.getTime());
-      },
       filteredSessionsOnDate(date) {
         const onlyFavorites = getParent(self, 2).schedule.isFiltered;
 
@@ -36,27 +33,28 @@ const Track = types
         const nextDay = new Date(day);
         nextDay.setHours(24);
 
-        return self.sessionsSorted.filter(
+        return self.sessions.filter(
           session =>
             (!onlyFavorites || session.isFavorite) && session.date >= day && session.date < nextDay,
         );
       },
       sessionOnNow(date) {
         const currentTime = date || new Date();
-        return self
-          .sessionsBy(currentTime)
-          .reverse()
-          .find(({ date: d }) => d < currentTime);
+        return self.sessions.reverse().find(({ date: d }) => d <= currentTime);
       },
       sessionUpNext(date) {
         const currentTime = date || new Date();
-        return self.sessionsSorted.find(({ date: d }) => d > currentTime);
+        return self.sessions.find(({ date: d }) => d > currentTime);
       },
     };
   })
   .actions(self => ({
     addSession(session) {
-      if (!self.sessions.includes(session)) self.sessions.push(session);
+      if (!self.sessions.includes(session)) {
+        self.sessions.push(session);
+        // Ensures that sessions are always sorted
+        self.sessions = self.sessions.sort((a, b) => a.timestamp - b.timestamp);
+      }
     },
   }));
 
