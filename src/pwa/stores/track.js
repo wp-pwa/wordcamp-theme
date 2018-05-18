@@ -21,9 +21,12 @@ const Track = types
       get sessionsSorted() {
         return self.sessions.sort(({ date: a }, { date: b }) => a.getTime() - b.getTime());
       },
-      sessionsBy(date) {
+      filteredSessionsOnDate(date) {
         const onlyFavorites = getParent(self, 2).schedule.isFiltered;
 
+        return this.sessionsBy(date, onlyFavorites);
+      },
+      sessionsBy(date, onlyFavorites = false) {
         const day = new Date(date); // Copy date passed as argument
         day.setHours(0);
         day.setMinutes(0);

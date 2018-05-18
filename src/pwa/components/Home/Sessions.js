@@ -2,23 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { inject } from 'mobx-react';
 import styled from 'react-emotion';
-import FavoriteButton from './FavoriteButton';
+import SessionRow from './SessionRow';
 
 const Sessions = ({ firstDaySessions, secondDaySessions }) => (
   <Container>
     <SessionDay>Friday, June 15th</SessionDay>
     {firstDaySessions.map((session, index) => (
-      <Row key={session.id} position={index}>
-        {session.title}
-        <FavoriteButton session={session} />
-      </Row>
+      <SessionRow key={session.id} position={index} session={session} />
     ))}
     <SessionDay>Saturday, June 16th</SessionDay>
     {secondDaySessions.map((session, index) => (
-      <Row key={session.id} position={index}>
-        {session.title}
-        <FavoriteButton session={session} />
-      </Row>
+      <SessionRow key={session.id} position={index} session={session} />
     ))}
   </Container>
 );
@@ -29,8 +23,12 @@ Sessions.propTypes = {
 };
 
 export default inject(({ theme }, { track }) => ({
-  firstDaySessions: theme.track(track).sessionsBy(new Date('2018-06-15T14:00:00+02:00')),
-  secondDaySessions: theme.track(track).sessionsBy(new Date('2018-06-16T14:00:00+02:00')),
+  firstDaySessions: theme
+    .track(track)
+    .filteredSessionsOnDate(new Date('2018-06-15T12:00:00+02:00')),
+  secondDaySessions: theme
+    .track(track)
+    .filteredSessionsOnDate(new Date('2018-06-16T12:00:00+02:00')),
 }))(Sessions);
 
 const Container = styled.div`
@@ -41,15 +39,4 @@ const Container = styled.div`
 const SessionDay = styled.h5`
   width: 100%;
   padding-left: 15px;
-`;
-
-const Row = styled.div`
-  box-sizing: border-box;
-  width: 100%;
-  height: ${({ theme }) => theme.sizes.button};
-  padding: ${({ theme }) => theme.paddings.schedule};
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: ${({ position }) => (position % 2 === 0 ? '#fafafa' : '#d0d0d0')};
 `;
