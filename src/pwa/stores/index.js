@@ -1,5 +1,5 @@
 import { types } from 'mobx-state-tree';
-import { values } from 'mobx';
+import { values, when } from 'mobx';
 import Menu from './menu';
 import Schedule from './schedule';
 import Session from './session';
@@ -19,6 +19,8 @@ export default types
     tracksMap: types.optional(types.map(Track), {}),
     speakersMap: types.optional(types.map(Speaker), {}),
     favoritesMap: types.optional(types.map(Favorite), {}),
+    currentDate: types.optional(types.Date, Date.now()),
+    isRealTime: true,
   })
   .views(self => {
     const filterSessions = sessions =>
@@ -58,19 +60,22 @@ export default types
         return filterSessions(
           self.tracks
             .slice(1) // removes "Networking" track
-            .map(t => t.sessionOnNow(date)),
+            .map(t => t.sessionOnNow(date || self.currentDate)),
         );
       },
       sessionsUpNext(date) {
         return filterSessions(
           self.tracks
             .slice(1) // removes "Networking" track
-            .map(t => t.sessionUpNext(date)),
+            .map(t => t.sessionUpNext(date || self.currentDate)),
         );
       },
     };
   })
   .actions(self => ({
+    afterCreate() {
+      self.resetGlobalTime();
+    },
     toggleFavorite(id) {
       if (self.favoritesMap.get(id)) {
         self.favoritesMap.get(id).val = !self.favoritesMap.get(id).val;
@@ -91,5 +96,18 @@ export default types
           if (!self.speaker(id)) self.speakersMap.set(id, { id });
         });
       self.sessionsMap.set(session.id, session);
+    },
+    setGlobalTime(day, hour, minutes) {
+      const padded = n => n.toString().padStart(2, '0');
+      self.isRealTime = false;
+      self.currentDate = new Date(
+        `2018-06-${padded(day)}T${padded(hour)}:${padded(minutes)}:00+02:00`,
+      );
+    },
+    resetGlobalTime() {
+      const interval = setInterval(() => {
+        self.currentDate = Date.now();
+      }, 60000); // one minute
+      when(() => !self.isRealTime, () => clearInterval(interval));
     },
   }));

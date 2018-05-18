@@ -15,7 +15,7 @@ OnNow.propTypes = {
 };
 
 export default inject(({ theme }) => ({
-  sessions: theme.sessionsOnNow(new Date('2018-06-15T10:13:16+02:00')),
+  sessions: theme.sessionsOnNow(),
 }))(OnNow);
 
 const Container = styled.div`
