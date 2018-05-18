@@ -8,11 +8,21 @@ const Sessions = ({ firstDaySessions, secondDaySessions }) => (
   <Container>
     <SessionDay>Friday, June 15th</SessionDay>
     {firstDaySessions.map((session, index) => (
-      <SessionRow key={session.id} position={index} session={session} />
+      <SessionRow
+        key={session.id}
+        position={index}
+        session={session}
+        columns={firstDaySessions.map(({ type, id, page }) => [{ type, id, page }])}
+      />
     ))}
     <SessionDay>Saturday, June 16th</SessionDay>
     {secondDaySessions.map((session, index) => (
-      <SessionRow key={session.id} position={index} session={session} />
+      <SessionRow
+        key={session.id}
+        position={index}
+        session={session}
+        columns={secondDaySessions.map(({ type, id, page }) => [{ type, id, page }])}
+      />
     ))}
   </Container>
 );

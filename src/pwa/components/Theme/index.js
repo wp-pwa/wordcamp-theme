@@ -5,6 +5,7 @@ import { compose } from 'recompose';
 import { injectGlobal } from 'react-emotion';
 import { ThemeProvider } from 'emotion-theming';
 import Home from '../Home';
+import Sessions from '../Sessions';
 import Venue from '../Venue';
 import Announcements from '../Announcements';
 import Credits from '../Credits';
@@ -26,6 +27,7 @@ const theme = {
     venue: '54px 0',
     credits: '54px 0 0 0',
     schedule: '0 0 0 15px',
+    session: '54px 0',
   },
 };
 
@@ -56,6 +58,13 @@ class Theme extends Component {
         <Fragment>
           {contextName === 'home' ? (
             <Home
+              columns={columns}
+              selectedColumnIndex={selectedColumnIndex}
+              handleOnTransitionEnd={this.handleOnTransitionEnd}
+            />
+          ) : null}
+          {contextName === 'sessions' ? (
+            <Sessions
               columns={columns}
               selectedColumnIndex={selectedColumnIndex}
               handleOnTransitionEnd={this.handleOnTransitionEnd}

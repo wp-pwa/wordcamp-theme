@@ -1,3 +1,5 @@
+import memoize from 'lodash/memoize';
+
 export const homeContext = {
   columns: [
     [
@@ -96,3 +98,10 @@ export const creditsContext = {
     name: 'credits',
   },
 };
+
+export const sessionContext = memoize((columns = []) => ({
+  columns,
+  options: {
+    name: 'sessions',
+  },
+}));
