@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Slider from '../Slider';
 import Session from './Session';
 import TopBar from '../TopBar';
+import Nav from './Nav';
 
 const Sessions = ({ columns, selectedColumnIndex, handleOnTransitionEnd }) => (
   <Fragment>
@@ -15,6 +16,7 @@ const Sessions = ({ columns, selectedColumnIndex, handleOnTransitionEnd }) => (
       })}
     </Slider>
     <TopBar />
+    <Nav />
   </Fragment>
 );
 

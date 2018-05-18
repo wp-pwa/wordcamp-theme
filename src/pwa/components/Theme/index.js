@@ -18,6 +18,13 @@ injectGlobal`
 `;
 
 const theme = {
+  colors: {
+    facebook: '#3b5998',
+    twitter: '#1da1f2',
+    whatsapp: '#2cb742',
+    email: '#7f7f7f',
+    share: '#006ca0',
+  },
   sizes: {
     button: '54px',
   },
