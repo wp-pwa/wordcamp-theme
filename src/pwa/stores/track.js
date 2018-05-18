@@ -21,7 +21,9 @@ const Track = types
       get sessionsSorted() {
         return self.sessions.sort(({ date: a }, { date: b }) => a.getTime() - b.getTime());
       },
-      sessionsBy(date, onlyFavorites = false) {
+      sessionsBy(date) {
+        const onlyFavorites = getParent(self, 2).schedule.isFiltered;
+
         const day = new Date(date); // Copy date passed as argument
         day.setHours(0);
         day.setMinutes(0);
@@ -31,17 +33,17 @@ const Track = types
         const nextDay = new Date(day);
         nextDay.setHours(24);
 
-        return self.sessionsSorted
-          .filter(
-            session =>
-              (!onlyFavorites || session.isFavorite) &&
-              session.date >= day &&
-              session.date < nextDay,
-          );
+        return self.sessionsSorted.filter(
+          session =>
+            (!onlyFavorites || session.isFavorite) && session.date >= day && session.date < nextDay,
+        );
       },
       sessionOnNow(date) {
         const currentTime = date || new Date();
-        return self.sessionsBy(currentTime).reverse().find(({ date: d }) => d < currentTime);
+        return self
+          .sessionsBy(currentTime)
+          .reverse()
+          .find(({ date: d }) => d < currentTime);
       },
       sessionUpNext(date) {
         const currentTime = date || new Date();

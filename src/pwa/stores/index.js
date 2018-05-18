@@ -1,5 +1,7 @@
 import { types } from 'mobx-state-tree';
+import { values } from 'mobx';
 import Menu from './menu';
+import Schedule from './schedule';
 import Session from './session';
 import Track from './track';
 import Speaker from './speaker';
@@ -8,19 +10,20 @@ export default types
   .model('Wordcamp')
   .props({
     menu: types.optional(Menu, {}),
+    schedule: types.optional(Schedule, {}),
     sessionsMap: types.optional(types.map(Session), {}),
     tracksMap: types.optional(types.map(Track), {}),
     speakersMap: types.optional(types.map(Speaker), {}),
   })
   .views(self => ({
     get sessions() {
-      return Array.from(self.sessionsMap.values());
+      return values(self.sessionsMap);
     },
     get tracks() {
-      return Array.from(self.tracksMap.values()).sort((a, b) => a.id - b.id);
+      return values(self.tracksMap).sort((a, b) => a.id - b.id);
     },
     get speakers() {
-      return Array.from(self.speakersMap.values());
+      return values(self.speakersMap);
     },
     session(id) {
       return self.sessionsMap.get(id) || self.sessionsMap.get(id.toString());

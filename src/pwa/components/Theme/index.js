@@ -25,6 +25,7 @@ const theme = {
     venueNav: '0 15px',
     venue: '54px 0',
     credits: '54px 0 0 0',
+    schedule: '0 0 0 15px',
   },
 };
 

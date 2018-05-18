@@ -22,6 +22,7 @@ const Session = types
   .props({
     id: types.identifier(Id),
     type: types.optional(types.string, 'wcb_session'),
+    isFavorite: types.optional(types.boolean, false),
     speakers: types.optional(types.array(SpeakerReference), []),
     tracks: types.optional(types.array(TrackReference), []),
   })
@@ -50,7 +51,7 @@ const Session = types
       get startTime() {
         const hours = self.date.getHours().toString();
         const minutes = self.date.getMinutes().toString();
-        return `${hours.padStart(2,'0')}:${minutes.padStart(2,'0')}`
+        return `${hours.padStart(2, '0')}:${minutes.padStart(2, '0')}`;
       },
       get endTime() {
         return self.nextSession.startTime;
@@ -59,14 +60,11 @@ const Session = types
         const { sessionsSorted } = self.tracks[0];
         return sessionsSorted[sessionsSorted.indexOf(self) + 1]
       },
-      get isFavorite() {
-        return false; // no favorites yet
-      },
     };
   })
   .actions(self => ({
-    setFavorite(value) {
-      self.isFavorite = value;
+    toggleFavorite() {
+      self.isFavorite = !self.isFavorite;
     },
     afterCreate() {
       self.speakers.forEach(speaker => speaker && speaker.addSession(self));

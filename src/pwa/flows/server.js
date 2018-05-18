@@ -81,4 +81,7 @@ export default self =>
         },
       }),
     ]);
+
+    const track = self.theme.tracks.find(t => t.name === 'Milky Way Track') || self.theme.tracks[0];
+    self.theme.schedule.setSelected(track);
   });
