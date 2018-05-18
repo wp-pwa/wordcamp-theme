@@ -24,7 +24,6 @@ const Session = types
     type: types.optional(types.string, 'wcb_session'),
     sessionTitle: types.maybe(types.string),
     sessionTimestamp: types.maybe(types.number),
-    isFavorite: types.optional(types.boolean, false),
     speakers: types.optional(types.array(SpeakerReference), []),
     tracks: types.optional(types.array(TrackReference), []),
   })
@@ -33,6 +32,11 @@ const Session = types
     const date = new Date();
 
     return {
+      get isFavorite() {
+        return getParent(self, 2).favoritesMap.get(`${self.id}`)
+          ? getParent(self, 2).favoritesMap.get(`${self.id}`).val
+          : false;
+      },
       get entity() {
         return getConnection().entity(self.type, self.id);
       },
@@ -69,7 +73,7 @@ const Session = types
   })
   .actions(self => ({
     toggleFavorite() {
-      self.isFavorite = !self.isFavorite;
+      getParent(self, 2).toggleFavorite(`${self.id}`);
     },
     afterCreate() {
       self.speakers.forEach(speaker => speaker && speaker.addSession(self));

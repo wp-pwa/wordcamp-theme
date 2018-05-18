@@ -6,6 +6,10 @@ import Session from './session';
 import Track from './track';
 import Speaker from './speaker';
 
+const Favorite = types.model('Favorite', {
+  val: true,
+});
+
 export default types
   .model('Wordcamp')
   .props({
@@ -14,6 +18,7 @@ export default types
     sessionsMap: types.optional(types.map(Session), {}),
     tracksMap: types.optional(types.map(Track), {}),
     speakersMap: types.optional(types.map(Speaker), {}),
+    favoritesMap: types.optional(types.map(Favorite), {}),
   })
   .views(self => {
     const filterSessions = sessions =>
@@ -66,6 +71,13 @@ export default types
     };
   })
   .actions(self => ({
+    toggleFavorite(id) {
+      if (self.favoritesMap.get(id)) {
+        self.favoritesMap.get(id).val = !self.favoritesMap.get(id).val;
+      } else {
+        self.favoritesMap.set(id, { val: true });
+      }
+    },
     createSession(session) {
       // Init tracks
       if (session.tracks)
@@ -78,7 +90,6 @@ export default types
         session.speakers.forEach(id => {
           if (!self.speaker(id)) self.speakersMap.set(id, { id });
         });
-
       self.sessionsMap.set(session.id, session);
     },
   }));
