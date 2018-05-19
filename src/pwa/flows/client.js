@@ -13,6 +13,6 @@ export default self => () => {
   // Starts to modify global time
   self.theme.restartTime();
   // Sets global functions to change global time
-  window.setTime = self.theme.setTime; // .bind(self.theme);
-  window.restartTime = self.theme.restartTime; // .bind(self.theme);
+  window.setTime = self.theme.setTime;
+  window.restartTime = self.theme.restartTime;
 };
