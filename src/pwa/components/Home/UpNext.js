@@ -15,7 +15,7 @@ UpNext.propTypes = {
 };
 
 export default inject(({ theme }) => ({
-  sessions: theme.sessionsUpNext(),
+  sessions: theme.sessionsUpNext,
 }))(UpNext);
 
 const Container = styled.div`

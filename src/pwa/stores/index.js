@@ -1,10 +1,13 @@
 import { types } from 'mobx-state-tree';
-import { values, when } from 'mobx';
+import { values } from 'mobx';
+import { now } from 'mobx-utils';
 import Menu from './menu';
 import Schedule from './schedule';
 import Session from './session';
 import Track from './track';
 import Speaker from './speaker';
+
+const NOW_INTERVAL = 60000; // One minute
 
 const Favorite = types.model('Favorite', {
   val: true,
@@ -19,12 +22,15 @@ export default types
     tracksMap: types.optional(types.map(Track), {}),
     speakersMap: types.optional(types.map(Speaker), {}),
     favoritesMap: types.optional(types.map(Favorite), {}),
-    currentDate: types.optional(types.Date, Date.now()),
+    time: types.optional(types.Date, Date.now()),
     isRealTime: false,
   })
   .views(self => {
-    const filterSessions = sessions =>
-      sessions
+    const filterSessions = mapFunction =>
+      self.tracks
+        .sort((a, b) => a.id - b.id) // sorts tracks by id
+        .slice(1) // removes "Networking" track
+        .map(mapFunction)
         // filters sessions in multiple tracks that are not
         // taking place in all of them (like "Lunch").
         .filter((session, index, sArray) => {
@@ -42,7 +48,7 @@ export default types
         return values(self.sessionsMap);
       },
       get tracks() {
-        return values(self.tracksMap).sort((a, b) => a.id - b.id);
+        return values(self.tracksMap);
       },
       get speakers() {
         return values(self.speakersMap);
@@ -56,19 +62,14 @@ export default types
       speaker(id) {
         return self.speakersMap.get(id) || self.speakersMap.get(id.toString());
       },
-      sessionsOnNow(date) {
-        return filterSessions(
-          self.tracks
-            .slice(1) // removes "Networking" track
-            .map(t => t.sessionOnNow(date || self.currentDate)),
-        );
+      get currentTime() {
+        return self.isRealTime ? now(NOW_INTERVAL) : self.time;
       },
-      sessionsUpNext(date) {
-        return filterSessions(
-          self.tracks
-            .slice(1) // removes "Networking" track
-            .map(t => t.sessionUpNext(date || self.currentDate)),
-        );
+      get sessionsOnNow() {
+        return filterSessions(t => t.sessionOnNow(self.currentTime));
+      },
+      get sessionsUpNext() {
+        return filterSessions(t => t.sessionUpNext(self.currentTime));
       },
     };
   })
@@ -94,20 +95,12 @@ export default types
         });
       self.sessionsMap.set(session.id, session);
     },
-    setCurrentDate(date) {
-      self.currentDate = date;
-    },
     setTime(day = 1, hour = 0, minutes = 0) {
-      const padded = n => `${n}`.padStart(2, '0');
+      const pad = n => `${n}`.padStart(2, '0');
       self.isRealTime = false;
-      self.setCurrentDate(
-        new Date(`2018-06-${padded(day)}T${padded(hour)}:${padded(minutes)}:00+02:00`),
-      );
+      self.time = new Date(`2018-06-${pad(day)}T${pad(hour)}:${pad(minutes)}:00+02:00`);
     },
-    restartTime() {
-      self.isRealTime = true;
-      self.setCurrentDate(Date.now());
-      const interval = setInterval(() => self.setCurrentDate(Date.now()), 60000); // one minute
-      when(() => !self.isRealTime, () => clearInterval(interval));
+    toggleRealTime() {
+      self.isRealTime = !self.isRealTime;
     },
   }));

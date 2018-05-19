@@ -10,9 +10,9 @@ export default self => () => {
     window.localStorage.setItem('frontity.favoritesMap', JSON.stringify(snapshot));
   });
 
-  // Starts to modify global time
-  self.theme.restartTime();
-  // Sets global functions to change global time
+  // Starts to modify current time
+  self.theme.toggleRealTime();
+  // Sets global functions to change current time
   window.setTime = self.theme.setTime;
-  window.restartTime = self.theme.restartTime;
+  window.toggleRealTime = self.theme.toggleRealTime;
 };
