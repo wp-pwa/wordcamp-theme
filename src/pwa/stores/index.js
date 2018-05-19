@@ -20,7 +20,7 @@ export default types
     speakersMap: types.optional(types.map(Speaker), {}),
     favoritesMap: types.optional(types.map(Favorite), {}),
     currentDate: types.optional(types.Date, Date.now()),
-    isRealTime: true,
+    isRealTime: false,
   })
   .views(self => {
     const filterSessions = sessions =>
@@ -73,9 +73,6 @@ export default types
     };
   })
   .actions(self => ({
-    afterCreate() {
-      self.resetGlobalTime();
-    },
     toggleFavorite(id) {
       if (self.favoritesMap.get(id)) {
         self.favoritesMap.get(id).val = !self.favoritesMap.get(id).val;
@@ -97,17 +94,20 @@ export default types
         });
       self.sessionsMap.set(session.id, session);
     },
-    setGlobalTime(day, hour, minutes) {
-      const padded = n => n.toString().padStart(2, '0');
+    setCurrentDate(date) {
+      self.currentDate = date;
+    },
+    setTime(day = 1, hour = 0, minutes = 0) {
+      const padded = n => `${n}`.padStart(2, '0');
       self.isRealTime = false;
-      self.currentDate = new Date(
-        `2018-06-${padded(day)}T${padded(hour)}:${padded(minutes)}:00+02:00`,
+      self.setCurrentDate(
+        new Date(`2018-06-${padded(day)}T${padded(hour)}:${padded(minutes)}:00+02:00`),
       );
     },
-    resetGlobalTime() {
-      const interval = setInterval(() => {
-        self.currentDate = Date.now();
-      }, 60000); // one minute
+    restartTime() {
+      self.isRealTime = true;
+      self.setCurrentDate(Date.now());
+      const interval = setInterval(() => self.setCurrentDate(Date.now()), 60000); // one minute
       when(() => !self.isRealTime, () => clearInterval(interval));
     },
   }));

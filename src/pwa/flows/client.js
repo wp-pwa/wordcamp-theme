@@ -8,5 +8,11 @@ export default self => () => {
 
   onSnapshot(self.theme.favoritesMap, snapshot => {
     window.localStorage.setItem('frontity.favoritesMap', JSON.stringify(snapshot));
-  })
-}
+  });
+
+  // Starts to modify global time
+  self.theme.restartTime();
+  // Sets global functions to change global time
+  window.setTime = self.theme.setTime; // .bind(self.theme);
+  window.restartTime = self.theme.restartTime; // .bind(self.theme);
+};
