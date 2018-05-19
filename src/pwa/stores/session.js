@@ -67,7 +67,12 @@ const Session = types
           : null;
       },
       get nextSessions() {
-        return self.tracks.map(t => t.sessions[t.sessions.indexOf(self) + 1]).filter(s => !!s);
+        return self.tracks
+          .map(t => {
+            const index = t.sessions.indexOf(self) + 1;
+            return index < t.sessions.length ? t.sessions[index] : null;
+          })
+          .filter(s => !!s);
       },
     };
   })
