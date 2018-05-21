@@ -123,6 +123,14 @@ export default self =>
       sessionTimestamp: new Date('2018-06-17T02:00:00+02:00').getTime(),
       tracks: allTrackIds,
     };
+    const afterAfter = {
+      mstId: 'after_after_session',
+      type: 'page',
+      id: 1101101106,
+      sessionTitle: 'AFTER',
+      sessionTimestamp: new Date('2019-06-17T02:00:00+02:00').getTime(),
+      tracks: allTrackIds,
+    };
 
     self.theme.createSession(before);
     self.theme.createSession(contributors);
@@ -130,4 +138,5 @@ export default self =>
     self.theme.createSession(fridayNight);
     self.theme.createSession(afterParty);
     self.theme.createSession(after);
+    self.theme.createSession(afterAfter);
   });

@@ -5,8 +5,6 @@ import Track from './track';
 // Hours -- correction - move this to database
 const hoursOffset = -2;
 
-const Id = types.union(types.number, types.string);
-
 const SpeakerReference = types.reference(types.late(() => Speaker), {
   get: (id, parent) => resolveIdentifier(Speaker, parent, id) || null,
   set: speaker => speaker.id || speaker,
@@ -20,7 +18,8 @@ const TrackReference = types.reference(types.late(() => Track), {
 const Session = types
   .model('Session')
   .props({
-    id: types.identifier(Id),
+    mstId: types.identifier(types.string),
+    id: types.union(types.number, types.string),
     type: types.optional(types.string, 'wcb_session'),
     sessionTitle: types.maybe(types.string),
     sessionTimestamp: types.maybe(types.number),

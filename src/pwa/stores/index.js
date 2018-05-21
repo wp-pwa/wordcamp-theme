@@ -53,9 +53,6 @@ export default types
       get speakers() {
         return values(self.speakersMap);
       },
-      session(id) {
-        return self.sessionsMap.get(id) || self.sessionsMap.get(id.toString());
-      },
       track(id) {
         return self.tracksMap.get(id) || self.tracksMap.get(id.toString());
       },
@@ -66,15 +63,16 @@ export default types
         return self.isRealTime ? now(NOW_INTERVAL) : self.time;
       },
       get sessionsOnNow() {
-        return filterSessions(t => t.sessionOnNow(self.currentTime));
+        return filterSessions(track => track.sessionOnNow(self.currentTime));
       },
       get sessionsUpNext() {
-        return filterSessions(t => t.sessionUpNext(self.currentTime));
+        return filterSessions(track => track.sessionUpNext(self.currentTime));
       },
     };
   })
   .actions(self => {
     const pad = n => `${n}`.padStart(2, '0');
+    const generateMstId = ({ type, id }) => `${type}_${id}`;
 
     return {
       toggleFavorite(id) {
@@ -95,7 +93,8 @@ export default types
           session.speakers.forEach(id => {
             if (!self.speaker(id)) self.speakersMap.set(id, { id });
           });
-        self.sessionsMap.set(session.id, session);
+        const mstId = session.mstId || generateMstId(session);
+        self.sessionsMap.set(mstId, { mstId, ...session });
       },
       setTime(day = 1, hour = 0, minutes = 0) {
         self.isRealTime = false;
