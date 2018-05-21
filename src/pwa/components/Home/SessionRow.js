@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'react-emotion';
 import FavoriteButton from './FavoriteButton';
 import Link from '../Link';
-import { sessionsContext } from '../../contexts';
+import { sessionsContext, speakersContext } from '../../contexts';
 
 const SessionRow = ({ session, position, columns }) => (
   <Container position={position}>
@@ -12,7 +12,18 @@ const SessionRow = ({ session, position, columns }) => (
       <Link type={session.type} id={session.id} context={sessionsContext(columns)}>
         <Title dangerouslySetInnerHTML={{ __html: session.title }} />
       </Link>
-      <Authors>{session.speakers.map(s => s.name).join(', ')}</Authors>
+      {session.speakers.map(speaker => (
+        <Link
+          key={speaker.name}
+          type={speaker.type}
+          id={speaker.id}
+          context={speakersContext(
+            session.speakers.map(({ type, id, page }) => [{ type, id, page }]),
+          )}
+        >
+          <Speaker>{`${speaker.name}`}</Speaker>
+        </Link>
+      ))}
     </InnerContainer>
     <FavoriteButton session={session} />
   </Container>
@@ -55,4 +66,7 @@ const Title = styled.div`
   font-weight: bold;
 `;
 
-const Authors = styled.div``;
+const Speaker = styled.a`
+  display: inline-block;
+  padding-right: 5px;
+`;

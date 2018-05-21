@@ -2,7 +2,6 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { inject } from 'mobx-react';
 import { compose } from 'recompose';
-import { injectGlobal } from 'react-emotion';
 import { ThemeProvider } from 'emotion-theming';
 import Home from '../Home';
 import Sessions from '../Sessions';
@@ -11,12 +10,7 @@ import Venue from '../Venue';
 import Announcements from '../Announcements';
 import Credits from '../Credits';
 
-// eslint-disable-next-line
-injectGlobal`
-  body {
-    margin: 0;
-  }
-`;
+import '../../styles';
 
 const theme = {
   colors: {
