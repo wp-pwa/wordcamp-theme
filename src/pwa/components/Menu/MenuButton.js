@@ -7,7 +7,7 @@ import MenuIcon from './MenuIcon';
 const MenuButton = ({ openMenu }) => (
   <Container onClick={openMenu}>
     <MenuIcon />
-    <Name>Menu</Name>
+    <Label>Menu</Label>
   </Container>
 );
 
@@ -30,7 +30,7 @@ const Container = styled.div`
   padding: 14px 16px;
 `;
 
-const Name = styled.div`
+const Label = styled.div`
   padding-top: 4px;
   font-size: 10px;
   line-height: 10px;

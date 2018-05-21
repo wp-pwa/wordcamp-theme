@@ -2,11 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { inject } from 'mobx-react';
 import styled from 'react-emotion';
+import CloseIcon from '../CloseIcon';
+import Logo from '../TopBar/Logo';
 
 const MenuHeader = ({ close }) => (
   <Container>
-    <Title>WordCamp Europe 2018</Title>
-    <Close onClick={close}>Close</Close>
+    <InnerContainer>
+      <Logo />
+      <Title>Menu</Title>
+    </InnerContainer>
+    <CloseButton onClick={close}>
+      <CloseIcon />
+    </CloseButton>
   </Container>
 );
 
@@ -19,25 +26,30 @@ export default inject(({ theme }) => ({
 }))(MenuHeader);
 
 const Container = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
   height: ${({ theme }) => theme.sizes.button};
+  width: 100vw;
   display: flex;
+  justify-content: space-between;
+  background: #e9e9e6;
+  color: #282409;
+`;
+
+const InnerContainer = styled.div`
+  display: flex;
+  align-items: center;
+  height: ${({ theme }) => theme.sizes.button};
 `;
 
 const Title = styled.div`
-  padding: ${({ theme }) => theme.paddings.menu};
-  height: ${({ theme }) => theme.sizes.button};
-  background-color: #cccccc;
-  flex-grow: 1;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  font-size: 16px;
+  text-transform: uppercase;
 `;
 
-const Close = styled.div`
-  height: ${({ theme }) => theme.sizes.button};
+const CloseButton = styled.div`
   width: ${({ theme }) => theme.sizes.button};
-  background-color: #aaaaaa;
-  flex-shrink: 0;
   display: flex;
   justify-content: center;
   align-items: center;

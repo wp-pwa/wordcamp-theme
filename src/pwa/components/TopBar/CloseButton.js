@@ -4,14 +4,19 @@ import { inject } from 'mobx-react';
 import styled from 'react-emotion';
 import { homeContext } from '../../contexts';
 import Link from '../Link';
+import CloseIcon from '../CloseIcon';
 
 const CloseButton = ({ previousContextRequested, contextIndex }) =>
   contextIndex ? (
-    <Container onClick={previousContextRequested}>Close</Container>
+    <Container onClick={previousContextRequested}>
+      <CloseIcon />
+    </Container>
   ) : (
     <Container>
       <Link type="page" id={13} context={homeContext}>
-        <A>Close</A>
+        <A>
+          <CloseIcon />
+        </A>
       </Link>
     </Container>
   );
