@@ -16,7 +16,7 @@ export default Session;
 
 const Container = styled.div`
   box-sizing: border-box;
-  padding: ${({ theme }) => theme.paddings.session};
+  padding: ${({ theme }) => theme.padding.session};
   width: 100vw;
   min-height: 100vh;
   display: flex;

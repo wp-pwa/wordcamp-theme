@@ -26,15 +26,11 @@ export default inject(({ theme }) => ({
 }))(MenuHeader);
 
 const Container = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
   height: ${({ theme }) => theme.sizes.button};
-  width: 100vw;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   background: #e9e9e6;
-  color: #282409;
 `;
 
 const InnerContainer = styled.div`

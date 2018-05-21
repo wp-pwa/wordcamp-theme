@@ -16,7 +16,7 @@ export default Speaker;
 
 const Container = styled.div`
   box-sizing: border-box;
-  padding: ${({ theme }) => theme.paddings.speaker};
+  padding: ${({ theme }) => theme.padding.speaker};
   width: 100vw;
   min-height: 100vh;
   display: flex;

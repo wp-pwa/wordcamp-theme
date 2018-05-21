@@ -14,7 +14,12 @@ import Manifest from '../Manifest';
 import '../../styles';
 
 const theme = {
-  colors: {
+  color: {
+    text: '#282409',
+    grey: 'rgba(40, 36, 9, 0.4)',
+    red: '#F95758',
+    yellow: '#EFDC39',
+    blue: '#5566C3',
     facebook: '#3b5998',
     twitter: '#1da1f2',
     whatsapp: '#2cb742',
@@ -24,8 +29,8 @@ const theme = {
   sizes: {
     button: '56px',
   },
-  paddings: {
-    menu: '0 15px',
+  padding: {
+    menuItem: '16px 24px',
     venueNav: '0 15px',
     venue: '56px 0',
     credits: '56px 0 0 0',

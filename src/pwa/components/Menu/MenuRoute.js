@@ -60,12 +60,17 @@ export default inject(({ connection, theme }, { name }) => {
 })(MenuRoute);
 
 const Container = styled.div`
+  box-sizing: border-box;
   height: ${({ theme }) => theme.sizes.button};
-  padding: ${({ theme }) => theme.paddings.menu};
+  box-shadow: inset 0 -1px 0 0 rgba(40, 36, 9, 0.1);
+  font-size: 20px;
+  line-height: 20px;
 `;
 
 const A = styled.a`
-  height: ${({ theme }) => theme.sizes.button};
+  box-sizing: border-box;
+  height: ${({ theme }) => theme.padding.menuItem};
+  padding: 16px 24px;
   display: flex;
   justify-content: flex-start;
   align-items: center;

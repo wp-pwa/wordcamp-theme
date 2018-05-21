@@ -28,7 +28,7 @@ const Container = styled.div`
   box-sizing: border-box;
   width: 100vw;
   height: 100vh;
-  padding: ${({ theme }) => theme.paddings.credits};
+  padding: ${({ theme }) => theme.padding.credits};
 `;
 
 const Title = styled.h1`

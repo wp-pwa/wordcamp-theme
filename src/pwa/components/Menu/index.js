@@ -34,6 +34,7 @@ const Container = styled.div`
   position: fixed;
   top: 0;
   left: 0;
+  color: ${({ theme }) => theme.color.text};
 `;
 
 const Overlay = styled.div`
@@ -46,5 +47,5 @@ const InnerContainer = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  background-color: #eeeeee;
+  background-color: #fff;
 `;
