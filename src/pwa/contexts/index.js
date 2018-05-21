@@ -99,9 +99,16 @@ export const creditsContext = {
   },
 };
 
-export const sessionContext = memoize((columns = []) => ({
+export const sessionsContext = memoize((columns = []) => ({
   columns,
   options: {
     name: 'sessions',
+  },
+}));
+
+export const speakersContext = memoize((columns = []) => ({
+  columns,
+  options: {
+    name: 'speakers',
   },
 }));

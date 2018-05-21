@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import styled from 'react-emotion';
 import FavoriteButton from './FavoriteButton';
 import Link from '../Link';
-import { sessionContext } from '../../contexts';
+import { sessionsContext } from '../../contexts';
 
 const SessionRow = ({ session, position, columns }) => (
   <Container position={position}>
     <Time>{session.startTime}</Time>
     <InnerContainer>
-      <Link type={session.type} id={session.id} context={sessionContext(columns)}>
+      <Link type={session.type} id={session.id} context={sessionsContext(columns)}>
         <Title dangerouslySetInnerHTML={{ __html: session.title }} />
       </Link>
       <Authors>{session.speakers.map(s => s.name).join(', ')}</Authors>

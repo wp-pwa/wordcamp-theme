@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'react-emotion';
-import { sessionContext } from '../../contexts';
+import { sessionsContext, speakersContext } from '../../contexts';
 import Link from '../Link';
 import FavoriteButton from './FavoriteButton';
 
@@ -13,10 +13,21 @@ const SessionCard = ({ session, columns }) => (
       <FavoriteButton session={session} />
     </Header>
     <Body>
-      <Link type={session.type} id={session.id} context={sessionContext(columns)}>
+      <Link type={session.type} id={session.id} context={sessionsContext(columns)}>
         <Title dangerouslySetInnerHTML={{ __html: session.title }} />
       </Link>
-      <p>{session.speakers.map(speaker => speaker.name).join(', ')}</p>
+      {session.speakers.map(speaker => (
+        <Link
+          key={speaker.name}
+          type={speaker.type}
+          id={speaker.id}
+          context={speakersContext(
+            session.speakers.map(({ type, id, page }) => [{ type, id, page }]),
+          )}
+        >
+          <Speaker>{`${speaker.name}`}</Speaker>
+        </Link>
+      ))}
       <p>{`${session.startTime}${session.endTime ? ` - ${session.endTime}` : ''}`}</p>
     </Body>
   </Container>
@@ -70,4 +81,9 @@ const Title = styled.a`
   font-size: 1.2rem;
   font-weight: bold;
   padding-top: 15px;
+`;
+
+const Speaker = styled.a`
+  display: inline-block;
+  padding-right: 5px;
 `;

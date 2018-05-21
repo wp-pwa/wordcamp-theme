@@ -7,13 +7,14 @@ const Speaker = types
   .model('Speaker')
   .props({
     id: types.identifier(Id),
+    type: types.optional(types.string, 'wcb_speaker'),
     sessions: types.optional(types.array(types.reference(types.late(() => Session))), []),
   })
   .views(self => {
     const getConnection = () => getParent(self, 3).connection;
     return {
       get entity() {
-        return getConnection().entity('wcb_speaker', self.id);
+        return getConnection().entity(self.type, self.id);
       },
       get name() {
         return self.entity.title;
