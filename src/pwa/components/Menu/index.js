@@ -42,9 +42,9 @@ const Overlay = styled.div`
 `;
 
 const InnerContainer = styled.div`
-  min-width: 65vw;
+  width: 100%;
   position: absolute;
-  bottom: ${({ theme }) => theme.sizes.button};
-  right: 0;
+  top: 0;
+  left: 0;
   background-color: #eeeeee;
 `;

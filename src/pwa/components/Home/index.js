@@ -1,11 +1,12 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Slider from '../Slider';
-import Menu from '../Menu';
 import OnNow from './OnNow';
 import UpNext from './UpNext';
 import Schedule from './Schedule';
-import HomeNav from './Nav';
+import TopBar from '../TopBar';
+import Menu from '../Menu';
+import Nav from './Nav';
 
 const Home = ({ columns, selectedColumnIndex, handleOnTransitionEnd }) => (
   <Fragment>
@@ -16,8 +17,9 @@ const Home = ({ columns, selectedColumnIndex, handleOnTransitionEnd }) => (
         return <Schedule key={mstId} />;
       })}
     </Slider>
-    <HomeNav key="nav" />
+    <TopBar />
     <Menu key="menu" />
+    <Nav key="nav" />
   </Fragment>
 );
 

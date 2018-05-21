@@ -31,6 +31,7 @@ const theme = {
     schedule: '0 0 0 15px',
     session: '54px 0',
     speaker: '54px 0',
+    home: '54px 0 74px 0',
   },
 };
 
@@ -59,36 +60,36 @@ class Theme extends Component {
     return (
       <ThemeProvider theme={theme}>
         <Fragment>
-          {contextName === 'home' ? (
+          {contextName === 'home' && (
             <Home
               columns={columns}
               selectedColumnIndex={selectedColumnIndex}
               handleOnTransitionEnd={this.handleOnTransitionEnd}
             />
-          ) : null}
-          {contextName === 'sessions' ? (
+          )}
+          {contextName === 'sessions' && (
             <Sessions
               columns={columns}
               selectedColumnIndex={selectedColumnIndex}
               handleOnTransitionEnd={this.handleOnTransitionEnd}
             />
-          ) : null}
-          {contextName === 'speakers' ? (
+          )}
+          {contextName === 'speakers' && (
             <Speakers
               columns={columns}
               selectedColumnIndex={selectedColumnIndex}
               handleOnTransitionEnd={this.handleOnTransitionEnd}
             />
-          ) : null}
-          {contextName === 'venue' ? (
+          )}
+          {contextName === 'venue' && (
             <Venue
               columns={columns}
               selectedColumnIndex={selectedColumnIndex}
               handleOnTransitionEnd={this.handleOnTransitionEnd}
             />
-          ) : null}
-          {contextName === 'announcements' ? <Announcements /> : null}
-          {contextName === 'credits' ? <Credits /> : null}
+          )}
+          {contextName === 'announcements' && <Announcements />}
+          {contextName === 'credits' && <Credits />}
         </Fragment>
       </ThemeProvider>
     );

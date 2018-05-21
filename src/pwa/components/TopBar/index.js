@@ -4,29 +4,42 @@ import { inject } from 'mobx-react';
 import styled from 'react-emotion';
 import { homeContext } from '../../contexts';
 import Link from '../Link';
+import MenuButton from '../Menu/MenuButton';
 
-const TopBar = ({ contextIndex, previousContextRequested }) => (
-  <Container>
-    {contextIndex ? (
-      <CloseButton onClick={previousContextRequested}>Close</CloseButton>
-    ) : (
-      <CloseButton>
-        <Link type="page" id={13} context={homeContext}>
-          <A>Close</A>
-        </Link>
-      </CloseButton>
-    )}
-  </Container>
-);
+const TopBar = ({ previousContextRequested, contextIndex, contextName }) => {
+  if (contextName === 'home') {
+    return (
+      <Container>
+        <MenuButton />
+      </Container>
+    );
+  }
+
+  return (
+    <Container>
+      {contextIndex ? (
+        <CloseButton onClick={previousContextRequested}>Close</CloseButton>
+      ) : (
+        <CloseButton>
+          <Link type="page" id={13} context={homeContext}>
+            <A>Close</A>
+          </Link>
+        </CloseButton>
+      )}
+    </Container>
+  );
+};
 
 TopBar.propTypes = {
-  contextIndex: PropTypes.number.isRequired,
   previousContextRequested: PropTypes.func.isRequired,
+  contextIndex: PropTypes.number.isRequired,
+  contextName: PropTypes.string.isRequired,
 };
 
 export default inject(({ connection }) => ({
   previousContextRequested: connection.previousContextRequested,
   contextIndex: connection.selectedContext.index,
+  contextName: connection.selectedContext.options.name,
 }))(TopBar);
 
 const Container = styled.div`
