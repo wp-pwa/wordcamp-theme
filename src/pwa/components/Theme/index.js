@@ -21,17 +21,17 @@ const theme = {
     share: '#006ca0',
   },
   sizes: {
-    button: '54px',
+    button: '56px',
   },
   paddings: {
     menu: '0 15px',
     venueNav: '0 15px',
-    venue: '54px 0',
-    credits: '54px 0 0 0',
+    venue: '56px 0',
+    credits: '56px 0 0 0',
     schedule: '0 0 0 15px',
-    session: '54px 0',
-    speaker: '54px 0',
-    home: '54px 0 74px 0',
+    session: '56px 0',
+    speaker: '56px 0',
+    home: '56px 0 76px 0',
   },
 };
 
