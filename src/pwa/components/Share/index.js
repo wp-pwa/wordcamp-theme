@@ -60,17 +60,17 @@ const Container = styled.div`
 `;
 
 const StyledFacebookShareButton = styled(FacebookShareButton)`
-  background-color: ${({ theme }) => theme.colors.facebook};
+  background-color: ${({ theme }) => theme.color.facebook};
 `;
 
 const StyledTwitterShareButton = styled(TwitterShareButton)`
-  background-color: ${({ theme }) => theme.colors.twitter};
+  background-color: ${({ theme }) => theme.color.twitter};
 `;
 
 const StyledWhatsappShareButton = styled(WhatsappShareButton)`
-  background-color: ${({ theme }) => theme.colors.whatsapp};
+  background-color: ${({ theme }) => theme.color.whatsapp};
 `;
 
 const StyledEmailShareButton = styled(EmailShareButton)`
-  background-color: ${({ theme }) => theme.colors.email};
+  background-color: ${({ theme }) => theme.color.email};
 `;

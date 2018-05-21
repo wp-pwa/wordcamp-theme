@@ -31,7 +31,6 @@ const Text = styled.div`
 `;
 
 const SwitchWrapper = styled.div`
-  width: ${({ theme }) => theme.sizes.button};
   display: flex;
   flex-shrink: 0;
   justify-content: center;
@@ -49,12 +48,6 @@ const SwitchWrapper = styled.div`
     background-color: #e9e9e6;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.35, 0, 0.25, 1);
-
-    & > span {
-      font-size: 12px;
-      position: absolute;
-      left: 24px;
-    }
 
     &:after {
       position: absolute;
@@ -86,19 +79,6 @@ const SwitchWrapper = styled.div`
     &.rc-switch-disabled:after {
       background: #9e9e9e;
       cursor: no-drop;
-    }
-    &.rc-switch-label {
-      display: inline-block;
-      line-height: 20px;
-      font-size: 14px;
-      padding-left: 10px;
-      vertical-align: middle;
-      white-space: normal;
-      pointer-events: none;
-      -webkit-user-select: text;
-      -moz-user-select: text;
-      -ms-user-select: text;
-      user-select: text;
     }
   }
 `;
