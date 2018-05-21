@@ -9,6 +9,7 @@ import Speakers from '../Speakers';
 import Venue from '../Venue';
 import Announcements from '../Announcements';
 import Credits from '../Credits';
+import Manifest from '../Manifest';
 
 import '../../styles';
 
@@ -60,6 +61,7 @@ class Theme extends Component {
     return (
       <ThemeProvider theme={theme}>
         <Fragment>
+          <Manifest />
           {contextName === 'home' && (
             <Home
               columns={columns}
