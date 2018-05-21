@@ -73,34 +73,36 @@ export default types
       },
     };
   })
-  .actions(self => ({
-    toggleFavorite(id) {
-      if (self.favoritesMap.get(id)) {
-        self.favoritesMap.get(id).val = !self.favoritesMap.get(id).val;
-      } else {
-        self.favoritesMap.set(id, { val: true });
-      }
-    },
-    createSession(session) {
-      // Init tracks
-      if (session.tracks)
-        session.tracks.forEach(id => {
-          if (!self.track(id)) self.tracksMap.set(id, { id });
-        });
+  .actions(self => {
+    const pad = n => `${n}`.padStart(2, '0');
 
-      // Init speakers
-      if (session.speakers)
-        session.speakers.forEach(id => {
-          if (!self.speaker(id)) self.speakersMap.set(id, { id });
-        });
-      self.sessionsMap.set(session.id, session);
-    },
-    setTime(day = 1, hour = 0, minutes = 0) {
-      const pad = n => `${n}`.padStart(2, '0');
-      self.isRealTime = false;
-      self.time = new Date(`2018-06-${pad(day)}T${pad(hour)}:${pad(minutes)}:00+02:00`);
-    },
-    toggleRealTime() {
-      self.isRealTime = !self.isRealTime;
-    },
-  }));
+    return {
+      toggleFavorite(id) {
+        if (self.favoritesMap.get(id)) {
+          self.favoritesMap.get(id).val = !self.favoritesMap.get(id).val;
+        } else {
+          self.favoritesMap.set(id, { val: true });
+        }
+      },
+      createSession(session) {
+        // Init tracks
+        if (session.tracks)
+          session.tracks.forEach(id => {
+            if (!self.track(id)) self.tracksMap.set(id, { id });
+          });
+        // Init speakers
+        if (session.speakers)
+          session.speakers.forEach(id => {
+            if (!self.speaker(id)) self.speakersMap.set(id, { id });
+          });
+        self.sessionsMap.set(session.id, session);
+      },
+      setTime(day = 1, hour = 0, minutes = 0) {
+        self.isRealTime = false;
+        self.time = new Date(`2018-06-${pad(day)}T${pad(hour)}:${pad(minutes)}:00+02:00`);
+      },
+      toggleRealTime() {
+        self.isRealTime = !self.isRealTime;
+      },
+    };
+  });
