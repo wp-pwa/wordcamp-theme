@@ -15,4 +15,7 @@ export default self => () => {
   // Sets global functions to change current time
   window.setTime = self.theme.setTime;
   window.toggleRealTime = self.theme.toggleRealTime;
+
+  // Fetch announcements
+  self.connection.fetchListPage({ type: 'latest', id: 'post', page: 1 });
 };
