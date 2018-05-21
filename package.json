@@ -19,7 +19,8 @@
   "dependencies": {
     "rc-switch": "^1.6.0",
     "react-select": "^2.0.0-beta.5",
-    "react-share": "^2.1.1"
+    "react-share": "^2.1.1",
+    "react-waypoint": "^8.0.1"
   },
   "devDependencies": {},
   "bugs": {
