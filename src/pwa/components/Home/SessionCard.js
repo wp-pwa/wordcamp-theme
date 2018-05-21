@@ -8,7 +8,7 @@ import FavoriteButton from './FavoriteButton';
 
 const SessionCard = ({ session, columns }) => (
   <Container>
-    <Header>
+    <Header track={session.tracks.length === 1 ? session.tracks[0].name : null}>
       <Track>{session.tracks.length === 1 ? session.tracks[0].name : ''}</Track>
       <FavoriteButton session={session} />
     </Header>
@@ -56,7 +56,11 @@ const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #888888;
+  background-color: ${({ theme, track }) => {
+    if (track === 'Milky Way Track') return theme.color.blue;
+    if (track === 'Andromeda Track') return theme.color.red;
+    return theme.color.yellow;
+  }};
 `;
 
 const Track = styled.div`
