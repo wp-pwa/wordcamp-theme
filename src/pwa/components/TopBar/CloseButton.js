@@ -27,7 +27,6 @@ export default inject(({ connection }) => ({
 }))(CloseButton);
 
 const Container = styled.div`
-  height: ${({ theme }) => theme.sizes.button};
   width: ${({ theme }) => theme.sizes.button};
   display: flex;
   justify-content: center;

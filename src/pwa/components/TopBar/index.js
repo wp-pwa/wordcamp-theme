@@ -2,19 +2,28 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { inject } from 'mobx-react';
 import styled from 'react-emotion';
+import Logo from './Logo';
 import MenuButton from '../Menu/MenuButton';
 import CloseButton from './CloseButton';
 
-const TopBar = ({ contextName }) => (
-  <Container>{contextName === 'home' ? <MenuButton /> : <CloseButton />}</Container>
+const TopBar = ({ contextTitle, contextName }) => (
+  <Container>
+    <InnerContainer>
+      <Logo />
+      <Title>{contextTitle}</Title>
+    </InnerContainer>
+    {contextName === 'home' ? <MenuButton /> : <CloseButton />}
+  </Container>
 );
 
 TopBar.propTypes = {
   contextName: PropTypes.string.isRequired,
+  contextTitle: PropTypes.string.isRequired,
 };
 
 export default inject(({ connection }) => ({
   contextName: connection.selectedContext.options.name,
+  contextTitle: connection.selectedContext.options.title,
 }))(TopBar);
 
 const Container = styled.div`
@@ -24,6 +33,17 @@ const Container = styled.div`
   height: ${({ theme }) => theme.sizes.button};
   width: 100vw;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   background: #e9e9e6;
+`;
+
+const InnerContainer = styled.div`
+  display: flex;
+  align-items: center;
+  height: ${({ theme }) => theme.sizes.button};
+`;
+
+const Title = styled.div`
+  font-size: 16px;
+  text-transform: uppercase;
 `;

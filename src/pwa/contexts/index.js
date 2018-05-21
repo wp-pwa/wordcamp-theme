@@ -23,6 +23,7 @@ export const homeContext = {
   ],
   options: {
     name: 'home',
+    title: 'Schedule',
   },
 };
 
@@ -67,6 +68,7 @@ export const venueContext = {
   ],
   options: {
     name: 'venue',
+    title: 'Venue Map',
   },
 };
 
@@ -82,6 +84,7 @@ export const announcementsContext = {
   ],
   options: {
     name: 'announcements',
+    title: 'Announcements',
   },
 };
 
@@ -96,6 +99,7 @@ export const creditsContext = {
   ],
   options: {
     name: 'credits',
+    title: 'Credits',
   },
 };
 
@@ -103,6 +107,7 @@ export const sessionsContext = memoize((columns = []) => ({
   columns,
   options: {
     name: 'sessions',
+    title: 'Session',
   },
 }));
 
@@ -110,5 +115,6 @@ export const speakersContext = memoize((columns = []) => ({
   columns,
   options: {
     name: 'speakers',
+    title: 'Speaker',
   },
 }));
