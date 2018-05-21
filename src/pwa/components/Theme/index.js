@@ -7,6 +7,7 @@ import Home from '../Home';
 import Sessions from '../Sessions';
 import Speakers from '../Speakers';
 import Venue from '../Venue';
+import Posts from '../Posts';
 import Announcements from '../Announcements';
 import Credits from '../Credits';
 import Manifest from '../Manifest';
@@ -93,6 +94,13 @@ class Theme extends Component {
           )}
           {contextName === 'venue' && (
             <Venue
+              columns={columns}
+              selectedColumnIndex={selectedColumnIndex}
+              handleOnTransitionEnd={this.handleOnTransitionEnd}
+            />
+          )}
+          {contextName === 'posts' && (
+            <Posts
               columns={columns}
               selectedColumnIndex={selectedColumnIndex}
               handleOnTransitionEnd={this.handleOnTransitionEnd}

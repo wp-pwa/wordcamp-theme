@@ -88,6 +88,14 @@ export const announcementsContext = {
   },
 };
 
+export const postsContext = memoize((columns = []) => ({
+  columns,
+  options: {
+    name: 'posts',
+    title: 'Announcements',
+  },
+}));
+
 export const creditsContext = {
   columns: [
     [

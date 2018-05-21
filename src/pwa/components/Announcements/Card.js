@@ -3,26 +3,34 @@ import PropTypes from 'prop-types';
 import styled from 'react-emotion';
 import { inject } from 'mobx-react';
 import Media from './Media';
+import Link from '../Link';
 
-const Card = ({ title, creationDate, authorName, featured }) => (
-  <Container>
-    <Media entity={featured} />
-    <Title>{title}</Title>
-    <Info>
-      <Fecha>{creationDate}</Fecha>
-      <Author>{authorName}</Author>
-    </Info>
-  </Container>
+const Card = ({ type, id, title, creationDate, authorName, featured, context }) => (
+  <Link type={type} id={id} context={context}>
+    <Container>
+      <Media entity={featured} />
+      <Title>{title}</Title>
+      <Info>
+        <Fecha>{creationDate}</Fecha>
+        <Author>{authorName}</Author>
+      </Info>
+    </Container>
+  </Link>
 );
 
 Card.propTypes = {
+  type: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   creationDate: PropTypes.string.isRequired,
   authorName: PropTypes.string.isRequired,
   featured: PropTypes.shape({}).isRequired,
+  context: PropTypes.shape({}).isRequired,
 };
 
 export default inject((_, { entity }) => ({
+  type: entity.type,
+  id: entity.id,
   title: entity.title,
   creationDate: new Date(entity.creationDate).toDateString(),
   authorName: entity.author.name,

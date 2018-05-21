@@ -6,17 +6,23 @@ import Card from './Card';
 import Refresh from './Refresh';
 import NextPage from './NextPage';
 import TopBar from '../TopBar';
+import { postsContext } from '../../contexts';
 
-const Announcements = ({ entities, list }) => (
-  <Fragment>
-    <TopBar />
-    <Content>
-      <Refresh list={list} />
-      <List>{entities.map(entity => <Card key={entity.mstId} entity={entity} />)}</List>
-      <NextPage list={list} />
-    </Content>
-  </Fragment>
-);
+const Announcements = ({ entities, list }) => {
+  const context = postsContext(entities.map(({ type, id }) => [{ type, id }]));
+  return (
+    <Fragment>
+      <TopBar />
+      <Content>
+        <Refresh list={list} />
+        <List>
+          {entities.map(entity => <Card key={entity.mstId} entity={entity} context={context} />)}
+        </List>
+        <NextPage list={list} />
+      </Content>
+    </Fragment>
+  );
+};
 
 Announcements.propTypes = {
   entities: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
