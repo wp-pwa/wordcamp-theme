@@ -18,7 +18,13 @@ const Track = types
       get name() {
         return self.entity.name;
       },
-      filteredSessionsOnDate(date) {
+      get firstDaySessions() {
+        return self.sessionsByWithFilter(new Date('2018-06-15T08:00:00+02:00'));
+      },
+      get secondDaySessions() {
+        return self.sessionsByWithFilter(new Date('2018-06-16T08:00:00+02:00'));
+      },
+      sessionsByWithFilter(date) {
         const onlyFavorites = getParent(self, 2).schedule.isFiltered;
 
         return this.sessionsBy(date, onlyFavorites);

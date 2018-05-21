@@ -33,12 +33,8 @@ Sessions.propTypes = {
 };
 
 export default inject(({ theme }, { track }) => ({
-  firstDaySessions: theme
-    .track(track)
-    .filteredSessionsOnDate(new Date('2018-06-15T12:00:00+02:00')),
-  secondDaySessions: theme
-    .track(track)
-    .filteredSessionsOnDate(new Date('2018-06-16T12:00:00+02:00')),
+  firstDaySessions: theme.track(track).firstDaySessions,
+  secondDaySessions: theme.track(track).secondDaySessions,
 }))(Sessions);
 
 const Container = styled.div`
