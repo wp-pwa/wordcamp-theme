@@ -6,7 +6,13 @@ import SessionCard from './SessionCard';
 
 const UpNext = ({ sessions }) => (
   <Container>
-    {sessions.map(session => <SessionCard key={session.id} session={session} />)}
+    {sessions.map(session => (
+      <SessionCard
+        key={session.id}
+        session={session}
+        columns={sessions.map(({ type, id, page }) => [{ type, id, page }])}
+      />
+    ))}
   </Container>
 );
 

@@ -10,7 +10,7 @@ const SessionRow = ({ session, position, columns }) => (
     <Time>{session.startTime}</Time>
     <InnerContainer>
       <Link type={session.type} id={session.id} context={sessionContext(columns)}>
-        <Title>{session.title}</Title>
+        <Title dangerouslySetInnerHTML={{ __html: session.title }} />
       </Link>
       <Authors>{session.speakers.map(s => s.name).join(', ')}</Authors>
     </InnerContainer>

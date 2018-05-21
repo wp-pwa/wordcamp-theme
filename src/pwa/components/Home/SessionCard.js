@@ -2,16 +2,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'react-emotion';
+import { sessionContext } from '../../contexts';
+import Link from '../Link';
 import FavoriteButton from './FavoriteButton';
 
-const SessionCard = ({ session }) => (
+const SessionCard = ({ session, columns }) => (
   <Container>
     <Header>
       <Track>{session.tracks.length === 1 ? session.tracks[0].name : ''}</Track>
       <FavoriteButton session={session} />
     </Header>
     <Body>
-      <h4 dangerouslySetInnerHTML={{ __html: session.title }} />
+      <Link type={session.type} id={session.id} context={sessionContext(columns)}>
+        <Title dangerouslySetInnerHTML={{ __html: session.title }} />
+      </Link>
       <p>{session.speakers.map(speaker => speaker.name).join(', ')}</p>
       <p>{`${session.startTime}${session.endTime ? ` - ${session.endTime}` : ''}`}</p>
     </Body>
@@ -20,6 +24,7 @@ const SessionCard = ({ session }) => (
 
 SessionCard.propTypes = {
   session: PropTypes.shape({}).isRequired,
+  columns: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({}))).isRequired,
 };
 
 export default SessionCard;
@@ -58,4 +63,11 @@ const Body = styled.div`
     margin: 0;
     padding-top: 15px;
   }
+`;
+
+const Title = styled.a`
+  display: block;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding-top: 15px;
 `;
