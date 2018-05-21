@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { inject } from 'mobx-react';
-import styled from 'react-emotion';
+import styled, { keyframes } from 'react-emotion';
 import FetchingIcon from 'react-icons/lib/fa/refresh';
 
 class Refresh extends Component {
@@ -11,13 +11,16 @@ class Refresh extends Component {
     this.getFirstPage = this.getFirstPage.bind(this);
     this.unclick = this.unclick.bind(this);
   }
+  componentDidMount() {
+    this.getFirstPage();
+  }
   getFirstPage() {
     const { type, id, fetchListPage, isFetching } = this.props;
-    if (!isFetching) fetchListPage({ type, id, page: 1 });
+    if (!isFetching) fetchListPage({ type, id, page: 1, force: true });
     this.setState({ isClicked: true });
 
     clearTimeout(this.timeout);
-    this.timeout = setTimeout(this.unclick, 100);
+    this.timeout = setTimeout(this.unclick, 500);
   }
   unclick() {
     this.setState({ isClicked: false });
@@ -56,6 +59,7 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 12px;
 `;
 
 const Button = styled.div`
@@ -71,8 +75,14 @@ const Button = styled.div`
   border-radius: 8px;
 `;
 
+const spinner = keyframes`
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+`;
+
 const Fetching = styled(FetchingIcon)`
   width: 28px;
   height: 28px;
   color: white;
+  animation: ${spinner} 1s ease infinite;
 `;

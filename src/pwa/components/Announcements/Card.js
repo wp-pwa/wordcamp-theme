@@ -4,9 +4,9 @@ import styled from 'react-emotion';
 import { inject } from 'mobx-react';
 import Media from './Media';
 
-const Card = ({ title, creationDate, authorName, hasFeaturedMedia, featured }) => (
+const Card = ({ title, creationDate, authorName, featured }) => (
   <Container>
-    {hasFeaturedMedia && <Media entity={featured}/>}
+    <Media entity={featured} />
     <Title>{title}</Title>
     <Info>
       <Fecha>{creationDate}</Fecha>
@@ -17,46 +17,46 @@ const Card = ({ title, creationDate, authorName, hasFeaturedMedia, featured }) =
 
 Card.propTypes = {
   title: PropTypes.string.isRequired,
-  creationDate: PropTypes.number.isRequired, // check this
+  creationDate: PropTypes.string.isRequired,
   authorName: PropTypes.string.isRequired,
-  hasFeaturedMedia: PropTypes.bool.isRequired,
   featured: PropTypes.shape({}).isRequired,
 };
 
 export default inject((_, { entity }) => ({
   title: entity.title,
-  creationDate: entity.creationDate,
+  creationDate: new Date(entity.creationDate).toDateString(),
   authorName: entity.author.name,
-  hasFeaturedMedia: entity.hasFeaturedMedia,
   featured: entity.media.featured,
 }))(Card);
 
 const Container = styled.div`
   box-sizing: border-box;
-  width: 100vw;
-  min-height: 56px;
+  width: 100%;
+  margin-bottom: 16px;
 `;
 
-const Title = styled.div`
-  box-sizing: border-box;
-  width: 100vw;
-  min-height: 56px;
-`;
-
-const Fecha = styled.div`
-  box-sizing: border-box;
-  width: 100vw;
-  min-height: 56px;
-`;
-
-const Author = styled.div`
-  box-sizing: border-box;
-  width: 100vw;
-  min-height: 56px;
+const Title = styled.h2`
+  width: 100%;
+  color: #5566c3;
+  font-size: 24px;
+  font-weight: normal;
+  margin: 16px 0 0 0;
 `;
 
 const Info = styled.div`
   box-sizing: border-box;
-  width: 100vw;
-  min-height: 56px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  color: rgba(40, 36, 9, 0.4);
+  text-align: center;
+`;
+
+const Fecha = styled.p`
+  margin: 0;
+`;
+
+const Author = styled.p`
+  margin: 0;
 `;

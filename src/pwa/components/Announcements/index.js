@@ -12,7 +12,7 @@ const Announcements = ({ entities, list }) => (
     <TopBar />
     <Content>
       <Refresh list={list} />
-      {entities.map(entity => <Card key={entity.mstId} entity={entity}/>)}
+      <List>{entities.map(entity => <Card key={entity.mstId} entity={entity} />)}</List>
       <NextPage list={list} />
     </Content>
   </Fragment>
@@ -33,4 +33,8 @@ const Content = styled.div`
   width: 100vw;
   min-height: 100vh;
   padding: ${({ theme }) => theme.paddings.credits};
+`;
+
+const List = styled.div`
+  margin: 0 32px;
 `;
