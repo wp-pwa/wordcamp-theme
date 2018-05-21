@@ -4,7 +4,7 @@ import MenuRoute from './MenuRoute';
 import MenuLink from './MenuLink';
 
 const routes = ['venue-map', 'announcements', 'credits'];
-const links = ['twitter', 'facebook'];
+const links = ['facebook', 'twitter'];
 
 const MenuList = () => (
   <Container>

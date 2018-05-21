@@ -59,7 +59,7 @@ const SwitchWrapper = styled.div`
       content: ' ';
       cursor: pointer;
       transition: left 0.3s cubic-bezier(0.35, 0, 0.25, 1);
-      background: ${({ theme }) => theme.color.grey};
+      background: ${({ theme }) => theme.color.switch};
     }
     &:focus {
       outline: none;

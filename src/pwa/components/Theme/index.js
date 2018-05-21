@@ -15,8 +15,10 @@ import '../../styles';
 
 const theme = {
   color: {
-    text: '#282409',
-    grey: 'rgba(40, 36, 9, 0.4)',
+    black: '#282409',
+    grey: '#E9E9E6',
+    darkGrey: '#A9A79C',
+    switch: '#9B998E',
     red: '#F95758',
     yellow: '#EFDC39',
     blue: '#5566C3',
@@ -25,6 +27,7 @@ const theme = {
     whatsapp: '#2cb742',
     email: '#7f7f7f',
     share: '#006ca0',
+    text: '#282409',
   },
   sizes: {
     button: '56px',

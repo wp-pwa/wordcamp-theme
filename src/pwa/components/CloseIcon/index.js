@@ -54,7 +54,7 @@ const Container = styled.div`
   box-sizing: border-box;
   width: ${({ theme }) => theme.sizes.button};
   height: ${({ theme }) => theme.sizes.button};
-  padding: 12px 18px 14px 18px;
+  padding: 14px 18px 14px 18px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -66,6 +66,7 @@ const Svg = styled.svg`
   width: 20px;
   height: 20px;
   padding: 4px;
+  padding-top: 2px;
 `;
 
 const Label = styled.div`
