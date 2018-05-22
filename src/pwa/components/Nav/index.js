@@ -2,89 +2,63 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { inject } from 'mobx-react';
 import styled from 'react-emotion';
+import PrevIcon from 'react-icons/lib/fa/angle-left';
+import NextIcon from 'react-icons/lib/fa/angle-right';
 import Share from './Share';
-import Link from '../Link';
+import Button from './Button';
 
-const Nav = ({ hasPreviousColumn, previousColumn, hasNextColumn, nextColumn }) => (
+const Nav = ({ previousItem, nextItem }) => (
   <Container>
-    {hasPreviousColumn ? (
-      <PreviousButton>
-        <Link type={previousColumn.items[0].type} id={previousColumn.items[0].id}>
-          <PreviousA>{'<'}</PreviousA>
-        </Link>
-      </PreviousButton>
-    ) : null}
+    <PrevButton item={previousItem} icon={PrevIcon} text="PREV" />
     <Share />
-    {hasNextColumn ? (
-      <NextButton>
-        <Link type={nextColumn.items[0].type} id={nextColumn.items[0].id}>
-          <NextA>{'>'}</NextA>
-        </Link>
-      </NextButton>
-    ) : null}
+    <NextButton item={nextItem} icon={NextIcon} text="NEXT" />
   </Container>
 );
 
 Nav.propTypes = {
-  hasPreviousColumn: PropTypes.bool.isRequired,
-  previousColumn: PropTypes.shape({}),
-  hasNextColumn: PropTypes.bool.isRequired,
-  nextColumn: PropTypes.shape({}),
+  previousItem: PropTypes.shape({}),
+  nextItem: PropTypes.shape({}),
 };
 
 Nav.defaultProps = {
-  previousColumn: null,
-  nextColumn: null,
+  previousItem: null,
+  nextItem: null,
 };
 
-export default inject(({ connection }) => ({
-  hasPreviousColumn: connection.selectedColumn.hasPreviousColumn,
-  previousColumn: connection.selectedColumn.previousColumn,
-  hasNextColumn: connection.selectedColumn.hasNextColumn,
-  nextColumn: connection.selectedColumn.nextColumn,
-}))(Nav);
+export default inject(({ connection }) => {
+  const {
+    hasPreviousColumn,
+    previousColumn,
+    hasNextColumn,
+    nextColumn,
+  } = connection.selectedColumn;
+  return {
+    previousItem: hasPreviousColumn ? previousColumn.selectedItem : null,
+    nextItem: hasNextColumn ? nextColumn.selectedItem : null,
+  };
+})(Nav);
 
 const Container = styled.div`
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100vw;
+  box-sizing: padding-box;
   height: ${({ theme }) => theme.size.button};
-  background-color: #cccccc;
+  background-color: ${({ theme }) => theme.color.lightGrey};
+  border-top: 1px solid ${({ theme }) => theme.color.grey};
   display: flex;
   justify-content: center;
 `;
 
-const Button = styled.div`
-  box-sizing: border-box;
+const PrevButton = styled(Button)`
   position: absolute;
   top: 0;
-  width: ${({ theme }) => theme.size.button};
-  height: 100%;
-  display: flex;
-  align-items: center;
-`;
-
-const PreviousButton = styled(Button)`
   left: 0;
 `;
 
 const NextButton = styled(Button)`
+  position: absolute;
+  top: 0;
   right: 0;
-`;
-
-const A = styled.a`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  padding: ${({ theme }) => theme.padding.venueNav};
-`;
-
-const PreviousA = styled(A)`
-  justify-content: flex-start;
-`;
-
-const NextA = styled(A)`
-  justify-content: flex-end;
 `;
