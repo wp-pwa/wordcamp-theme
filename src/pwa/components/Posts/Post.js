@@ -83,8 +83,17 @@ const Author = styled.p`
 `;
 
 const Content = styled.div`
-  padding: 24px 24px 8px 24px;
+  padding: 0 24px;
+  margin: 24px 0 8px 0;
   font-size: 14px;
   line-height: 20px;
   color: ${({ theme }) => theme.color.darkGrey};
+
+  & > p:first-child {
+    margin-top: 0;
+  }
+
+  & > p:last-child {
+    margin-bottom: 0;
+  }
 `;
