@@ -16,21 +16,23 @@ import '../../styles';
 
 const theme = {
   color: {
+    white: '#FFFFFF',
     black: '#282409',
+    lightGrey: '#FBFBFA',
     grey: '#E9E9E6',
     darkGrey: '#A9A79C',
-    switch: '#9B998E',
     red: '#F95758',
     yellow: '#EFDC39',
     blue: '#5566C3',
+    text: '#282409',
+    whiteText: '#FFFFFF',
+    greyText: '#706E5E',
+    switch: '#9B998E',
     facebook: '#3b5998',
     twitter: '#1da1f2',
     whatsapp: '#2cb742',
     email: '#7f7f7f',
     share: '#006ca0',
-    text: '#282409',
-    whiteText: '#FFFFFF',
-    greyText: '#706E5E',
   },
   size: {
     button: '56px',

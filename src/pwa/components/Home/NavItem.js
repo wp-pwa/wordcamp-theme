@@ -8,17 +8,14 @@ const routes = {
   'on-now': {
     id: 13,
     text: 'On Now',
-    color: 'hotpink',
   },
   'up-next': {
     id: 15,
     text: 'Up Next',
-    color: 'crimson',
   },
   schedule: {
     id: 17,
-    text: 'Schedule',
-    color: 'indigo',
+    text: 'Full',
   },
 };
 
@@ -44,7 +41,10 @@ const Container = styled.div`
   box-sizing: border-box;
   flex-grow: 1;
   width: 33%;
-  background-color: ${({ isSelected, label }) => (isSelected ? routes[label].color : '')};
+  color: ${({ theme, isSelected }) => (isSelected ? theme.color.blue : '#7C7A69')};
+  background-color: ${({ theme, isSelected }) => (isSelected ? theme.color.white : null)}
+  font-size: 16px;
+  box-shadow: inset -1px 0 0 0 #e9e9e6;
 `;
 
 const A = styled.a`
