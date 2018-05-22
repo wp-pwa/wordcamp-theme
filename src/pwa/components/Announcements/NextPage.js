@@ -12,7 +12,8 @@ class NextPage extends Component {
   }
   getNextPage() {
     const { type, id, fetchedPages, totalPages, fetchListPage, isFetching } = this.props;
-    if (!isFetching && fetchedPages < totalPages) fetchListPage({ type, id, page: totalPages + 1 });
+    if (!isFetching && totalPages && fetchedPages < totalPages)
+      fetchListPage({ type, id, page: totalPages + 1 });
   }
   render() {
     const { fetchedPages, totalPages, isFetching } = this.props;
@@ -37,8 +38,8 @@ export default inject(({ connection }, { list }) => ({
   type: list.type,
   id: list.id,
   isFetching: list.isFetching,
-  fetchedPages: list.total.fetched.pages,
-  totalPages: list.total.pages,
+  fetchedPages: list.total.fetched.pages || 0,
+  totalPages: list.total.pages || 0,
   fetchListPage: connection.fetchListPage,
 }))(NextPage);
 
