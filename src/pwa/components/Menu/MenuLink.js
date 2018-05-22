@@ -51,6 +51,7 @@ const Link = styled.a`
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  color: ${({ theme }) => theme.color.text};
 `;
 
 const StyledFacebookIcon = styled(FacebookIcon)`
