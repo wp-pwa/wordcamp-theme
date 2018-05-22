@@ -35,11 +35,14 @@ const Container = styled.div`
   top: 0;
   left: 0;
   color: ${({ theme }) => theme.color.text};
+  z-index: 100;
 `;
 
 const Overlay = styled.div`
   width: 100%;
   height: 100%;
+  background-color: ${({ theme }) => theme.color.black};
+  opacity: 0.5;
 `;
 
 const InnerContainer = styled.div`
