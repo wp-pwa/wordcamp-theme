@@ -1,13 +1,10 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { inject } from 'mobx-react';
 import { parse } from 'url';
 
-const Image = ({ alt, src, srcSet }) => (
-  <Fragment>
-    {src || srcSet ? <img alt={alt} sizes="100vw" src={src} srcSet={srcSet} /> : null}
-  </Fragment>
-);
+const Image = ({ alt, src, srcSet }) =>
+  src || srcSet ? <img alt={alt} sizes="100vw" src={src} srcSet={srcSet} /> : null;
 
 Image.propTypes = {
   alt: PropTypes.string.isRequired,
