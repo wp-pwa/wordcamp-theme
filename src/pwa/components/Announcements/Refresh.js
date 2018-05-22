@@ -14,6 +14,9 @@ class Refresh extends Component {
   componentDidMount() {
     this.getFirstPage();
   }
+  componentWillUnmount() {
+    clearTimeout(this.timeout);
+  }
   getFirstPage() {
     const { type, id, fetchListPage, isFetching } = this.props;
     if (!isFetching) fetchListPage({ type, id, page: 1, force: true });
@@ -59,7 +62,6 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 12px;
 `;
 
 const Button = styled.div`
@@ -67,6 +69,8 @@ const Button = styled.div`
   width: 96px;
   height: 32px;
   color: white;
+  line-height: 20px;
+  font-size: 16px;
   font-weight: bold;
   background: #5566c3;
   display: flex;
@@ -81,8 +85,8 @@ const spinner = keyframes`
 `;
 
 const Fetching = styled(FetchingIcon)`
-  width: 28px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
   color: white;
   animation: ${spinner} 1s ease infinite;
 `;

@@ -41,16 +41,17 @@ export default inject((_, { entity }) => ({
 
 const Container = styled.div`
   box-sizing: border-box;
-  width: 100%;
-  margin-bottom: 16px;
+  padding: 0 24px 16px 24px;
 `;
 
 const Title = styled.h2`
   width: 100%;
-  color: ${({ theme }) => theme.color.blue};
-  font-size: 24px;
+  margin: 0;
+  padding-top: 8px;
+  line-height: 24px;
+  font-size: 20px;
   font-weight: normal;
-  margin: 16px 0 0 0;
+  color: ${({ theme }) => theme.color.blue};
 `;
 
 const Info = styled.div`
@@ -59,6 +60,8 @@ const Info = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
+  line-height: 20px;
+  font-size: 16px;
   color: ${({ theme }) => theme.color.darkGrey};
 `;
 

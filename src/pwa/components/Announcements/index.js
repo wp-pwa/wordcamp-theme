@@ -13,13 +13,11 @@ const Announcements = ({ entities, list }) => {
   return (
     <Fragment>
       <TopBar />
-      <Content>
+      <Container>
         <Refresh list={list} />
-        <List>
           {entities.map(entity => <Card key={entity.mstId} entity={entity} context={context} />)}
-        </List>
         <NextPage list={list} />
-      </Content>
+      </Container>
     </Fragment>
   );
 };
@@ -34,15 +32,12 @@ export default inject(({ connection }) => ({
   list: connection.list('latest', 'post'),
 }))(Announcements);
 
-const Content = styled.div`
+const Container = styled.div`
   box-sizing: border-box;
   width: 100vw;
   min-height: 100vh;
-  padding: 56px 0;
-`;
-
-const List = styled.div`
-  margin: 0 32px;
+  padding: 56px 0 0 0;
   display: flex;
   flex-direction: column;
+  align-items: stretch;
 `;
