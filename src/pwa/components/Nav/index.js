@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { inject } from 'mobx-react';
 import styled from 'react-emotion';
+import Share from './Share';
 import Link from '../Link';
-import Share from '../Share';
 
 const Nav = ({ hasPreviousColumn, previousColumn, hasNextColumn, nextColumn }) => (
   <Container>

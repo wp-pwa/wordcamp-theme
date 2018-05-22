@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Slider from '../Slider';
 import Post from './Post';
 import TopBar from '../TopBar';
-import Nav from './Nav';
+import Nav from '../Nav';
 
 const Posts = ({ columns, selectedColumnIndex, handleOnTransitionEnd }) => (
   <Fragment>
