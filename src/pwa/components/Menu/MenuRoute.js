@@ -74,4 +74,5 @@ const A = styled.a`
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  color: ${({ theme }) => theme.color.text};
 `;

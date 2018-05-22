@@ -27,6 +27,7 @@ const theme = {
     text: '#282409',
     whiteText: '#FFFFFF',
     greyText: '#706E5E',
+    lightGreyText: '#7E7C6B',
     switch: '#9B998E',
     facebook: '#3b5998',
     twitter: '#1da1f2',

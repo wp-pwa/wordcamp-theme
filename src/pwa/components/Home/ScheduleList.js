@@ -3,10 +3,14 @@ import PropTypes from 'prop-types';
 import { inject } from 'mobx-react';
 import styled from 'react-emotion';
 import ScheduleItem from './ScheduleItem';
+import FilterFavorites from './FilterFavorites';
 
 const ScheduleList = ({ firstDaySessions, secondDaySessions }) => (
   <Container>
-    <SessionDay>Friday, June 15th</SessionDay>
+    <InnerContainer>
+      <SessionDay>Friday, June 15th</SessionDay>
+      <FilterFavorites />
+    </InnerContainer>
     {firstDaySessions.map((session, index) => (
       <ScheduleItem
         key={session.id}
@@ -15,7 +19,9 @@ const ScheduleList = ({ firstDaySessions, secondDaySessions }) => (
         columns={firstDaySessions.map(({ type, id, page }) => [{ type, id, page }])}
       />
     ))}
-    <SessionDay>Saturday, June 16th</SessionDay>
+    <InnerContainer>
+      <SessionDay>Saturday, June 16th</SessionDay>
+    </InnerContainer>
     {secondDaySessions.map((session, index) => (
       <ScheduleItem
         key={session.id}
@@ -38,11 +44,24 @@ export default inject(({ theme }, { track }) => ({
 }))(ScheduleList);
 
 const Container = styled.div`
-  width: 100%;
-  padding-bottom: ${({ theme }) => theme.size.button};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
-const SessionDay = styled.h5`
-  width: 100%;
-  padding-left: 15px;
+const InnerContainer = styled.div`
+  width: calc(100vw - 48px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 24px;
+  margin-bottom: 16px;
+`;
+
+const SessionDay = styled.h3`
+  margin: 0;
+  font-size: 14px;
+  color: ${({ theme }) => theme.color.lightGreyText};
+  align-self: flex-start;
+  line-height: 20px;
 `;

@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { inject } from 'mobx-react';
 import styled from 'react-emotion';
-import FilterFavorites from './FilterFavorites';
 import ScheduleList from './ScheduleList';
 
 const Schedule = ({ options, selected, selectTrack }) => (
@@ -14,7 +13,6 @@ const Schedule = ({ options, selected, selectTrack }) => (
         </option>
       ))}
     </Select>
-    <FilterFavorites />
     <ScheduleList track={selected.id} />
   </Container>
 );
