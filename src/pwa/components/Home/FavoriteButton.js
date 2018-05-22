@@ -5,25 +5,31 @@ import styled from 'react-emotion';
 import EmptyStarIcon from 'react-icons/lib/fa/star-o';
 import FullStarIcon from 'react-icons/lib/fa/star';
 
-const FavoriteButton = ({ isFavorite, toggleFavorite }) => (
-  <Container onClick={toggleFavorite}>
-    {isFavorite ? <StyledFullStarIcon size={18} /> : <StyledEmptyStarIcon size={18} />}
+const FavoriteButton = ({ isFavorite, toggleFavorite, inSchedule }) => (
+  <Container onClick={toggleFavorite} inSchedule={inSchedule}>
+    {isFavorite ? (
+      <StyledFullStarIcon size={18} inSchedule={inSchedule} />
+    ) : (
+      <StyledEmptyStarIcon size={18} inSchedule={inSchedule} />
+    )}
   </Container>
 );
 
 FavoriteButton.propTypes = {
   isFavorite: PropTypes.bool.isRequired,
   toggleFavorite: PropTypes.func.isRequired,
+  inSchedule: PropTypes.bool.isRequired,
 };
 
-export default inject((_, { session }) => ({
+export default inject((_, { session, inSchedule }) => ({
   isFavorite: !!session.isFavorite,
   toggleFavorite: session.toggleFavorite,
+  inSchedule: !!inSchedule,
 }))(FavoriteButton);
 
 const Container = styled.div`
-  width: ${({ theme }) => theme.size.cardHeader};
-  height: ${({ theme }) => theme.size.cardHeader};
+  width: ${({ theme, inSchedule }) => (inSchedule ? '' : theme.size.cardHeader)};
+  height: ${({ theme, inSchedule }) => (inSchedule ? '' : theme.size.cardHeader)};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,11 +37,11 @@ const Container = styled.div`
 `;
 
 const StyledEmptyStarIcon = styled(EmptyStarIcon)`
-  padding: 11px;
-  color: ${({ theme }) => theme.color.whiteText};
+  padding: ${({ inSchedule }) => (inSchedule ? null : '11px')};
+  color: ${({ theme, inSchedule }) => (inSchedule ? theme.color.darkGrey : theme.color.white)};
 `;
 
 const StyledFullStarIcon = styled(FullStarIcon)`
-  padding: 11px;
-  color: ${({ theme }) => theme.color.whiteText};
+  padding: ${({ inSchedule }) => (inSchedule ? null : '11px')};
+  color: ${({ theme, inSchedule }) => (inSchedule ? theme.color.red : theme.color.white)};
 `;

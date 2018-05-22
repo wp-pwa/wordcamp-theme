@@ -11,25 +11,29 @@ const ScheduleList = ({ firstDaySessions, secondDaySessions }) => (
       <SessionDay>Friday, June 15th</SessionDay>
       <FilterFavorites />
     </InnerContainer>
-    {firstDaySessions.map((session, index) => (
-      <ScheduleItem
-        key={session.id}
-        position={index}
-        session={session}
-        columns={firstDaySessions.map(({ type, id, page }) => [{ type, id, page }])}
-      />
-    ))}
+    <div>
+      {firstDaySessions.map((session, index) => (
+        <ScheduleItem
+          key={session.id}
+          position={index}
+          session={session}
+          columns={firstDaySessions.map(({ type, id, page }) => [{ type, id, page }])}
+        />
+      ))}
+    </div>
     <InnerContainer>
       <SessionDay>Saturday, June 16th</SessionDay>
     </InnerContainer>
-    {secondDaySessions.map((session, index) => (
-      <ScheduleItem
-        key={session.id}
-        position={index}
-        session={session}
-        columns={secondDaySessions.map(({ type, id, page }) => [{ type, id, page }])}
-      />
-    ))}
+    <div>
+      {secondDaySessions.map((session, index) => (
+        <ScheduleItem
+          key={session.id}
+          position={index}
+          session={session}
+          columns={secondDaySessions.map(({ type, id, page }) => [{ type, id, page }])}
+        />
+      ))}
+    </div>
   </Container>
 );
 

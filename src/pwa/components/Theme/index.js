@@ -42,6 +42,7 @@ const theme = {
   padding: {
     home: '80px 24px',
     schedule: '80px 0',
+    scheduleItem: '16px 24px',
     cardBody: '16px',
     menuItem: '16px 24px',
   },
