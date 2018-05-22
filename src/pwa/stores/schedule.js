@@ -8,8 +8,10 @@ export default types
     isFiltered: types.optional(types.boolean, false),
   })
   .views(self => ({
-    get options() {
-      return getParent(self).tracks.filter(track => track.name !== 'Networking');
+    get tracks() {
+      return getParent(self)
+        .tracks.filter(track => track.name !== 'Networking')
+        .sort((a, b) => a.id - b.id);
     },
   }))
   .actions(self => ({

@@ -2,36 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { inject } from 'mobx-react';
 import styled from 'react-emotion';
-import Select from 'react-select';
 import FilterFavorites from './FilterFavorites';
 import ScheduleList from './ScheduleList';
 
-const selectStyles = {
-  container: base => ({
-    ...base,
-    width: '80vw',
-    height: '54px',
-    marginTop: '20px',
-  }),
-  control: base => ({
-    ...base,
-    height: '54px',
-  }),
-};
-
 const Schedule = ({ options, selected, selectTrack }) => (
   <Container>
-    <Select
-      styles={selectStyles}
-      value={{ value: selected.name, label: selected.name }}
-      onChange={selectTrack}
-      isClearable={false}
-      isSearchable={false}
-      options={options.map(({ name }) => ({
-        value: name,
-        label: name,
-      }))}
-    />
+    <Select onChange={selectTrack} value={selected.name}>
+      {options.map(({ name }) => (
+        <option key={name} value={name}>
+          {name}
+        </option>
+      ))}
+    </Select>
     <FilterFavorites />
     <ScheduleList track={selected.id} />
   </Container>
@@ -44,10 +26,10 @@ Schedule.propTypes = {
 };
 
 export default inject(({ theme }) => ({
-  options: theme.schedule.options,
+  options: theme.schedule.tracks,
   selected: theme.schedule.selected,
-  selectTrack: ({ value }) => {
-    theme.schedule.selectTrack(value);
+  selectTrack: event => {
+    theme.schedule.selectTrack(event.target.value);
   },
 }))(Schedule);
 
@@ -57,4 +39,29 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: ${({ theme }) => theme.padding.schedule};
+`;
+
+const Select = styled.select`
+  height: 48px;
+  width: calc(100vw - 48px);
+  padding: 8px 16px;
+  border: 1px solid ${({ theme }) => theme.color.grey};
+  border-radius: 3px;
+  font-size: 16px;
+  color: ${({ theme }) => theme.color.text};
+  background-color: ${({ theme }) => theme.color.white};
+  appearance: none;
+  text-transform: uppercase;
+
+  background-image: linear-gradient(45deg, transparent 50%, ${({ theme }) => theme.color.text} 50%),
+    linear-gradient(135deg, ${({ theme }) => theme.color.text} 50%, transparent 50%);
+  background-position: calc(100% - 20px) calc(1.2em + 2px), calc(100% - 15px) calc(1.2em + 2px),
+    calc(100% - 2.5em) 0.75em;
+  background-size: 5px 5px, 5px 5px, 1px 1.5em;
+  background-repeat: no-repeat;
+
+  &:focus {
+    outline: none;
+  }
 `;
