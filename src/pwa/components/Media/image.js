@@ -23,10 +23,7 @@ export default inject(({ settings }, { entity }) => {
   const src = cdn && originalPath ? `${cdn}${originalPath}` : entity.original.url;
 
   const sizes = entity.sizes
-    .reduce((result, current) => {
-      if (sameRatio(current, entity.original)) result.push(current);
-      return result;
-    }, [])
+    .filter(item => sameRatio(item, entity.original))
     .map(item => {
       const { path } = parse(item.url);
       const url = cdn && path ? `${cdn}${path}` : item.url;
