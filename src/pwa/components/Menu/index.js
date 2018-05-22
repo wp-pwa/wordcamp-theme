@@ -9,7 +9,7 @@ import MenuNotifications from './MenuNotifications';
 const Menu = ({ isOpen, close }) =>
   isOpen ? (
     <Container>
-      <Overlay onClick={close} />
+      <Overlay onClick={close} onTouchMove={close} />
       <InnerContainer>
         <MenuHeader />
         <MenuList />
