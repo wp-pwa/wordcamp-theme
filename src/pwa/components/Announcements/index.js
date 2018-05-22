@@ -38,7 +38,7 @@ const Content = styled.div`
   box-sizing: border-box;
   width: 100vw;
   min-height: 100vh;
-  padding: ${({ theme }) => theme.padding.credits};
+  padding: 56px 0;
 `;
 
 const List = styled.div`

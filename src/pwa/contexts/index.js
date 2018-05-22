@@ -92,7 +92,7 @@ export const postsContext = memoize((columns = []) => ({
   columns,
   options: {
     name: 'posts',
-    title: 'Announcements',
+    title: 'Announcement',
   },
 }));
 
