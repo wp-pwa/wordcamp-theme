@@ -45,7 +45,7 @@ const Container = styled.div`
 
 const Title = styled.h2`
   width: 100%;
-  color: #5566c3;
+  color: ${({ theme }) => theme.color.blue};
   font-size: 24px;
   font-weight: normal;
   margin: 16px 0 0 0;

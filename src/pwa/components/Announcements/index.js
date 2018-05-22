@@ -43,4 +43,6 @@ const Content = styled.div`
 
 const List = styled.div`
   margin: 0 32px;
+  display: flex;
+  flex-direction: column;
 `;
