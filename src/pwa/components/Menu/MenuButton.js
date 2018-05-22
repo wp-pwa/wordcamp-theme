@@ -21,7 +21,7 @@ export default inject(({ theme }) => ({
 
 const Container = styled.div`
   box-sizing: border-box;
-  width: ${({ theme }) => theme.sizes.button};
+  width: ${({ theme }) => theme.size.button};
   flex-shrink: 0;
   display: flex;
   flex-direction: column;

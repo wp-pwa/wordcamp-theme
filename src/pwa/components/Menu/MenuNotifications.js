@@ -15,7 +15,7 @@ export default MenuNotifications;
 
 const Container = styled.div`
   box-sizing: border-box;
-  height: ${({ theme }) => theme.sizes.button};
+  height: ${({ theme }) => theme.size.button};
   width: 100%;
   display: flex;
   box-shadow: inset 0 -1px 0 0 rgba(40, 36, 9, 0.1);

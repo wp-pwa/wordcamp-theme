@@ -30,7 +30,7 @@ const Container = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  height: ${({ theme }) => theme.sizes.button};
+  height: ${({ theme }) => theme.size.button};
   width: 100vw;
   display: flex;
   justify-content: space-between;
@@ -40,7 +40,7 @@ const Container = styled.div`
 const InnerContainer = styled.div`
   display: flex;
   align-items: center;
-  height: ${({ theme }) => theme.sizes.button};
+  height: ${({ theme }) => theme.size.button};
 `;
 
 const Title = styled.div`

@@ -39,7 +39,7 @@ export default inject(({ theme }, { track }) => ({
 
 const Container = styled.div`
   width: 100%;
-  padding-bottom: ${({ theme }) => theme.sizes.button};
+  padding-bottom: ${({ theme }) => theme.size.button};
 `;
 
 const SessionDay = styled.h5`

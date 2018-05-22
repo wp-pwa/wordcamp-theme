@@ -10,6 +10,7 @@ const SessionsFrame = ({ sessions }) => (
         key={session.id}
         session={session}
         columns={sessions.map(({ type, id, page }) => [{ type, id, page }])}
+        isFavorite={!!session.isFavorite}
       />
     ))}
   </Container>
@@ -28,5 +29,5 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: ${({ theme }) => `calc(${theme.sizes.button} + 20px)`};
+  padding: ${({ theme }) => theme.padding.home};
 `;

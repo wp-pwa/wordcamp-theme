@@ -45,7 +45,7 @@ const Container = styled.div`
   box-sizing: border-box;
   width: auto;
   display: flex;
-  height: ${({ theme }) => theme.sizes.button};
+  height: ${({ theme }) => theme.size.button};
 
   & > div {
     margin: 5px;

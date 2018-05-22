@@ -24,7 +24,7 @@ export default inject(({ theme }) => ({
 }))(FilterFavorites);
 
 const Container = styled.div`
-  height: ${({ theme }) => theme.sizes.button};
+  height: ${({ theme }) => theme.size.button};
   width: 100vw;
   display: flex;
   justify-content: center;
@@ -32,8 +32,8 @@ const Container = styled.div`
 `;
 
 const SwitchWrapper = styled.span`
-  width: ${({ theme }) => theme.sizes.button};
-  height: ${({ theme }) => theme.sizes.button};
+  width: ${({ theme }) => theme.size.button};
+  height: ${({ theme }) => theme.size.button};
   display: flex;
   flex-shrink: 0;
   justify-content: center;

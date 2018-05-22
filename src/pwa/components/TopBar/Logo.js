@@ -19,8 +19,8 @@ export default inject(({ settings }) => ({
 
 const Container = styled.div`
   box-sizing: border-box;
-  width: ${({ theme }) => theme.sizes.button};
-  height: ${({ theme }) => theme.sizes.button};
+  width: ${({ theme }) => theme.size.button};
+  height: ${({ theme }) => theme.size.button};
   padding: 12px 0 12px 16px;
 `;
 

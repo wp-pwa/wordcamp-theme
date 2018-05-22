@@ -47,7 +47,7 @@ const Container = styled.div`
   bottom: 0;
   left: 0;
   width: 100vw;
-  height: ${({ theme }) => theme.sizes.button};
+  height: ${({ theme }) => theme.size.button};
   background-color: #cccccc;
 `;
 

@@ -32,7 +32,7 @@ export default inject(({ connection }) => ({
 }))(CloseButton);
 
 const Container = styled.div`
-  width: ${({ theme }) => theme.sizes.button};
+  width: ${({ theme }) => theme.size.button};
   display: flex;
   justify-content: center;
   align-items: center;

@@ -29,19 +29,17 @@ const theme = {
     email: '#7f7f7f',
     share: '#006ca0',
     text: '#282409',
+    whiteText: '#FFFFFF',
+    greyText: '#706E5E',
   },
-  sizes: {
+  size: {
     button: '56px',
+    cardHeader: '40px',
   },
   padding: {
-    menuItem: '16px 24px',
-    venueNav: '0 15px',
-    venue: '56px 0',
-    credits: '56px 0 0 0',
-    schedule: '0 0 0 15px',
-    session: '56px 0',
-    speaker: '56px 0',
     home: '80px 24px',
+    cardBody: '16px',
+    menuItem: '16px 24px',
   },
 };
 

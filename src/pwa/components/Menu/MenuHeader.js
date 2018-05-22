@@ -26,7 +26,7 @@ export default inject(({ theme }) => ({
 }))(MenuHeader);
 
 const Container = styled.div`
-  height: ${({ theme }) => theme.sizes.button};
+  height: ${({ theme }) => theme.size.button};
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -36,7 +36,7 @@ const Container = styled.div`
 const InnerContainer = styled.div`
   display: flex;
   align-items: center;
-  height: ${({ theme }) => theme.sizes.button};
+  height: ${({ theme }) => theme.size.button};
 `;
 
 const Title = styled.div`
@@ -45,7 +45,7 @@ const Title = styled.div`
 `;
 
 const CloseButton = styled.div`
-  width: ${({ theme }) => theme.sizes.button};
+  width: ${({ theme }) => theme.size.button};
   display: flex;
   justify-content: center;
   align-items: center;

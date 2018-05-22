@@ -61,7 +61,7 @@ export default inject(({ connection, theme }, { name }) => {
 
 const Container = styled.div`
   box-sizing: border-box;
-  height: ${({ theme }) => theme.sizes.button};
+  height: ${({ theme }) => theme.size.button};
   box-shadow: inset 0 -1px 0 0 rgba(40, 36, 9, 0.1);
   font-size: 20px;
   line-height: 20px;

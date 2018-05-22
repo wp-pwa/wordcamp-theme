@@ -42,13 +42,13 @@ const Container = styled.div`
   display: flex;
   align-items: flex-start;
   width: 100%;
-  min-height: ${({ theme }) => theme.sizes.button};
+  min-height: ${({ theme }) => theme.size.button};
   padding: 15px 0;
   background-color: ${({ position }) => (position % 2 === 0 ? '#fafafa' : '#d0d0d0')};
 `;
 
 const Time = styled.a`
-  width: ${({ theme }) => theme.sizes.button};
+  width: ${({ theme }) => theme.size.button};
   flex-shrink: 0;
   display: flex;
   justify-content: center;
