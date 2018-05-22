@@ -1,48 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { inject } from 'mobx-react';
 import styled from 'react-emotion';
-import SessionRow from './SessionRow';
+import SessionItem from './SessionItem';
 
-const Sessions = ({ firstDaySessions, secondDaySessions }) => (
+const SessionsFrame = ({ sessions }) => (
   <Container>
-    <SessionDay>Friday, June 15th</SessionDay>
-    {firstDaySessions.map((session, index) => (
-      <SessionRow
+    {sessions.map(session => (
+      <SessionItem
         key={session.id}
-        position={index}
         session={session}
-        columns={firstDaySessions.map(({ type, id, page }) => [{ type, id, page }])}
-      />
-    ))}
-    <SessionDay>Saturday, June 16th</SessionDay>
-    {secondDaySessions.map((session, index) => (
-      <SessionRow
-        key={session.id}
-        position={index}
-        session={session}
-        columns={secondDaySessions.map(({ type, id, page }) => [{ type, id, page }])}
+        columns={sessions.map(({ type, id, page }) => [{ type, id, page }])}
       />
     ))}
   </Container>
 );
 
-Sessions.propTypes = {
-  firstDaySessions: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  secondDaySessions: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+SessionsFrame.propTypes = {
+  sessions: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
 
-export default inject(({ theme }, { track }) => ({
-  firstDaySessions: theme.track(track).firstDaySessions,
-  secondDaySessions: theme.track(track).secondDaySessions,
-}))(Sessions);
+export default SessionsFrame;
 
 const Container = styled.div`
-  width: 100%;
-  padding-bottom: ${({ theme }) => theme.sizes.button};
-`;
-
-const SessionDay = styled.h5`
-  width: 100%;
-  padding-left: 15px;
+  box-sizing: border-box;
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: ${({ theme }) => `calc(${theme.sizes.button} + 20px)`};
 `;

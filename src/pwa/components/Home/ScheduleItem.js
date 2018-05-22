@@ -5,7 +5,7 @@ import FavoriteButton from './FavoriteButton';
 import Link from '../Link';
 import { sessionsContext, speakersContext } from '../../contexts';
 
-const SessionRow = ({ session, position, columns }) => (
+const ScheduleItem = ({ session, position, columns }) => (
   <Container position={position}>
     <Time>{session.startTime}</Time>
     <InnerContainer>
@@ -29,13 +29,13 @@ const SessionRow = ({ session, position, columns }) => (
   </Container>
 );
 
-SessionRow.propTypes = {
+ScheduleItem.propTypes = {
   session: PropTypes.shape({}).isRequired,
   position: PropTypes.number.isRequired,
   columns: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({}))).isRequired,
 };
 
-export default SessionRow;
+export default ScheduleItem;
 
 const Container = styled.div`
   box-sizing: border-box;

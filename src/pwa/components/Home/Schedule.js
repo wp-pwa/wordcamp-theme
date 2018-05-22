@@ -4,7 +4,7 @@ import { inject } from 'mobx-react';
 import styled from 'react-emotion';
 import Select from 'react-select';
 import FilterFavorites from './FilterFavorites';
-import SessionList from './SessionList';
+import ScheduleList from './ScheduleList';
 
 const selectStyles = {
   container: base => ({
@@ -33,7 +33,7 @@ const Schedule = ({ options, selected, selectTrack }) => (
       }))}
     />
     <FilterFavorites />
-    <SessionList track={selected.id} />
+    <ScheduleList track={selected.id} />
   </Container>
 );
 

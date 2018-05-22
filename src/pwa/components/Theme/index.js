@@ -41,7 +41,7 @@ const theme = {
     schedule: '0 0 0 15px',
     session: '56px 0',
     speaker: '56px 0',
-    home: '56px 0 76px 0',
+    home: '80px 24px',
   },
 };
 
