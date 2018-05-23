@@ -18,6 +18,7 @@ const ScheduleList = ({ firstDaySessions, secondDaySessions }) => (
           position={index}
           session={session}
           columns={firstDaySessions.map(({ type, id, page }) => [{ type, id, page }])}
+          isSpecial={!session.hasSpeakers}
         />
       ))}
     </div>
@@ -31,6 +32,7 @@ const ScheduleList = ({ firstDaySessions, secondDaySessions }) => (
           position={index}
           session={session}
           columns={secondDaySessions.map(({ type, id, page }) => [{ type, id, page }])}
+          isSpecial={!session.hasSpeakers}
         />
       ))}
     </div>

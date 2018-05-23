@@ -27,7 +27,9 @@ const Track = types
       sessionsByWithFilter(date) {
         const onlyFavorites = getParent(self, 2).schedule.isFiltered;
 
-        return this.sessionsBy(date, onlyFavorites);
+        return this.sessionsBy(date, onlyFavorites).filter(
+          session => session.type === 'wcb_session',
+        );
       },
       sessionsBy(date, onlyFavorites = false) {
         const day = new Date(date); // Copy date passed as argument

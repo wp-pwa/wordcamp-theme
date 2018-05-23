@@ -6,12 +6,8 @@ import EmptyStarIcon from 'react-icons/lib/fa/star-o';
 import FullStarIcon from 'react-icons/lib/fa/star';
 
 const FavoriteButton = ({ isFavorite, toggleFavorite, inSchedule }) => (
-  <Container onClick={toggleFavorite} inSchedule={inSchedule}>
-    {isFavorite ? (
-      <StyledFullStarIcon size={18} inSchedule={inSchedule} />
-    ) : (
-      <StyledEmptyStarIcon size={18} inSchedule={inSchedule} />
-    )}
+  <Container onClick={toggleFavorite} inSchedule={inSchedule} isFavorite={isFavorite}>
+    {isFavorite ? <FullStarIcon size={18} /> : <EmptyStarIcon size={18} />}
   </Container>
 );
 
@@ -34,14 +30,12 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
-`;
 
-const StyledEmptyStarIcon = styled(EmptyStarIcon)`
-  padding: ${({ inSchedule }) => (inSchedule ? null : '11px')};
-  color: ${({ theme, inSchedule }) => (inSchedule ? theme.color.darkGrey : theme.color.white)};
-`;
-
-const StyledFullStarIcon = styled(FullStarIcon)`
-  padding: ${({ inSchedule }) => (inSchedule ? null : '11px')};
-  color: ${({ theme, inSchedule }) => (inSchedule ? theme.color.red : theme.color.white)};
+  & > svg {
+    padding: ${({ inSchedule }) => (inSchedule ? null : '11px')};
+    color: ${({ theme, inSchedule, isFavorite }) => {
+      if (inSchedule) return isFavorite ? theme.color.red : theme.color.darkGrey;
+      return theme.color.white;
+    }};
+  }
 `;

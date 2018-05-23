@@ -36,6 +36,9 @@ const Session = types
           ? getParent(self, 2).favoritesMap.get(`${self.id}`).val
           : false;
       },
+      get hasSpeakers() {
+        return !!self.speakers.length;
+      },
       get entity() {
         return getConnection().entity(self.type, self.id);
       },

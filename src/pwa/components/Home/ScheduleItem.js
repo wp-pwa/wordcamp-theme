@@ -3,32 +3,25 @@ import PropTypes from 'prop-types';
 import { inject } from 'mobx-react';
 import styled from 'react-emotion';
 import FavoriteButton from './FavoriteButton';
-import Link from '../Link';
-import { sessionsContext, speakersContext } from '../../contexts';
+import Title from './ScheduleItemTitle';
+import Speakers from './ScheduleItemSpeakers';
+import Icon from '../Icons';
 
-const ScheduleItem = ({ session, position, columns, isFavorite }) => (
-  <Container position={position} isFavorite={isFavorite}>
+const ScheduleItem = ({ session, position, columns, isFavorite, isSpecial }) => (
+  <Container position={position} isFavorite={isFavorite} isSpecial={isSpecial}>
     <Time>{session.startTime}</Time>
-    <InnerContainer>
-      <Link type={session.type} id={session.id} context={sessionsContext(columns)}>
-        <Title dangerouslySetInnerHTML={{ __html: session.title }} />
-      </Link>
-      <Speakers>
-        {session.speakers.map(speaker => (
-          <Link
-            key={speaker.name}
-            type={speaker.type}
-            id={speaker.id}
-            context={speakersContext(
-              session.speakers.map(({ type, id, page }) => [{ type, id, page }]),
-            )}
-          >
-            <Speaker>{`${speaker.name}`}</Speaker>
-          </Link>
-        ))}
-      </Speakers>
+    <InnerContainer isSpecial={isSpecial}>
+      {isSpecial && <Icon title={session.title} size={22} />}
+      <Title
+        type={session.type}
+        id={session.id}
+        title={session.title}
+        columns={columns}
+        isSpecial={isSpecial}
+      />
+      {!isSpecial && <Speakers speakers={session.speakers} />}
     </InnerContainer>
-    <FavoriteButton session={session} inSchedule />
+    {!isSpecial && <FavoriteButton session={session} inSchedule />}
   </Container>
 );
 
@@ -37,6 +30,7 @@ ScheduleItem.propTypes = {
   position: PropTypes.number.isRequired,
   columns: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({}))).isRequired,
   isFavorite: PropTypes.bool.isRequired,
+  isSpecial: PropTypes.bool.isRequired,
 };
 
 export default inject((_, { session }) => ({
@@ -50,7 +44,11 @@ const Container = styled.div`
   width: 100%;
   padding: ${({ theme }) => theme.padding.scheduleItem};
   border-bottom: 1px solid ${({ theme }) => theme.color.grey};
-  background-color: ${({ theme, isFavorite }) => (isFavorite ? theme.color.yellow : null)};
+  background-color: ${({ theme, isFavorite, isSpecial }) => {
+    if (isFavorite) return theme.color.yellow;
+    if (isSpecial) return theme.color.grey;
+    return null;
+  }};
 
   &:first-child {
     border-top: 1px solid ${({ theme }) => theme.color.grey};
@@ -66,30 +64,8 @@ const Time = styled.div`
 
 const InnerContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: ${({ isSpecial }) => (isSpecial ? 'row' : 'column')};
   align-items: flex-start;
   flex-grow: 1;
   padding: 0 8px;
-`;
-
-const Title = styled.div`
-  font-size: 18px;
-  color: ${({ theme }) => theme.color.blue};
-  line-height: 24px;
-`;
-
-const Speakers = styled.div`
-  font-size: 16px;
-  color: ${({ theme }) => theme.color.lightGreyText};
-`;
-
-const Speaker = styled.a`
-  display: inline-block;
-  line-height: 20px;
-  margin-right: 4px;
-  color: ${({ theme }) => theme.color.lightGreyText};
-
-  &:not(:last-child):after {
-    content: ', ';
-  }
 `;
