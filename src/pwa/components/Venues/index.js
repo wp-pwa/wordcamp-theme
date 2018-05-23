@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import TopBar from '../TopBar';
 import Slider from '../Slider';
 import Venue from './Venue';
-import Nav from './Nav';
+import Nav from '../Nav';
 
 const Venues = ({ columns, selectedColumnIndex, handleOnTransitionEnd }) => (
   <Fragment>

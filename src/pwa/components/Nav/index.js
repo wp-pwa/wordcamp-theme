@@ -9,9 +9,9 @@ import Button from './Button';
 
 const Nav = ({ previousItem, nextItem }) => (
   <Container>
-    <PrevButton item={previousItem} icon={PrevIcon} text="PREV" />
+    <PrevButton item={previousItem} icon={PrevIcon} text="Prev" />
     <Share />
-    <NextButton item={nextItem} icon={NextIcon} text="NEXT" />
+    <NextButton item={nextItem} icon={NextIcon} text="Next" />
   </Container>
 );
 
