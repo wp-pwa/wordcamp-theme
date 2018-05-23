@@ -7,27 +7,42 @@ import {
   FacebookShareButton,
   WhatsappShareButton,
   TwitterShareButton,
-  EmailShareButton,
+  LinkedinShareButton,
+  // EmailShareButton,
 } from 'react-share';
-import EmailIcon from 'react-icons/lib/fa/envelope-o';
-import FacebookIcon from 'react-icons/lib/fa/facebook';
+// import EmailIcon from 'react-icons/lib/fa/envelope-o';
+import FacebookIcon from 'react-icons/lib/fa/facebook-official';
 import TwitterIcon from 'react-icons/lib/fa/twitter';
 import WhatsappIcon from 'react-icons/lib/fa/whatsapp';
+import LinkedinIcon from 'react-icons/lib/fa/linkedin-square';
 
 const Share = ({ link, title }) => (
   <Container>
-    <StyledFacebookShareButton url={link} quote={title}>
-      <FacebookIcon size={28} />
-    </StyledFacebookShareButton>
-    <StyledTwitterShareButton url={link} title={title}>
-      <TwitterIcon size={30} />
-    </StyledTwitterShareButton>
-    <StyledWhatsappShareButton url={link} title={title}>
-      <WhatsappIcon size={30} />
-    </StyledWhatsappShareButton>
-    <StyledEmailShareButton url={link} subject={title} body={`${title}\n${link}`}>
-      <EmailIcon size={28} />
-    </StyledEmailShareButton>
+    <FacebookShareButton url={link} quote={title}>
+      <ShareButton>
+        <FacebookIcon size={28} />
+      </ShareButton>
+    </FacebookShareButton>
+    <TwitterShareButton url={link} title={title}>
+      <ShareButton>
+        <TwitterIcon size={28} />
+      </ShareButton>
+    </TwitterShareButton>
+    <LinkedinShareButton url={link} title={title}>
+      <ShareButton>
+        <LinkedinIcon size={28} />
+      </ShareButton>
+    </LinkedinShareButton>
+    <WhatsappShareButton url={link} title={title}>
+      <ShareButton>
+        <WhatsappIcon size={28} />
+      </ShareButton>
+    </WhatsappShareButton>
+    {/* <EmailShareButton url={link} subject={title} body={`${title}\n${link}`}>
+      <Button>
+        <EmailIcon size={28} />
+      </Button>
+    </EmailShareButton> */}
   </Container>
 );
 
@@ -45,32 +60,18 @@ const Container = styled.div`
   box-sizing: border-box;
   width: auto;
   display: flex;
+  align-items: center;
   height: ${({ theme }) => theme.size.button};
-
-  & > div {
-    margin: 5px;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 44px;
-    width: 44px;
-    border-radius: 50%;
-  }
 `;
 
-const StyledFacebookShareButton = styled(FacebookShareButton)`
-  background-color: ${({ theme }) => theme.color.facebook};
-`;
-
-const StyledTwitterShareButton = styled(TwitterShareButton)`
-  background-color: ${({ theme }) => theme.color.twitter};
-`;
-
-const StyledWhatsappShareButton = styled(WhatsappShareButton)`
-  background-color: ${({ theme }) => theme.color.whatsapp};
-`;
-
-const StyledEmailShareButton = styled(EmailShareButton)`
-  background-color: ${({ theme }) => theme.color.email};
+const ShareButton = styled.div`
+  width: 40px;
+  height: 40px;
+  margin: 0 4px;
+  border-radius: 20px;
+  border: 1px solid ${({ theme }) => theme.color.grey};
+  color: ${({ theme }) => theme.color.darkGrey};
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
