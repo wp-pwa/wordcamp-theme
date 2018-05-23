@@ -5,19 +5,26 @@ import { inject } from 'mobx-react';
 import styled from 'react-emotion';
 import Gravatar from 'react-gravatar';
 import SessionCard from './SessionCard';
+import { sessionsContext } from '../../contexts';
 
-const Speaker = ({ name, gravatar, content, sessions }) => (
-  <Container>
-    <Name>{name}</Name>
-    <div>
-      <Avatar>
-        <Gravatar md5={gravatar} size={88} />
-      </Avatar>
-      <Content dangerouslySetInnerHTML={{ __html: content }} />
-    </div>
-    {sessions.map(session => <SessionCard key={session.id} title={session.title} />)}
-  </Container>
-);
+const Speaker = ({ name, gravatar, content, sessions }) => {
+  const columns = sessions.map(({ type, id }) => [{ type, id }]);
+
+  return (
+    <Container>
+      <Name>{name}</Name>
+      <div>
+        <Avatar>
+          <Gravatar md5={gravatar} size={88} />
+        </Avatar>
+        <Content dangerouslySetInnerHTML={{ __html: content }} />
+      </div>
+      {sessions.map(session => (
+        <SessionCard key={session.id} session={session} context={sessionsContext(columns)} />
+      ))}
+    </Container>
+  );
+};
 
 Speaker.propTypes = {
   name: PropTypes.string.isRequired,

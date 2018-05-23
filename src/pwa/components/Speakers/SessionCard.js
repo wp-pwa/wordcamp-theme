@@ -1,19 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { inject } from 'mobx-react';
 import styled from 'react-emotion';
+import Link from '../Link';
 
-const SessionCard = ({ title }) => (
-  <Card>
-    <Session>SESSION</Session>
-    <Title>{title}</Title>
-  </Card>
+const SessionCard = ({ type, id, title, context }) => (
+  <Link type={type} id={id} context={context} method="push">
+    <Card>
+      <Session>SESSION</Session>
+      <Title>{title}</Title>
+    </Card>
+  </Link>
 );
 
 SessionCard.propTypes = {
+  type: PropTypes.string.isRequired,
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   title: PropTypes.string.isRequired,
+  context: PropTypes.shape({}).isRequired,
 };
 
-export default SessionCard;
+export default inject((_, { session }) => ({
+  type: session.type,
+  id: session.id,
+  title: session.title,
+}))(SessionCard);
 
 const Card = styled.div`
   margin-top: 16px;
