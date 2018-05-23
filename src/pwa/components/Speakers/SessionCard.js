@@ -8,7 +8,7 @@ const SessionCard = ({ type, id, title, context }) => (
   <Link type={type} id={id} context={context} method="push">
     <Card>
       <Session>SESSION</Session>
-      <Title>{title}</Title>
+      <Title dangerouslySetInnerHTML={{ __html: title }} />
     </Card>
   </Link>
 );
