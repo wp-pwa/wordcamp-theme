@@ -14,9 +14,11 @@ const Speaker = ({ name, gravatar, content, sessions }) => {
     <Container>
       <Name>{name}</Name>
       <div>
-        <Avatar>
-          <Gravatar md5={gravatar} size={88} />
-        </Avatar>
+        {gravatar && (
+          <Avatar>
+            <Gravatar md5={gravatar} size={88} />
+          </Avatar>
+        )}
         <Content dangerouslySetInnerHTML={{ __html: content }} />
       </div>
       {sessions.map(session => (
