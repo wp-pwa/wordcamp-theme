@@ -78,7 +78,7 @@ const Avatar = styled.div`
   height: 88px;
   margin: 0 16px 12px 0;
   float: left;
-  box-shadow: 4px 4px 0 0 #efdc39;
+  box-shadow: 4px 4px 0 0 ${({ theme }) => theme.color.yellow};
   background: ${({ theme }) => theme.color.black};
 
   img {
