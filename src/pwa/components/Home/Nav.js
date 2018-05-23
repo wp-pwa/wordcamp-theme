@@ -17,6 +17,5 @@ const Container = styled.div`
   width: 100vw;
   height: ${({ theme }) => theme.size.button};
   display: flex;
-  box-shadow: 0 -1px 0 0 ${({ theme }) => theme.color.grey};
   background-color: ${({ theme }) => theme.color.lightGrey};
 `;

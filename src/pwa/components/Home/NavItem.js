@@ -22,7 +22,7 @@ const routes = {
 const NavItem = ({ label, isSelected }) => (
   <Container isSelected={isSelected} label={label}>
     <Link type="page" id={routes[label].id}>
-      <A>{routes[label].text}</A>
+      <A isSelected={isSelected}>{routes[label].text}</A>
     </Link>
   </Container>
 );
@@ -44,12 +44,14 @@ const Container = styled.div`
   color: ${({ theme, isSelected }) => (isSelected ? theme.color.blue : '#7C7A69')};
   background-color: ${({ theme, isSelected }) => (isSelected ? theme.color.white : null)}
   font-size: 16px;
-  box-shadow: inset -1px 0 0 0 #e9e9e6;
+  ${({ isSelected, theme }) =>
+    isSelected ? null : `box-shadow: inset 0 0 0 1px ${theme.color.grey}`};
 `;
 
 const A = styled.a`
   width: 100%;
-  height: 100%;
+  height: ${({ theme }) => theme.size.button};
+  color: ${({ theme, isSelected }) => (isSelected ? theme.color.blue : '#7C7A69')};
   display: flex;
   justify-content: center;
   align-items: center;
