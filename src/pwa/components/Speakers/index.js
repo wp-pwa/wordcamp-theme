@@ -12,7 +12,7 @@ const Speakers = ({ columns, selectedColumnIndex, handleOnTransitionEnd }) => (
         if (index > selectedColumnIndex + 1) return <div key={selectedItem.mstId} />;
         if (index < selectedColumnIndex - 1) return <div key={selectedItem.mstId} />;
 
-        return <Speaker key={selectedItem.mstId} speaker={selectedItem} />;
+        return <Speaker key={selectedItem.mstId} item={selectedItem} />;
       })}
     </Slider>
     <TopBar />
