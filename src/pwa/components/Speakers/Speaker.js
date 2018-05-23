@@ -30,12 +30,12 @@ export default inject(({ theme }, { item: { id } }) => ({
   name: theme.speaker(id).name,
   gravatar: theme.speaker(id).gravatar,
   content: theme.speaker(id).entity.content,
-  sessions: theme.speaker(id).sessions,
+  sessions: theme.speaker(id).sessions.peek(),
 }))(Speaker);
 
 const Container = styled.div`
   box-sizing: border-box;
-  padding: 56px 24px;
+  padding: 56px 24px 72px 24px;
   width: 100vw;
   min-height: 100vh;
   display: flex;
@@ -47,6 +47,7 @@ const Name = styled.h3`
   padding: 24px 0 16px 0;
   margin: 0;
   font-size: 22px;
+  font-weight: normal;
   line-height: 28px;
   color: ${({ theme }) => theme.color.black};
 `;
@@ -71,6 +72,7 @@ const Avatar = styled.div`
   margin: 0 16px 12px 0;
   float: left;
   box-shadow: 4px 4px 0 0 #efdc39;
+  background: ${({ theme }) => theme.color.black};
 
   img {
     filter: grayscale(100%);
