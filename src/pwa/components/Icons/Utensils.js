@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'react-emotion';
 
-const Utensils = ({ size }) => (
+const Utensils = ({ size, inCard }) => (
   <Svg
     size={size}
+    inCard={inCard}
     aria-hidden="true"
     data-prefix="fal"
     data-icon="utensils"
@@ -23,6 +24,7 @@ const Utensils = ({ size }) => (
 
 Utensils.propTypes = {
   size: PropTypes.number.isRequired,
+  inCard: PropTypes.bool.isRequired,
 };
 
 export default Utensils;
@@ -30,5 +32,6 @@ export default Utensils;
 const Svg = styled.svg`
   width: ${({ size }) => `${size}px`};
   height: ${({ size }) => `${size}px`};
-  color: ${({ theme }) => theme.color.black};
+  color: ${({ theme, inCard }) => (inCard ? theme.color.blue : theme.color.black)};
+  ${({ inCard }) => (inCard ? 'margin-right: 12px' : null)};
 `;

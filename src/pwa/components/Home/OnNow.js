@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { inject } from 'mobx-react';
-import SessionList from './SessionList';
+import CardsList from './CardsList';
 
-const OnNow = ({ sessions }) => <SessionList sessions={sessions} />;
+const OnNow = ({ sessions }) => <CardsList sessions={sessions} />;
 
 OnNow.propTypes = {
   sessions: PropTypes.arrayOf(PropTypes.shape({})).isRequired,

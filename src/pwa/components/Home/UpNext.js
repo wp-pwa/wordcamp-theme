@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { inject } from 'mobx-react';
-import SessionList from './SessionList';
+import CardsList from './CardsList';
 
-const UpNext = ({ sessions }) => <SessionList sessions={sessions} />;
+const UpNext = ({ sessions }) => <CardsList sessions={sessions} />;
 
 UpNext.propTypes = {
   sessions: PropTypes.arrayOf(PropTypes.shape({})).isRequired,

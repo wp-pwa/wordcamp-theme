@@ -1,26 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'react-emotion';
-import SessionItem from './SessionItem';
+import Card from './Card';
 
-const SessionsFrame = ({ sessions }) => (
+const CardsList = ({ sessions }) => (
   <Container>
     {sessions.map(session => (
-      <SessionItem
+      <Card
         key={session.id}
         session={session}
         columns={sessions.map(({ type, id, page }) => [{ type, id, page }])}
         isFavorite={!!session.isFavorite}
+        isSpecial={!session.hasSpeakers}
       />
     ))}
   </Container>
 );
 
-SessionsFrame.propTypes = {
+CardsList.propTypes = {
   sessions: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
 
-export default SessionsFrame;
+export default CardsList;
 
 const Container = styled.div`
   box-sizing: border-box;

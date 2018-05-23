@@ -26,7 +26,7 @@ const theme = {
     blue: '#5566C3',
     text: '#282409',
     whiteText: '#FFFFFF',
-    greyText: '#706E5E',
+    greyText: '#757361',
     lightGreyText: '#7E7C6B',
     switch: '#9B998E',
     facebook: '#3b5998',

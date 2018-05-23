@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'react-emotion';
 
-const Bullhorn = ({ size }) => (
+const Bullhorn = ({ size, inCard }) => (
   <Svg
     size={size}
+    inCard={inCard}
     aria-hidden="true"
     data-prefix="fal"
     data-icon="bullhorn"
@@ -23,6 +24,7 @@ const Bullhorn = ({ size }) => (
 
 Bullhorn.propTypes = {
   size: PropTypes.number.isRequired,
+  inCard: PropTypes.bool.isRequired,
 };
 
 export default Bullhorn;
@@ -30,4 +32,6 @@ export default Bullhorn;
 const Svg = styled.svg`
   width: ${({ size }) => `${size}px`};
   height: ${({ size }) => `${size}px`};
+  color: ${({ theme, inCard }) => (inCard ? theme.color.blue : theme.color.black)};
+  ${({ inCard }) => (inCard ? 'margin-right: 12px' : null)};
 `;
