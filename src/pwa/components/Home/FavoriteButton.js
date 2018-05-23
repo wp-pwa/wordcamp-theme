@@ -32,7 +32,7 @@ const Container = styled.div`
   flex-shrink: 0;
 
   & > svg {
-    padding: ${({ inSchedule }) => (inSchedule ? null : '11px')};
+    padding: ${({ inSchedule }) => (inSchedule ? '3px 0' : '11px')};
     color: ${({ theme, inSchedule, isFavorite }) => {
       if (inSchedule) return isFavorite ? theme.color.red : theme.color.darkGrey;
       return theme.color.white;
