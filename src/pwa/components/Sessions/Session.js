@@ -1,18 +1,57 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { inject } from 'mobx-react';
 import styled from 'react-emotion';
+import Link from '../Link';
 
-const Session = ({ session }) => (
+const Session = ({ title, isFavorite, content, speakers, trackName, time }) => (
   <Container>
-    <Title>{session.entity.title}</Title>
+    <Title>{title}</Title>
+    <Star isFavorite={isFavorite} />
+    <Content dangerouslySetInnerHTML={{ __html: content }} />
+    <Card>
+      <CardSection>
+        <CardTitle>SPEAKERS</CardTitle>
+        <CardText>
+          {speakers.map(speaker => (
+            <Link type={speaker.type} id={speaker.id}>
+              <span>{speaker.name}</span>
+            </Link>
+          ))}
+        </CardText>
+      </CardSection>
+      <CardSection>
+        <CardTitle>TRACK</CardTitle>
+        <CardText>{trackName}</CardText>
+      </CardSection>
+      <CardSection>
+        <CardTitle>TIME</CardTitle>
+        <CardText>{time}</CardText>
+      </CardSection>
+    </Card>
   </Container>
 );
 
 Session.propTypes = {
-  session: PropTypes.shape({}).isRequired,
+  title: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
+  speakers: PropTypes.arrayOf(PropTypes.string).isRequired,
+  trackName: PropTypes.string.isRequired,
+  time: PropTypes.string.isRequired,
+  isFavorite: PropTypes.bool.isRequired,
 };
 
-export default Session;
+export default inject(({ theme }, { item }) => {
+  const session = theme.sessionsMap.get(`${item.type}_${item.id}`);
+  return {
+    title: session.entity.title,
+    content: session.entity.content,
+    speakers: session.speakers.peek(),
+    trackName: session.tracks[0].name,
+    time: session.startTime,
+    isFavorite: session.isFavorite,
+  };
+})(Session);
 
 const Container = styled.div`
   box-sizing: border-box;
@@ -27,3 +66,10 @@ const Container = styled.div`
 const Title = styled.h3`
   padding: 0 20px;
 `;
+
+const Star = styled.div``;
+const Content = styled.div``;
+const Card = styled.div``;
+const CardSection = styled.div``;
+const CardTitle = styled.div``;
+const CardText = styled.div``;

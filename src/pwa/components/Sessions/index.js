@@ -12,7 +12,7 @@ const Sessions = ({ columns, selectedColumnIndex, handleOnTransitionEnd }) => (
         if (index > selectedColumnIndex + 1) return <div key={selectedItem.mstId} />;
         if (index < selectedColumnIndex - 1) return <div key={selectedItem.mstId} />;
 
-        return <Session key={selectedItem.mstId} session={selectedItem} />;
+        return <Session key={selectedItem.mstId} item={selectedItem} />;
       })}
     </Slider>
     <TopBar />
