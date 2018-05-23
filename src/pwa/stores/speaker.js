@@ -8,6 +8,7 @@ const Speaker = types
   .props({
     id: types.identifier(Id),
     type: types.optional(types.string, 'wcb_speaker'),
+    gravatar: types.maybe(types.string),
     sessions: types.optional(types.array(types.reference(types.late(() => Session))), []),
   })
   .views(self => {
@@ -27,6 +28,9 @@ const Speaker = types
   .actions(self => ({
     addSession(session) {
       if (!self.sessions.includes(session)) self.sessions.push(session);
+    },
+    setGravatar(gravatar) {
+      self.gravatar = gravatar;
     },
   }));
 

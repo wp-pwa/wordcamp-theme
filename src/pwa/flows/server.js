@@ -2,8 +2,9 @@ import { flow, addMiddleware } from 'mobx-state-tree';
 import { homeContext, venueContext, announcementsContext, creditsContext } from '../contexts';
 
 const extractId = href => /\/(\d+)$/g.exec(href)[1];
+const extractGravatar = url => (/gravatar\.com\/avatar\/([0-9A-Fa-f]+)/.exec(url) || [])[1];
 
-const sessionMiddleware = (call, next) => {
+const wcbMiddleware = (call, next) => {
   if (call.name === 'addEntity') {
     const [{ entity }] = call.args;
 
@@ -20,6 +21,16 @@ const sessionMiddleware = (call, next) => {
       const speakers = speakerHrefs.map(({ href }) => parseInt(extractId(href), 10));
 
       theme.createSession({ id, tracks, categories, speakers });
+    } else if (entity.type === 'wcb_track') {
+      const { theme } = call.tree;
+      const { id } = entity;
+      if (!theme.track(id)) theme.createTrack({ id });
+    } else if (entity.type === 'wcb_speaker') {
+      const { theme } = call.tree;
+      const { id, avatar_urls: { 96: avatarUrl } } = entity;
+      const gravatar = avatarUrl ? extractGravatar(avatarUrl) : null;
+      if (!theme.speaker(id)) theme.createSpeaker({ id, gravatar });
+      else theme.speaker(id).setGravatar(gravatar);
     }
   }
   next(call);
@@ -27,7 +38,7 @@ const sessionMiddleware = (call, next) => {
 
 export default self =>
   flow(function* ThemeServer({ selectedItem }) {
-    addMiddleware(self, sessionMiddleware);
+    addMiddleware(self, wcbMiddleware);
 
     const { type, id, page } = selectedItem;
     const action = { selectedItem: { type, id, page } };

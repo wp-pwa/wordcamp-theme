@@ -96,6 +96,12 @@ export default types
         const mstId = session.mstId || generateMstId(session);
         self.sessionsMap.set(mstId, { mstId, ...session });
       },
+      createTrack(track){
+        self.tracksMap.set(track.id, track);
+      },
+      createSpeaker(speaker){
+        self.speakersMap.set(speaker.id, speaker);
+      },
       setTime(day = 1, hour = 0, minutes = 0) {
         self.isRealTime = false;
         self.time = new Date(`2018-06-${pad(day)}T${pad(hour)}:${pad(minutes)}:00+02:00`);
