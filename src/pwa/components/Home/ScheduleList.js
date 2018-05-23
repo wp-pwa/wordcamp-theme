@@ -11,7 +11,7 @@ const ScheduleList = ({ firstDaySessions, secondDaySessions }) => (
       <SessionDay>Friday, June 15th</SessionDay>
       <FilterFavorites />
     </InnerContainer>
-    <div>
+    <ScheduleWrapper>
       {firstDaySessions.map((session, index) => (
         <ScheduleItem
           key={session.id}
@@ -21,11 +21,11 @@ const ScheduleList = ({ firstDaySessions, secondDaySessions }) => (
           isSpecial={!session.hasSpeakers}
         />
       ))}
-    </div>
+    </ScheduleWrapper>
     <InnerContainer>
       <SessionDay>Saturday, June 16th</SessionDay>
     </InnerContainer>
-    <div>
+    <ScheduleWrapper>
       {secondDaySessions.map((session, index) => (
         <ScheduleItem
           key={session.id}
@@ -35,7 +35,7 @@ const ScheduleList = ({ firstDaySessions, secondDaySessions }) => (
           isSpecial={!session.hasSpeakers}
         />
       ))}
-    </div>
+    </ScheduleWrapper>
   </Container>
 );
 
@@ -50,6 +50,7 @@ export default inject(({ theme }, { track }) => ({
 }))(ScheduleList);
 
 const Container = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -62,6 +63,10 @@ const InnerContainer = styled.div`
   align-items: center;
   margin-top: 24px;
   margin-bottom: 16px;
+`;
+
+const ScheduleWrapper = styled.div`
+  width: 100%;
 `;
 
 const SessionDay = styled.h3`
