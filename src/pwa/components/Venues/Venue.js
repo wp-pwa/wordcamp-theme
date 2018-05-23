@@ -29,6 +29,7 @@ const Title = styled.h1`
   font-size: 22px;
   margin: 0;
   color: ${({ theme }) => theme.color.text};
+  margin-bottom: 16px;
 `;
 
 const Image = styled.img`
