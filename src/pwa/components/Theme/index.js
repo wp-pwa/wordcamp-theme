@@ -6,7 +6,7 @@ import { ThemeProvider } from 'emotion-theming';
 import Home from '../Home';
 import Sessions from '../Sessions';
 import Speakers from '../Speakers';
-import Venue from '../Venue';
+import Venues from '../Venues';
 import Posts from '../Posts';
 import Announcements from '../Announcements';
 import Credits from '../Credits';
@@ -42,6 +42,7 @@ const theme = {
   padding: {
     home: '80px 24px',
     schedule: '80px 0',
+    venues: '80px 0',
     scheduleItem: '16px 24px',
     cardBody: '16px',
     menuItem: '16px 24px',
@@ -95,8 +96,8 @@ class Theme extends Component {
               handleOnTransitionEnd={this.handleOnTransitionEnd}
             />
           )}
-          {contextName === 'venue' && (
-            <Venue
+          {contextName === 'venues' && (
+            <Venues
               columns={columns}
               selectedColumnIndex={selectedColumnIndex}
               handleOnTransitionEnd={this.handleOnTransitionEnd}

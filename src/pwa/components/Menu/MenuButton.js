@@ -35,4 +35,5 @@ const Label = styled.div`
   font-size: 10px;
   line-height: 10px;
   text-transform: uppercase;
+  color: ${({ theme }) => theme.color.text};
 `;

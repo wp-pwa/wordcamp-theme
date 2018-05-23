@@ -1,9 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'react-emotion';
 
-const Andromeda = () => <Container>Andromeda</Container>;
+const Venue = ({ venue }) => <Container>{venue.title}</Container>;
 
-export default Andromeda;
+Venue.propTypes = {
+  venue: PropTypes.shape({}).isRequired,
+};
+
+export default Venue;
 
 const Container = styled.div`
   box-sizing: border-box;

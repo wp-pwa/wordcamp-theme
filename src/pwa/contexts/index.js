@@ -68,7 +68,7 @@ export const venueContext = {
     ],
   ],
   options: {
-    name: 'venue',
+    name: 'venues',
     title: 'Venue Map',
     color: 'grey',
   },

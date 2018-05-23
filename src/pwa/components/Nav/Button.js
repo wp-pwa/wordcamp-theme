@@ -31,6 +31,7 @@ export default Button;
 const Container = styled.div`
   width: ${({ theme }) => theme.size.button};
   height: ${({ theme }) => theme.size.button};
+  color: ${({ theme }) => theme.color.black};
 `;
 
 const Content = styled.div`

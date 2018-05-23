@@ -48,4 +48,5 @@ const InnerContainer = styled.div`
 const Title = styled.div`
   font-size: 16px;
   text-transform: uppercase;
+  color: ${({ theme }) => theme.color.text};
 `;
