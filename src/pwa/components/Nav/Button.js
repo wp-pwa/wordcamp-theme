@@ -3,17 +3,18 @@ import PropTypes from 'prop-types';
 import styled from 'react-emotion';
 import Link from '../Link';
 
-const Button = ({ item, icon: Icon, text }) =>
-  item ? (
-    <Link type={item.type} id={item.id}>
-      <Container>
-        <ButtonSymbol>
+const Button = ({ item, icon: Icon, text }) => (
+  <Container>
+    {item ? (
+      <Link type={item.type} id={item.id}>
+        <Content>
           <Icon size={20} />
-        </ButtonSymbol>
-        <ButtonText>{text}</ButtonText>
-      </Container>
-    </Link>
-  ) : null;
+          <Text>{text}</Text>
+        </Content>
+      </Link>
+    ) : null}
+  </Container>
+);
 
 Button.propTypes = {
   item: PropTypes.shape({}).isRequired,
@@ -24,28 +25,22 @@ Button.propTypes = {
 export default Button;
 
 const Container = styled.div`
-  box-sizing: padding-box;
   width: ${({ theme }) => theme.size.button};
   height: ${({ theme }) => theme.size.button};
+`;
+
+const Content = styled.div`
+  box-sizing: padding-box;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
 `;
 
-const ButtonSymbol = styled.div`
-  box-sizing: content-box;
-  padding: 12px 18px 2px 18px;
-  width: 20px;
-  height: 20px;
-
-  & > * {
-    display: block;
-  }
-`;
-
-const ButtonText = styled.div`
-  text-align: center;
-  line-height: 12px;
+const Text = styled.div`
+  line-height: 10px;
+  text-transform: uppercase;
   font-size: 10px;
 `;

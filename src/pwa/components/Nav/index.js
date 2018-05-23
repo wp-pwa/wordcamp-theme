@@ -48,7 +48,7 @@ const Container = styled.div`
   background-color: ${({ theme }) => theme.color.lightGrey};
   border-top: 1px solid ${({ theme }) => theme.color.grey};
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
 `;
 
 const PrevButton = styled(Button)`
