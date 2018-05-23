@@ -17,9 +17,13 @@ const Button = ({ item, icon: Icon, text }) => (
 );
 
 Button.propTypes = {
-  item: PropTypes.shape({}).isRequired,
+  item: PropTypes.shape({}),
   icon: PropTypes.func.isRequired,
   text: PropTypes.string.isRequired,
+};
+
+Button.defaultProps = {
+  item: null,
 };
 
 export default Button;
