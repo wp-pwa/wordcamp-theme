@@ -12,6 +12,7 @@ const wcbMiddleware = (call, next) => {
       const { theme } = call.tree;
 
       const {
+        type,
         id,
         session_track: tracks,
         session_category: categories,
@@ -20,7 +21,7 @@ const wcbMiddleware = (call, next) => {
 
       const speakers = speakerHrefs.map(({ href }) => parseInt(extractId(href), 10));
 
-      theme.createSession({ id, tracks, categories, speakers });
+      theme.createSession({ type, id, tracks, categories, speakers });
     } else if (entity.type === 'wcb_track') {
       const { theme } = call.tree;
       const { id } = entity;
