@@ -6,8 +6,8 @@ import Logo from './Logo';
 import MenuButton from '../Menu/MenuButton';
 import CloseButton from './CloseButton';
 
-const TopBar = ({ contextTitle, contextName }) => (
-  <Container>
+const TopBar = ({ contextTitle, contextName, contextColor }) => (
+  <Container color={contextColor}>
     <InnerContainer>
       <Logo />
       <Title>{contextTitle}</Title>
@@ -19,11 +19,13 @@ const TopBar = ({ contextTitle, contextName }) => (
 TopBar.propTypes = {
   contextName: PropTypes.string.isRequired,
   contextTitle: PropTypes.string.isRequired,
+  contextColor: PropTypes.string.isRequired,
 };
 
 export default inject(({ connection }) => ({
   contextName: connection.selectedContext.options.name,
   contextTitle: connection.selectedContext.options.title,
+  contextColor: connection.selectedContext.options.color,
 }))(TopBar);
 
 const Container = styled.div`
@@ -34,7 +36,7 @@ const Container = styled.div`
   width: 100vw;
   display: flex;
   justify-content: space-between;
-  background: #e9e9e6;
+  background: ${({ theme, color }) => theme.color[color] || theme.color.grey};
 `;
 
 const InnerContainer = styled.div`
