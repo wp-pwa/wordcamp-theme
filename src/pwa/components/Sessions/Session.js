@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { inject } from 'mobx-react';
 import styled from 'react-emotion';
 import FavoriteButton from './FavoriteButton';
+import Content from '../Content';
 import Link from '../Link';
 import { speakersContext } from '../../contexts';
 
@@ -14,7 +15,7 @@ const Session = ({ session, title, content, speakers, trackName, time, hasSpeake
         {hasSpeakers && <FavoriteButton session={session} />}
         <Title dangerouslySetInnerHTML={{ __html: title }} />
       </Header>
-      <Content dangerouslySetInnerHTML={{ __html: content }} />
+      <Content content={content} padding={24} />
       <Card>
         <CardSection>
           <CardTitle>SPEAKER{speakers.length > 1 ? 'S' : ''}</CardTitle>
@@ -69,7 +70,7 @@ export default inject(({ theme }, { item }) => {
 
 const Container = styled.div`
   box-sizing: border-box;
-  padding: 80px 24px;
+  padding: 80px 0;
   width: 100vw;
   min-height: 100vh;
   display: flex;
@@ -78,7 +79,7 @@ const Container = styled.div`
 `;
 
 const Header = styled.div`
-  padding: 0 0 8px 0;
+  padding: 0 24px 8px 24px;
 `;
 
 const Title = styled.h3`
@@ -89,14 +90,8 @@ const Title = styled.h3`
   margin: 0;
 `;
 
-const Content = styled.div`
-  color: ${({ theme }) => theme.color.darkGrey};
-  font-size: 14px;
-  line-height: 20px;
-`;
-
 const Card = styled.div`
-  margin-top: 16px;
+  margin: 16px 24px 0 24px;
   padding: 16px;
   border-radius: 3px;
   color: ${({ theme }) => theme.color.black};
