@@ -27,7 +27,7 @@ export default inject((_, { session }) => ({
 }))(SessionCard);
 
 const Card = styled.div`
-  margin-top: 16px;
+  margin: 16px 24px 0 24px;
   padding: 16px;
   border-radius: 3px;
   background-color: ${({ theme }) => theme.color.lightGrey};
