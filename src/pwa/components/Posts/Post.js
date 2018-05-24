@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { inject } from 'mobx-react';
-import { format } from 'fecha';
 import styled from 'react-emotion';
 import Media from '../Media';
+import { formatDate } from '../../utils';
 
 const Post = ({ title, creationDate, authorName, hasFeaturedMedia, featured, content }) => (
   <Container>
@@ -31,7 +31,7 @@ Post.propTypes = {
 
 export default inject((_, { post }) => ({
   title: post.entity.title,
-  creationDate: format(new Date(post.entity.creationDate), 'MMMM Do'),
+  creationDate: formatDate(new Date(post.entity.creationDate), 'MMMM Do'),
   authorName: post.entity.author.name,
   featured: post.entity.media.featured,
   hasFeaturedMedia: post.entity.hasFeaturedMedia,

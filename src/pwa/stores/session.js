@@ -1,6 +1,7 @@
 import { types, getParent, resolveIdentifier } from 'mobx-state-tree';
 import Speaker from './speaker';
 import Track from './track';
+import { formatDate } from '../utils';
 
 // Hours -- correction - move this to database
 const hoursOffset = -2;
@@ -58,9 +59,7 @@ const Session = types
         return date;
       },
       get startTime() {
-        const hours = self.date.getHours().toString();
-        const minutes = self.date.getMinutes().toString();
-        return `${hours.padStart(2, '0')}:${minutes.padStart(2, '0')}`;
+        return formatDate(self.date, 'HH:mm');
       },
       get endTime() {
         const { nextSessions } = self;

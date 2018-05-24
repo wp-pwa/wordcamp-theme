@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'react-emotion';
 import { inject } from 'mobx-react';
-import { format } from 'fecha';
 import Media from '../Media';
 import Link from '../Link';
+import { formatDate } from '../../utils';
 
 const Card = ({ type, id, title, creationDate, authorName, featured, context }) => (
   <Link type={type} id={id} context={context}>
@@ -34,7 +34,7 @@ export default inject((_, { entity }) => ({
   type: entity.type,
   id: entity.id,
   title: entity.title,
-  creationDate: format(new Date(entity.creationDate), 'MMMM Do'),
+  creationDate: formatDate(new Date(entity.creationDate), 'MMMM Do'),
   authorName: entity.author.name,
   featured: entity.media.featured,
 }))(Card);
