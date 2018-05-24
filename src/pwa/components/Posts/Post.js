@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { inject } from 'mobx-react';
 import styled from 'react-emotion';
 import Media from '../Media';
+import Content from '../Content';
 import { formatDate } from '../../utils';
 
 const Post = ({ title, creationDate, authorName, hasFeaturedMedia, featured, content }) => (
@@ -16,7 +17,9 @@ const Post = ({ title, creationDate, authorName, hasFeaturedMedia, featured, con
       </Info>
     </Header>
     {hasFeaturedMedia && <Media entity={featured} />}
-    <Content dangerouslySetInnerHTML={{ __html: content }} />
+    <ContentContainer>
+      <Content content={content} padding={24} />
+    </ContentContainer>
   </Container>
 );
 
@@ -82,18 +85,6 @@ const Author = styled.p`
   margin: 0;
 `;
 
-const Content = styled.div`
-  padding: 0 24px;
+const ContentContainer = styled.div`
   margin: 24px 0 8px 0;
-  font-size: 14px;
-  line-height: 20px;
-  color: ${({ theme }) => theme.color.darkGrey};
-
-  & > p:first-child {
-    margin-top: 0;
-  }
-
-  & > p:last-child {
-    margin-bottom: 0;
-  }
 `;
