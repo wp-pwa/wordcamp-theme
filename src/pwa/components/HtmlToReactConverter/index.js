@@ -78,10 +78,6 @@ class HtmlToReactConverter extends React.Component {
     this.handleNode = this.handleNode.bind(this);
   }
 
-  shouldComponentUpdate() {
-    return false;
-  }
-
   convert(element) {
     const { converters, extraProps, state, theme } = this.props;
     try {

@@ -82,7 +82,7 @@ export default self =>
         params: {
           per_page: 100,
           _embed: false,
-          include: '13, 15, 17, 19, 23, 26, 28, 30, 32, 34, 36',
+          include: '13, 15, 17, 19, 23, 26, 28, 30, 32, 34, 36, 50, 52, 56, 58, 60, 62', 
         },
       }),
     ]);
@@ -95,42 +95,42 @@ export default self =>
     // Adds custom sessions
     const before = {
       type: 'page',
-      id: 1101101101,
+      id: 50,
       sessionTitle: 'BEFORE',
       sessionTimestamp: new Date('2018-05-01T00:00:00+02:00').getTime(),
       tracks: allTrackIds,
     };
     const contributors = {
       type: 'page',
-      id: 1101101102,
+      id: 52,
       sessionTitle: 'CONTRIBUTORS',
       sessionTimestamp: new Date('2018-06-14T08:00:00+02:00').getTime(), // check time
       tracks: allTrackIds,
     };
     const thursdayNight = {
       type: 'page',
-      id: 1101101103,
+      id: 56,
       sessionTitle: 'THURSDAY NIGHT',
       sessionTimestamp: new Date('2018-06-14T18:00:00+02:00').getTime(), // check time
       tracks: allTrackIds,
     };
     const fridayNight = {
       type: 'page',
-      id: 1101101104,
+      id: 58,
       sessionTitle: 'FRIDAY NIGHT',
       sessionTimestamp: new Date('2018-06-15T18:00:00+02:00').getTime(), // check time
       tracks: allTrackIds,
     };
     const afterParty = {
       type: 'page',
-      id: 1101101105,
+      id: 60,
       sessionTitle: 'AFTER PARTY',
       sessionTimestamp: new Date('2018-06-16T20:00:00+02:00').getTime(), // check time
       tracks: allTrackIds,
     };
     const after = {
       type: 'page',
-      id: 1101101106,
+      id: 62,
       sessionTitle: 'AFTER',
       sessionTimestamp: new Date('2018-06-17T02:00:00+02:00').getTime(),
       tracks: allTrackIds,
@@ -138,7 +138,7 @@ export default self =>
     const afterAfter = {
       mstId: 'after_after_session',
       type: 'page',
-      id: 1101101106,
+      id: 62,
       sessionTitle: 'AFTER',
       sessionTimestamp: new Date('2019-06-17T02:00:00+02:00').getTime(),
       tracks: allTrackIds,

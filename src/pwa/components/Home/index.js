@@ -1,12 +1,15 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { inject } from 'mobx-react';
 import Slider from '../Slider';
-import OnNow from './OnNow';
-import UpNext from './UpNext';
+import NowNext from './NowNext';
 import Schedule from './Schedule';
 import TopBar from '../TopBar';
 import Menu from '../Menu';
 import Nav from './Nav';
+
+const OnNow = inject(({ theme }) => ({ sessions: theme.sessionsOnNow }))(NowNext);
+const UpNext = inject(({ theme }) => ({ sessions: theme.sessionsUpNext }))(NowNext);
 
 const Home = ({ columns, selectedColumnIndex, handleOnTransitionEnd }) => (
   <Fragment>
