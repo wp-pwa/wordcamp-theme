@@ -17,9 +17,13 @@
   "author": "eduardo@frontity.com, luis@frontity.com, david@frontity.com",
   "license": "MIT",
   "dependencies": {
+    "adler-32": "^1.2.0",
+    "he": "^1.1.1",
+    "himalaya": "^1.1.0",
     "moment-timezone": "^0.5.17",
     "rc-switch": "^1.6.0",
     "react-gravatar": "^2.6.3",
+    "react-image-lightbox": "^5.0.0",
     "react-select": "^2.0.0-beta.5",
     "react-share": "^2.1.1",
     "react-waypoint": "^8.0.1"
