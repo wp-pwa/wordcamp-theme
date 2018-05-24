@@ -43,6 +43,7 @@ const theme = {
     home: '80px 24px',
     schedule: '80px 0',
     venues: '80px 0',
+    credits: '80px 0',
     scheduleItem: '16px 24px',
     cardBody: '16px',
     menuItem: '16px 24px',

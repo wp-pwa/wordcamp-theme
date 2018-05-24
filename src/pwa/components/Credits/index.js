@@ -29,10 +29,16 @@ const Container = styled.div`
   width: 100vw;
   height: 100vh;
   padding: ${({ theme }) => theme.padding.credits};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const Title = styled.h1`
-  text-align: center;
+  font-size: 22px;
+  margin: 0;
+  color: ${({ theme }) => theme.color.text};
+  margin-bottom: 16px;
 `;
 
 const Content = styled.section`
