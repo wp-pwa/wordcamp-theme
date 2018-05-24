@@ -5,7 +5,12 @@ import styled from 'react-emotion';
 import ScheduleItem from './ScheduleItem';
 import FilterFavorites from './FilterFavorites';
 
-const ScheduleList = ({ firstDaySessions, secondDaySessions }) => (
+const ScheduleList = ({
+  firstDaySessions,
+  secondDaySessions,
+  firstDayColumns,
+  secondDayColumns,
+}) => (
   <Container>
     <InnerContainer>
       <SessionDay>Friday, June 15th</SessionDay>
@@ -17,7 +22,7 @@ const ScheduleList = ({ firstDaySessions, secondDaySessions }) => (
           key={session.id}
           position={index}
           session={session}
-          columns={firstDaySessions.map(({ type, id, page }) => [{ type, id, page }])}
+          columns={firstDayColumns}
           isSpecial={!session.hasSpeakers}
         />
       ))}
@@ -31,7 +36,7 @@ const ScheduleList = ({ firstDaySessions, secondDaySessions }) => (
           key={session.id}
           position={index}
           session={session}
-          columns={secondDaySessions.map(({ type, id, page }) => [{ type, id, page }])}
+          columns={secondDayColumns}
           isSpecial={!session.hasSpeakers}
         />
       ))}
@@ -42,11 +47,21 @@ const ScheduleList = ({ firstDaySessions, secondDaySessions }) => (
 ScheduleList.propTypes = {
   firstDaySessions: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   secondDaySessions: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  firstDayColumns: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({}))).isRequired,
+  secondDayColumns: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({}))).isRequired,
 };
 
 export default inject(({ theme }, { track }) => ({
   firstDaySessions: theme.track(track).firstDaySessions,
   secondDaySessions: theme.track(track).secondDaySessions,
+  firstDayColumns: theme
+    .track(track)
+    .firstDaySessions.filter(item => item.speakers.length !== 0)
+    .map(({ type, id, page }) => [{ type, id, page }]),
+  secondDayColumns: theme
+    .track(track)
+    .secondDaySessions.filter(item => item.speakers.length !== 0)
+    .map(({ type, id, page }) => [{ type, id, page }]),
 }))(ScheduleList);
 
 const Container = styled.div`
