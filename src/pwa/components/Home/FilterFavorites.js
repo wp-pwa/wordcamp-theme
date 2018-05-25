@@ -5,10 +5,10 @@ import styled from 'react-emotion';
 import Switch from 'rc-switch';
 
 const FilterFavorites = ({ isFiltered, toggleFilter }) => (
-  <Container>
+  <Container onClick={toggleFilter}>
     <Label>Only Favorites</Label>
     <SwitchWrapper>
-      <Switch checked={isFiltered} onChange={toggleFilter} />
+      <Switch checked={isFiltered} />
     </SwitchWrapper>
   </Container>
 );
