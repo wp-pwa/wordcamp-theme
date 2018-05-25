@@ -4,7 +4,7 @@ export default types
   .model('Notifications')
   .props({
     areSupported: types.optional(types.boolean, false),
-    areEnabled: types.optional(types.boolean, false),
+    areEnabled: types.optional(types.boolean, true),
     areRegistered: types.optional(types.boolean, false),
   })
   .actions(self => ({

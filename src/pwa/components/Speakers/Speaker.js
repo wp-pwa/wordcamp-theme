@@ -3,23 +3,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { inject } from 'mobx-react';
 import styled from 'react-emotion';
-import Gravatar from 'react-gravatar';
 import SessionCard from './SessionCard';
 import Content from '../Content';
 import { sessionsContext } from '../../contexts';
 
-const Speaker = ({ name, gravatar, content, sessions }) => {
+const Speaker = ({ name, content, sessions, src, srcSet }) => {
   const columns = sessions.map(({ type, id }) => [{ type, id }]);
 
   return (
     <Container>
       <Name>{name}</Name>
       <div>
-        {gravatar && (
-          <Avatar>
-            <Gravatar md5={gravatar} size={88} />
-          </Avatar>
-        )}
+        <Avatar>
+          <Image alt="Speaker gravatar" src={src} srcSet={srcSet} />
+        </Avatar>
         <Content content={content} padding={24} />
       </div>
       {sessions.map(session => (
@@ -31,17 +28,41 @@ const Speaker = ({ name, gravatar, content, sessions }) => {
 
 Speaker.propTypes = {
   name: PropTypes.string.isRequired,
-  gravatar: PropTypes.string.isRequired,
+  src: PropTypes.string.isRequired,
+  srcSet: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
   sessions: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
 
-export default inject(({ theme }, { item: { id } }) => ({
-  name: theme.speaker(id).name,
-  gravatar: theme.speaker(id).gravatar,
-  content: theme.speaker(id).entity.content,
-  sessions: theme.speaker(id).sessions.peek(),
-}))(Speaker);
+export default inject(({ theme }, { item: { id } }) => {
+  const { gravatar } = theme.speaker(id);
+  const sizes = [
+    { px: 88, ratio: 1 },
+    { px: 132, ratio: 1.5 },
+    { px: 176, ratio: 2 },
+    { px: 220, ratio: 2.5 },
+    { px: 264, ratio: 3 },
+  ];
+
+  return {
+    name: theme.speaker(id).name,
+    src: gravatar
+      ? `https://www.gravatar.com/avatar/${gravatar}?d=retro&r=g&s=400`
+      : `https://secure.gravatar.com/avatar/?d=mm&r=g&s=400`,
+    srcSet: gravatar
+      ? sizes
+          .map(
+            size =>
+              `https://www.gravatar.com/avatar/${gravatar}?d=retro&r=g&s=${size.px} ${size.ratio}x`,
+          )
+          .join(', ')
+      : sizes
+          .map(size => `https://secure.gravatar.com/avatar/?d=mm&r=g&s=${size.px} ${size.ratio}x`)
+          .join(', '),
+    content: theme.speaker(id).entity.content,
+    sessions: theme.speaker(id).sessions.peek(),
+  };
+})(Speaker);
 
 const Container = styled.div`
   box-sizing: border-box;
@@ -69,8 +90,12 @@ const Avatar = styled.div`
   float: left;
   box-shadow: 4px 4px 0 0 ${({ theme }) => theme.color.yellow};
   background: ${({ theme }) => theme.color.black};
+`;
 
-  img {
-    filter: grayscale(100%);
-  }
+const Image = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  object-position: center;
+  filter: grayscale(100 %);
 `;
