@@ -5,7 +5,7 @@ import { inject } from 'mobx-react';
 
 const Manifest = ({ siteId, dynamicUrl }) => (
   <Helmet>
-    <link rel="manifest" href={`${dynamicUrl}/dynamic/wordcamp-theme/${siteId}/manifest.json`} />
+    <link rel="manifest" href={`${dynamicUrl}dynamic/wordcamp-theme/${siteId}/manifest.json`} />
   </Helmet>
 );
 Manifest.propTypes = {
