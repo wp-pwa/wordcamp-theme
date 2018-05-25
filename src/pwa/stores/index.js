@@ -3,6 +3,7 @@ import { values } from 'mobx';
 import { now } from 'mobx-utils';
 import Menu from './menu';
 import Schedule from './schedule';
+import Notifications from './notifications';
 import Session from './session';
 import Track from './track';
 import Speaker from './speaker';
@@ -18,6 +19,7 @@ export default types
   .props({
     menu: types.optional(Menu, {}),
     schedule: types.optional(Schedule, {}),
+    notifications: types.optional(Notifications, {}),
     sessionsMap: types.optional(types.map(Session), {}),
     tracksMap: types.optional(types.map(Track), {}),
     speakersMap: types.optional(types.map(Speaker), {}),
@@ -96,10 +98,10 @@ export default types
         const mstId = session.mstId || generateMstId(session);
         self.sessionsMap.set(mstId, { mstId, ...session });
       },
-      createTrack(track){
+      createTrack(track) {
         self.tracksMap.set(track.id, track);
       },
-      createSpeaker(speaker){
+      createSpeaker(speaker) {
         self.speakersMap.set(speaker.id, speaker);
       },
       setTime(day = 1, hour = 0, minutes = 0) {
