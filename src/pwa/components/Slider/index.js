@@ -160,6 +160,9 @@ class Slider extends Component {
   }
 
   async componentDidMount() {
+    // Overwrite the previous scroll when changing context
+    if (typeof window !== 'undefined') window.scrollTo(0, 0);
+
     // Gets scrolling element.
     if (!Slider.scrollingElement) Slider.scrollingElement = await getScrollingElement();
 
