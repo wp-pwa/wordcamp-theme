@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { inject } from 'mobx-react';
 import styled from 'react-emotion';
+import he from 'he';
 import {
   FacebookShareButton,
   WhatsappShareButton,
@@ -52,7 +53,7 @@ Share.propTypes = {
 };
 
 export default inject(({ connection }) => ({
-  title: connection.selectedItem.entity.title,
+  title: he.unescape(connection.selectedItem.entity.title),
   link: connection.selectedItem.entity.link,
 }))(Share);
 
