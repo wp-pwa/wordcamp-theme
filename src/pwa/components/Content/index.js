@@ -7,18 +7,14 @@ import converters from '../../converters';
 
 const Content = ({ content, padding }) => (
   <Container padding={padding}>
-    <HtmlToReactConverter
-      html={content}
-      processors={processors}
-      converters={converters}
-    />
+    <HtmlToReactConverter html={content} processors={processors} converters={converters} />
   </Container>
 );
 
 Content.propTypes = {
   content: PropTypes.string.isRequired,
   padding: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
-}
+};
 
 export default Content;
 
@@ -40,7 +36,11 @@ const Container = styled.div`
 
   &
     > *:not(.ad):not(.carousel):not(.gallery):not(.wp-video):not(.wpappbox):not(blockquote):not(.table) {
-    padding: 0 ${({ padding }) => typeof padding === 'number' ? `${padding}px` : padding};
+    padding: 0 ${({ padding }) => (typeof padding === 'number' ? `${padding}px` : padding)};
+  }
+
+  a, a:visited {
+    color: ${({ theme }) => theme.color.blue};
   }
 
   & > a,
