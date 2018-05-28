@@ -100,22 +100,6 @@ export const postsContext = memoize((columns = []) => ({
   },
 }));
 
-export const creditsContext = {
-  columns: [
-    [
-      {
-        type: 'page',
-        id: 36,
-      },
-    ],
-  ],
-  options: {
-    name: 'credits',
-    title: 'Credits',
-    color: 'grey',
-  },
-};
-
 export const sessionsContext = memoize((columns = []) => ({
   columns,
   options: {

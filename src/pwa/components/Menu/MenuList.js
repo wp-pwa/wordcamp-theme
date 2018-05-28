@@ -3,7 +3,7 @@ import styled from 'react-emotion';
 import MenuRoute from './MenuRoute';
 import MenuLink from './MenuLink';
 
-const routes = ['venue-map', 'announcements', 'credits'];
+const routes = ['venue-map', 'announcements'];
 const links = ['facebook', 'twitter'];
 
 const MenuList = () => (

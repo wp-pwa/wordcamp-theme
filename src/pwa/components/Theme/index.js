@@ -11,7 +11,6 @@ import Speakers from '../Speakers';
 import Venues from '../Venues';
 import Posts from '../Posts';
 import Announcements from '../Announcements';
-import Credits from '../Credits';
 
 import '../../styles';
 
@@ -115,7 +114,6 @@ class Theme extends Component {
             />
           )}
           {contextName === 'announcements' && <Announcements />}
-          {contextName === 'credits' && <Credits />}
         </Fragment>
       </ThemeProvider>
     );
