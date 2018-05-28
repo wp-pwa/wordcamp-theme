@@ -7,6 +7,9 @@ export default injectGlobal`
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
     font-family: -apple-system, BlinkMacSystemFont,"Segoe UI","Roboto", "Droid Sans","Helvetica Neue", Helvetica, Arial, sans-serif;
+    ::-webkit-scrollbar {
+      display: none;
+    }
   }
   body {
     margin: 0;
