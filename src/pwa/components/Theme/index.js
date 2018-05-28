@@ -1,16 +1,17 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { inject } from 'mobx-react';
-import { compose } from 'recompose';
 import { ThemeProvider } from 'emotion-theming';
 import Home from '../Home';
+import Title from './Title';
+import Favicon from './Favicon';
+import Manifest from '../Manifest';
 import Sessions from '../Sessions';
 import Speakers from '../Speakers';
 import Venues from '../Venues';
 import Posts from '../Posts';
 import Announcements from '../Announcements';
 import Credits from '../Credits';
-import Manifest from '../Manifest';
 
 import '../../styles';
 
@@ -75,6 +76,8 @@ class Theme extends Component {
     return (
       <ThemeProvider theme={theme}>
         <Fragment>
+          <Title />
+          <Favicon />
           <Manifest />
           {contextName === 'home' && (
             <Home
@@ -126,11 +129,9 @@ Theme.propTypes = {
   routeChangeRequested: PropTypes.func.isRequired,
 };
 
-export default compose(
-  inject(({ connection }) => ({
-    routeChangeRequested: connection.routeChangeRequested,
-    contextName: connection.selectedContext.options.name,
-    columns: connection.selectedContext.columns,
-    selectedColumnIndex: connection.selectedColumn.index,
-  })),
-)(Theme);
+export default inject(({ connection }) => ({
+  routeChangeRequested: connection.routeChangeRequested,
+  contextName: connection.selectedContext.options.name,
+  columns: connection.selectedContext.columns,
+  selectedColumnIndex: connection.selectedColumn.index,
+}))(Theme);
