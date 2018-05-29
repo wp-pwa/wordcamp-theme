@@ -10,6 +10,7 @@ import Sessions from '../Sessions';
 import Speakers from '../Speakers';
 import Venues from '../Venues';
 import Posts from '../Posts';
+import Pages from '../Pages';
 import Announcements from '../Announcements';
 
 import '../../styles';
@@ -108,6 +109,13 @@ class Theme extends Component {
           )}
           {contextName === 'posts' && (
             <Posts
+              columns={columns}
+              selectedColumnIndex={selectedColumnIndex}
+              handleOnTransitionEnd={this.handleOnTransitionEnd}
+            />
+          )}
+          {contextName === 'pages' && (
+            <Pages
               columns={columns}
               selectedColumnIndex={selectedColumnIndex}
               handleOnTransitionEnd={this.handleOnTransitionEnd}
