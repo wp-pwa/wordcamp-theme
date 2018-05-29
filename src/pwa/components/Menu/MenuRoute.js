@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { inject } from 'mobx-react';
 import styled from 'react-emotion';
-import { venueContext, announcementsContext, creditsContext } from '../../contexts';
+import { venueContext, announcementsContext, singleContext } from '../../contexts';
 import Link from '../Link';
 
 const routes = {
@@ -18,10 +18,15 @@ const routes = {
     context: announcementsContext,
     text: 'Announcements',
   },
-  credits: {
+  menus: {
     type: 'page',
-    id: 36,
-    context: creditsContext,
+    id: 78,
+    context: singleContext({ type: 'page', id: 78, name: 'pages', title: 'Menus' }),
+  },
+  'code-of-conduct': {
+    type: 'page',
+    id: 76,
+    context: singleContext({ type: 'page', id: 76, name: 'pages', title: 'Code of Conduct' }),
   },
 };
 
