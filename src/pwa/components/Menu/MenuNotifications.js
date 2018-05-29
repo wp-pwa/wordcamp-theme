@@ -4,26 +4,26 @@ import { inject } from 'mobx-react';
 import styled from 'react-emotion';
 import Switch from 'rc-switch';
 
-const MenuNotifications = ({ areEnabled, areRegistered, toggleRegistered }) =>
-  areEnabled && (
-    <Container onClick={toggleRegistered}>
+const MenuNotifications = ({ areSupported, areEnabled, toggleEnabled }) =>
+  areSupported && (
+    <Container onClick={toggleEnabled}>
       <Text>Push Notifications</Text>
       <SwitchWrapper>
-        <Switch checked={areRegistered} />
+        <Switch checked={areEnabled} />
       </SwitchWrapper>
     </Container>
   );
 
 MenuNotifications.propTypes = {
+  areSupported: PropTypes.bool.isRequired,
   areEnabled: PropTypes.bool.isRequired,
-  areRegistered: PropTypes.bool.isRequired,
-  toggleRegistered: PropTypes.func.isRequired,
+  toggleEnabled: PropTypes.func.isRequired,
 };
 
-export default inject(({ theme }) => ({
-  areEnabled: theme.notifications.areEnabled,
-  areRegistered: theme.notifications.areRegistered,
-  toggleRegistered: theme.notifications.toggleRegistered,
+export default inject(({ notifications }) => ({
+  areSupported: notifications.areSupported,
+  areEnabled: notifications.areEnabled,
+  toggleEnabled: notifications.toggleEnabled,
 }))(MenuNotifications);
 
 const Container = styled.div`
