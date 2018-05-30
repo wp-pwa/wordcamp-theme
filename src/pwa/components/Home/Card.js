@@ -6,6 +6,7 @@ import styled from 'react-emotion';
 import FavoriteButton from './FavoriteButton';
 import Title from './CardTitle';
 import Speakers from './CardSpeakers';
+import VenueLink from './VenueLink';
 import Icon from '../Icons';
 
 const specialTracks = {
@@ -18,7 +19,13 @@ const specialTracks = {
 const Card = ({ isFavorite, isSpecial, session, columns }) => (
   <Container isFavorite={isFavorite}>
     <Header isSpecial={isSpecial} track={session.tracks[0].name}>
-      <Track>{isSpecial ? specialTracks[session.title] : session.tracks[0].name}</Track>
+      <Track>
+        {isSpecial ? (
+          <VenueLink name={specialTracks[session.title]} />
+        ) : (
+          <VenueLink trackId={session.tracks[0].id} />
+        )}
+      </Track>
       {!isSpecial && <FavoriteButton session={session} />}
     </Header>
     <Body>
@@ -94,6 +101,10 @@ const Track = styled.div`
   font-size: 14px;
   font-weight: lighter;
   text-transform: uppercase;
+
+  a, a:visited {
+    color: inherit;
+  }
 `;
 
 const Body = styled.div`
