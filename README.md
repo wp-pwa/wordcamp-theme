@@ -8,6 +8,11 @@ Finally, use `npm run start:pwa` to start the development environment.
 
 ## Changelog
 
+#### 1.0.2
+
+- Several bugfixes
+- Push Notifications
+
 #### 1.0.1
 
 - Some small bugfixes
