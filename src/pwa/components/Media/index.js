@@ -30,7 +30,7 @@ const Container = styled.div`
   box-sizing: border-box;
   width: 100%;
   height: 160px;
-  background: #e9e9e6;
+  background: ${({ theme }) => theme.color.grey};
   border-radius: 3px;
 
   img {
