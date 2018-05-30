@@ -1,5 +1,12 @@
 import { flow, addMiddleware } from 'mobx-state-tree';
-import { homeContext, venueContext, announcementsContext, creditsContext } from '../contexts';
+import {
+  homeContext,
+  venueContext,
+  announcementsContext,
+  creditsContext,
+  singlePageContext,
+  postsContext,
+} from '../contexts';
 
 const extractId = href => /\/(\d+)$/g.exec(href)[1];
 const extractGravatar = url => (/gravatar\.com\/avatar\/([0-9A-Fa-f]+)/.exec(url) || [])[1];
@@ -47,9 +54,14 @@ export default self =>
     if (type === 'page') {
       if ([23, 26, 28, 30, 32, 34].includes(id)) action.context = venueContext;
       else if (id === 36) action.context = creditsContext;
+      else if (id === 76) action.context = singlePageContext({ id, title: 'Code of Conduct' });
+      else if (id === 78) action.context = singlePageContext({ id, title: 'Menus' });
       else action.context = homeContext;
     } else if (type === 'latest' && id === 'post') {
       action.context = announcementsContext;
+    } else if (type === 'post') {
+      yield self.connection.fetchEntity(selectedItem);
+      action.context = postsContext([[selectedItem]]);
     } else {
       action.context = homeContext;
     }
@@ -82,7 +94,7 @@ export default self =>
         params: {
           per_page: 100,
           _embed: false,
-          include: '13, 15, 17, 19, 23, 26, 28, 30, 32, 34, 36, 50, 52, 56, 58, 60, 62, 76, 78', 
+          include: '13, 15, 17, 19, 23, 26, 28, 30, 32, 34, 36, 50, 52, 56, 58, 60, 62, 76, 78',
         },
       }),
     ]);
