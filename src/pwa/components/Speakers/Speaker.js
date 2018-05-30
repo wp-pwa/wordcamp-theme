@@ -97,5 +97,5 @@ const Image = styled.img`
   height: 100%;
   object-fit: fill;
   object-position: center;
-  filter: grayscale(100 %);
+  filter: grayscale(100%);
 `;
