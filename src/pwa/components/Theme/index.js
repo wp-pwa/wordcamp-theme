@@ -5,6 +5,7 @@ import { ThemeProvider } from 'emotion-theming';
 import Home from '../Home';
 import Title from './Title';
 import Favicon from './Favicon';
+import AppleMeta from './AppleMeta';
 import Manifest from '../Manifest';
 import Sessions from '../Sessions';
 import Speakers from '../Speakers';
@@ -78,6 +79,7 @@ class Theme extends Component {
         <Fragment>
           <Title />
           <Favicon />
+          <AppleMeta />
           <Manifest />
           {contextName === 'home' && (
             <Home
