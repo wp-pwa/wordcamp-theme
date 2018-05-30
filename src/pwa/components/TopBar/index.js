@@ -37,6 +37,7 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   background: ${({ theme, color }) => theme.color[color] || theme.color.grey};
+  z-index: 10;
 `;
 
 const InnerContainer = styled.div`
