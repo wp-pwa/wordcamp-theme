@@ -8,6 +8,11 @@ Finally, use `npm run start:pwa` to start the development environment.
 
 ## Changelog
 
+#### 1.0.3
+
+- Last styling and bug fixes
+- Added iOS metatags
+
 #### 1.0.2
 
 - Several bugfixes
