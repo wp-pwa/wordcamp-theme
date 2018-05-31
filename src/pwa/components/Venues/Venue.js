@@ -5,7 +5,9 @@ import styled from 'react-emotion';
 const Venue = ({ venue }) => (
   <Container>
     <Title>{venue.entity.title}</Title>
-    <Image alt={venue.entity.media.featured.alt} src={venue.entity.media.featured.original.url} />
+    <a href={venue.entity.media.featured.original.url}>
+      <Image alt={venue.entity.media.featured.alt} src={venue.entity.media.featured.original.url} />
+    </a>
   </Container>
 );
 
