@@ -29,14 +29,12 @@ class Refresh extends Component {
     this.setState({ isClicked: false });
   }
   render() {
-    const { isFetching } = this.props;
-    const { isClicked } = this.state;
+    const isFetching = this.props.isFetching || this.state.isClicked;
     return (
-      <Container>
-        <Button onClick={this.getFirstPage}>
-          {isFetching || isClicked ? <Fetching /> : 'Refresh'}
-        </Button>
-      </Container>
+      <Button onClick={this.getFirstPage} isFetching={isFetching}>
+        <Text>{isFetching ? 'Refreshing' : 'Refresh'}</Text>
+        <Icon isFetching={isFetching} />
+      </Button>
     );
   }
 }
@@ -55,28 +53,17 @@ export default inject(({ connection }, { list }) => ({
   fetchListPage: connection.fetchListPage,
 }))(Refresh);
 
-const Container = styled.div`
-  box-sizing: border-box;
-  width: 100vw;
-  height: 56px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
 const Button = styled.div`
   box-sizing: border-box;
-  width: 96px;
-  height: 32px;
-  color: white;
-  line-height: 20px;
-  font-size: 16px;
-  font-weight: bold;
-  background: #5566c3;
+  width: 100%;
+  height: 40px;
+  color: ${({ isFetching }) => isFetching ? '#282409' : '#5566C3'};
+  background: ${({ isFetching }) => isFetching ? '#FCF8D7' : 'white'};
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 8px;
+  margin-bottom: 24px;
+  box-shadow: ${({ isFetching }) => (isFetching ? 'none' : 'inset 0 -1px 0 0 #E9E9E6')};
 `;
 
 const spinner = keyframes`
@@ -84,9 +71,17 @@ const spinner = keyframes`
   100% { transform: rotate(360deg); }
 `;
 
-const Fetching = styled(FetchingIcon)`
-  width: 24px;
-  height: 24px;
-  color: white;
-  animation: ${spinner} 1s ease infinite;
+const Text = styled.div`
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 24px;
+  padding-right: 8px;
+`;
+
+const Icon = styled(FetchingIcon)`
+  width: 20px;
+  height: 20px;
+  color: #5566C3;
+  animation: ${({ isFetching }) => (isFetching ? `${spinner} 1s ease infinite` : '')};
 `;
