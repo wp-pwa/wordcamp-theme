@@ -42,6 +42,7 @@ const InnerContainer = styled.div`
 const Title = styled.div`
   font-size: 16px;
   text-transform: uppercase;
+  padding-left: 8px;
 `;
 
 const CloseButton = styled.div`
