@@ -83,5 +83,5 @@ const Icon = styled(FetchingIcon)`
   width: 20px;
   height: 20px;
   color: #5566C3;
-  animation: ${({ isFetching }) => (isFetching ? `${spinner} 1s ease infinite` : '')};
+  animation: ${({ isFetching }) => (isFetching ? `${spinner} 1s ease infinite` : 'none')};
 `;
