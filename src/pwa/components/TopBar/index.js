@@ -50,4 +50,5 @@ const Title = styled.div`
   font-size: 16px;
   text-transform: uppercase;
   color: ${({ theme }) => theme.color.text};
+  padding-left: 8px;
 `;
