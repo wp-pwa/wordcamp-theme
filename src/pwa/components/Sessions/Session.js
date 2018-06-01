@@ -5,9 +5,10 @@ import styled from 'react-emotion';
 import FavoriteButton from './FavoriteButton';
 import Content from '../Content';
 import Link from '../Link';
+import VenueLink from '../Home/VenueLink';
 import { speakersContext } from '../../contexts';
 
-const Session = ({ session, title, content, speakers, trackName, time, hasSpeakers }) => {
+const Session = ({ session, title, content, speakers, trackId, time, hasSpeakers }) => {
   const columns = speakers.map(({ type, id }) => [{ type, id }]);
   return (
     <Container>
@@ -34,7 +35,9 @@ const Session = ({ session, title, content, speakers, trackName, time, hasSpeake
         </CardSection>
         <CardSection>
           <CardTitle>TRACK</CardTitle>
-          <CardText>{trackName}</CardText>
+          <CardTextVenue>
+            <VenueLink trackId={trackId} />
+          </CardTextVenue>
         </CardSection>
         <CardSection>
           <CardTitle>TIME</CardTitle>
@@ -50,7 +53,7 @@ Session.propTypes = {
   title: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
   speakers: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  trackName: PropTypes.string.isRequired,
+  trackId: PropTypes.number.isRequired,
   time: PropTypes.string.isRequired,
   hasSpeakers: PropTypes.bool.isRequired,
 };
@@ -62,7 +65,7 @@ export default inject(({ theme }, { item }) => {
     title: session.entity.title,
     content: session.entity.content,
     speakers: session.speakers.peek(),
-    trackName: session.tracks[0].name,
+    trackId: session.tracks[0].id,
     time: session.startTime,
     hasSpeakers: session.hasSpeakers,
   };
@@ -113,6 +116,10 @@ const CardTitle = styled.div`
 const CardText = styled.div`
   font-size: 16px;
   line-height: 20px;
+`;
+
+const CardTextVenue = styled(CardText)`
+  color: ${({ theme }) => theme.color.blue};
 `;
 
 const SpeakerName = styled.span`
