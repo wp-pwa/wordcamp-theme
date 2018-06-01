@@ -4,7 +4,7 @@ import {
   venueContext,
   announcementsContext,
   creditsContext,
-  singlePageContext,
+  pageContext,
   postsContext,
 } from '../contexts';
 
@@ -35,7 +35,10 @@ const wcbMiddleware = (call, next) => {
       if (!theme.track(id)) theme.createTrack({ id });
     } else if (entity.type === 'wcb_speaker') {
       const { theme } = call.tree;
-      const { id, avatar_urls: { 96: avatarUrl } } = entity;
+      const {
+        id,
+        avatar_urls: { 96: avatarUrl },
+      } = entity;
       const gravatar = avatarUrl ? extractGravatar(avatarUrl) : null;
       if (!theme.speaker(id)) theme.createSpeaker({ id, gravatar });
       else theme.speaker(id).setGravatar(gravatar);
@@ -54,8 +57,8 @@ export default self =>
     if (type === 'page') {
       if ([23, 26, 28, 30, 32, 34].includes(id)) action.context = venueContext;
       else if (id === 36) action.context = creditsContext;
-      else if (id === 76) action.context = singlePageContext({ id, title: 'Code of Conduct' });
-      else if (id === 78) action.context = singlePageContext({ id, title: 'Menus' });
+      else if (id === 76) action.context = pageContext({ id, title: 'Code of Conduct' });
+      else if (id === 78) action.context = pageContext({ id, title: 'Menus' });
       else action.context = homeContext;
     } else if (type === 'latest' && id === 'post') {
       action.context = announcementsContext;

@@ -116,13 +116,7 @@ class Theme extends Component {
               handleOnTransitionEnd={this.handleOnTransitionEnd}
             />
           )}
-          {contextName === 'pages' && (
-            <Pages
-              columns={columns}
-              selectedColumnIndex={selectedColumnIndex}
-              handleOnTransitionEnd={this.handleOnTransitionEnd}
-            />
-          )}
+          {contextName === 'page' && <Pages />}
           {contextName === 'announcements' && <Announcements />}
         </Fragment>
       </ThemeProvider>

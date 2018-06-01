@@ -101,14 +101,13 @@ const Container = styled.span`
   height: ${({ styles }) => styles.height};
   position: relative;
   margin: ${({ content }) => (content === 'true' ? '15px 0' : '')};
-  ${({ content }) => content === 'true' && 'left: -15px'};
 
   img {
     ${({ content, styles }) =>
       content === 'true' && styles.height === 'auto' ? 'position: static' : 'position: absolute'};
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     object-position: center;
     color: transparent;
     border: none;
