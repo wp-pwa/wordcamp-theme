@@ -2,11 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { inject } from 'mobx-react';
 import styled from 'react-emotion';
+import FullStarIcon from 'react-icons/lib/fa/star';
 import EmptyStarIcon from 'react-icons/lib/fa/star-o';
 
 const FavoriteButton = ({ isFavorite, toggleFavorite }) => (
   <Container onClick={toggleFavorite} isFavorite={isFavorite}>
-    <EmptyStarIcon size={28}/>
+    {isFavorite ? <FullStarIcon size={28} /> : <EmptyStarIcon size={28} />}
   </Container>
 );
 
@@ -31,6 +32,6 @@ const Container = styled.div`
   flex-shrink: 0;
 
   & > svg {
-    color: ${({ theme, isFavorite }) => isFavorite ? theme.color.yellow : theme.color.darkGrey};
+    color: ${({ theme, isFavorite }) => (isFavorite ? theme.color.yellow : theme.color.darkGrey)};
   }
 `;
