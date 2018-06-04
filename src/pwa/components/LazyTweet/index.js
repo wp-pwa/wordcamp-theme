@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { inject } from 'mobx-react';
-import { Helmet } from 'react-helmet';
 import LazyLoad from '@frontity/lazyload';
 import IconTwitter from 'react-icons/lib/fa/twitter';
 import styled from 'react-emotion';
@@ -11,8 +9,6 @@ class LazyTweet extends Component {
     children: PropTypes.shape({}).isRequired,
     width: PropTypes.string.isRequired,
     height: PropTypes.string.isRequired,
-    isAmp: PropTypes.bool.isRequired,
-    tweetId: PropTypes.string.isRequired,
   };
 
   constructor() {
@@ -51,28 +47,8 @@ class LazyTweet extends Component {
   }
 
   render() {
-    const { children, width, height, tweetId, isAmp } = this.props;
+    const { children, width, height } = this.props;
     const { loaded } = this.state;
-
-    if (isAmp) {
-      return [
-        <Helmet>
-          <script
-            async=""
-            custom-element="amp-twitter"
-            src="https://cdn.ampproject.org/v0/amp-twitter-0.1.js"
-          />
-        </Helmet>,
-        <Container
-          styles={{ height, width }}
-          innerRef={node => {
-            this.ref = node;
-          }}
-        >
-          <amp-twitter height={1} width={1} layout="responsive" data-tweetid={tweetId} />
-        </Container>,
-      ];
-    }
 
     return (
       <Container
@@ -99,9 +75,7 @@ class LazyTweet extends Component {
   }
 }
 
-export default inject(({ build }) => ({
-  isAmp: build.isAmp,
-}))(LazyTweet);
+export default LazyTweet;
 
 const Container = styled.div`
   position: relative;

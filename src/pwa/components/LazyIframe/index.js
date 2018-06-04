@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'react-emotion';
-import { inject } from 'mobx-react';
-import { Helmet } from 'react-helmet';
 import LazyLoad from '@frontity/lazyload';
 
-const LazyIframe = ({ width, height, attributes, isAmp }) => {
+const LazyIframe = ({ width, height, attributes }) => {
   const {
     title,
     allowFullScreen,
@@ -15,29 +13,7 @@ const LazyIframe = ({ width, height, attributes, isAmp }) => {
     height: attributesHeight,
     ...rest
   } = attributes;
-  if (isAmp) {
-    return [
-      <Helmet>
-        <script
-          async=""
-          custom-element="amp-iframe"
-          src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"
-        />
-      </Helmet>,
-      <Container styles={{ height, width }}>
-        <amp-iframe
-          title={title || ''}
-          width={width}
-          height={height}
-          allowFullScreen={allowFullScreen ? '' : null}
-          allowPaymentRequest={allowPaymentRequest ? '' : null}
-          allowTransparency={allowTransparency ? '' : null}
-          sandbox="allow-scripts"
-          {...rest}
-        />
-      </Container>,
-    ];
-  }
+
   return (
     <Container styles={{ width, height }}>
       <LazyLoad elementType="span" offsetVertical={2000} offsetHorizontal={-10} throttle={50}>
@@ -59,12 +35,9 @@ LazyIframe.propTypes = {
   width: PropTypes.string.isRequired,
   height: PropTypes.string.isRequired,
   attributes: PropTypes.shape({}).isRequired,
-  isAmp: PropTypes.bool.isRequired,
 };
 
-export default inject(({ build }) => ({
-  isAmp: build.isAmp,
-}))(LazyIframe);
+export default LazyIframe;
 
 const Container = styled.span`
   display: block;
