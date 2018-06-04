@@ -74,7 +74,7 @@ const Container = styled.div`
 
 const A = styled.a`
   box-sizing: border-box;
-  height: ${({ theme }) => theme.padding.menuItem};
+  height: ${({ theme }) => theme.size.button};
   padding: 16px 24px;
   display: flex;
   justify-content: flex-start;
