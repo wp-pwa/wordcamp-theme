@@ -26,6 +26,10 @@ const Container = styled.div`
   line-height: 20px;
   color: ${({ theme }) => theme.color.darkGrey};
 
+  & > *:first-child {
+    margin-top: 0;
+  }
+
   & > *:not(blockquote):not(.table) {
     padding: 0 ${({ padding }) => (typeof padding === 'number' ? `${padding}px` : padding)};
   }

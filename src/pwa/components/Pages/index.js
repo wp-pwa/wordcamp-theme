@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { inject } from 'mobx-react';
 import Page from './Page';
 import TopBar from '../TopBar';
 import Nav from '../Nav';
@@ -16,4 +17,6 @@ Pages.propTypes = {
   selectedItem: PropTypes.shape({}).isRequired,
 };
 
-export default Pages;
+export default inject(({ connection }) => ({
+  selectedItem: connection.selectedItem,
+}))(Pages);

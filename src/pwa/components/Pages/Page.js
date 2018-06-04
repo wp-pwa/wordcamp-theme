@@ -6,9 +6,7 @@ import Content from '../Content';
 
 const Page = ({ content }) => (
   <Container>
-    <ContentContainer>
-      <Content content={content} padding={24} />
-    </ContentContainer>
+    <Content content={content} padding={24} />
   </Container>
 );
 
@@ -22,14 +20,10 @@ export default inject((_, { entity }) => ({
 
 const Container = styled.div`
   box-sizing: border-box;
-  padding: 56px 0;
+  padding: 80px 0;
   width: 100vw;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: stretch;
-`;
-
-const ContentContainer = styled.div`
-  margin: 24px 0 8px 0;
 `;
