@@ -1,48 +1,24 @@
 /* eslint-disable jsx-a11y/media-has-caption */
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { inject } from 'mobx-react';
-import { Helmet } from 'react-helmet';
 import LazyLoad from '@frontity/lazyload';
 import IconAudio from 'react-icons/lib/md/audiotrack';
 import styled from 'react-emotion';
 
-const LazyAudio = ({ width, height, isAmp, attributes, children }) => {
-  if (isAmp) {
-    return (
-      <Fragment>
-        <Helmet>
-          <script
-            async=""
-            custom-element="amp-audio"
-            src="https://cdn.ampproject.org/v0/amp-audio-0.1.js"
-          />
-        </Helmet>
-        <Container styles={{ height, width }}>
-          <amp-audio layout="fixed-height" height="50px">
-            {children}
-          </amp-audio>
-        </Container>
-      </Fragment>
-    );
-  }
-
-  return (
-    <Container styles={{ height, width }}>
-      <Icon>
-        <IconAudio size={40} />
-      </Icon>
-      <LazyLoad elementType="span" offsetVertical={2000} offsetHorizontal={-10} throttle={50}>
-        <audio {...attributes}>{children}</audio>
-      </LazyLoad>
-    </Container>
-  );
-};
+const LazyAudio = ({ width, height, attributes, children }) => (
+  <Container styles={{ height, width }}>
+    <Icon>
+      <IconAudio size={40} />
+    </Icon>
+    <LazyLoad elementType="span" offsetVertical={2000} offsetHorizontal={-10} throttle={50}>
+      <audio {...attributes}>{children}</audio>
+    </LazyLoad>
+  </Container>
+);
 
 LazyAudio.propTypes = {
   width: PropTypes.string.isRequired,
   height: PropTypes.string.isRequired,
-  isAmp: PropTypes.bool.isRequired,
   attributes: PropTypes.shape({}).isRequired,
   children: PropTypes.oneOfType([PropTypes.shape({}), PropTypes.arrayOf(PropTypes.shape({}))]),
 };
@@ -51,9 +27,7 @@ LazyAudio.defaultProps = {
   children: null,
 };
 
-export default inject(({ build }) => ({
-  isAmp: build.isAmp,
-}))(LazyAudio);
+export default LazyAudio;
 
 const Container = styled.span`
   position: relative;

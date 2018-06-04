@@ -1,37 +1,12 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { inject } from 'mobx-react';
 import IconVideo from 'react-icons/lib/md/ondemand-video';
 import styled from 'react-emotion';
-import { Helmet } from 'react-helmet';
 import LazyLoad from '@frontity/lazyload';
 
-const LazyVideo = ({ children, width, height, isAmp, attributes }) => {
+const LazyVideo = ({ children, width, height, attributes }) => {
   const { autoPlay, loop, className, ...filteredAttributes } = attributes;
-
-  if (isAmp) {
-    return [
-      <Helmet>
-        <script
-          async=""
-          custom-element="amp-video"
-          src="https://cdn.ampproject.org/v0/amp-video-0.1.js"
-        />
-      </Helmet>,
-      <Container styles={{ height, width }}>
-        <amp-video
-          controls
-          autoPlay={autoPlay ? '' : null}
-          loop={loop ? '' : null}
-          layout="fill"
-          {...filteredAttributes}
-        >
-          {children}
-        </amp-video>
-      </Container>,
-    ];
-  }
 
   return (
     <Container styles={{ height, width }}>
@@ -52,13 +27,10 @@ LazyVideo.propTypes = {
     .isRequired,
   width: PropTypes.string.isRequired,
   height: PropTypes.string.isRequired,
-  isAmp: PropTypes.bool.isRequired,
   attributes: PropTypes.shape({}).isRequired,
 };
 
-export default inject(({ build }) => ({
-  isAmp: build.isAmp,
-}))(LazyVideo);
+export default LazyVideo;
 
 const Container = styled.span`
   position: relative;

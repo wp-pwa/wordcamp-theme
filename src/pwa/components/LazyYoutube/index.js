@@ -1,46 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { inject } from 'mobx-react';
-import { Helmet } from 'react-helmet';
 import IconVideo from 'react-icons/lib/md/ondemand-video';
 import styled from 'react-emotion';
 import LazyLoad from '@frontity/lazyload';
 
-const LazyYoutube = ({ width, height, isAmp, youtubeId, attributes }) => {
-  if (isAmp) {
-    return (
-      youtubeId && [
-        <Helmet>
-          <script
-            async=""
-            custom-element="amp-youtube"
-            src="https://cdn.ampproject.org/v0/amp-youtube-0.1.js"
-          />
-        </Helmet>,
-        <Container styles={{ height, width }}>
-          <amp-youtube layout="fill" data-videoid={youtubeId} />
-        </Container>,
-      ]
-    );
-  }
-
-  return (
-    <Container styles={{ height, width }}>
-      <Icon>
-        <IconVideo size={40} />
-      </Icon>
-      <LazyLoad elementType="span" offsetVertical={2000} offsetHorizontal={-10} throttle={50}>
-        <iframe title={attributes.title || youtubeId} {...attributes} />
-      </LazyLoad>
-    </Container>
-  );
-};
+const LazyYoutube = ({ width, height, youtubeId, attributes }) => (
+  <Container styles={{ height, width }}>
+    <Icon>
+      <IconVideo size={40} />
+    </Icon>
+    <LazyLoad elementType="span" offsetVertical={2000} offsetHorizontal={-10} throttle={50}>
+      <iframe title={attributes.title || youtubeId} {...attributes} />
+    </LazyLoad>
+  </Container>
+);
 
 LazyYoutube.propTypes = {
   width: PropTypes.string.isRequired,
   height: PropTypes.string.isRequired,
   youtubeId: PropTypes.string,
-  isAmp: PropTypes.bool.isRequired,
   attributes: PropTypes.shape({}).isRequired,
 };
 
@@ -48,9 +26,7 @@ LazyYoutube.defaultProps = {
   youtubeId: null,
 };
 
-export default inject(({ build }) => ({
-  isAmp: build.isAmp,
-}))(LazyYoutube);
+export default LazyYoutube;
 
 const Container = styled.span`
   position: relative;
