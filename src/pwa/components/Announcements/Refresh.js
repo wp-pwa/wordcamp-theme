@@ -12,7 +12,7 @@ class Refresh extends Component {
     this.unclick = this.unclick.bind(this);
   }
   componentDidMount() {
-    this.getFirstPage();
+    // this.getFirstPage();
   }
   componentWillUnmount() {
     clearTimeout(this.timeout);
