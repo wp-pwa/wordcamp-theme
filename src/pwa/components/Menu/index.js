@@ -5,6 +5,7 @@ import styled from 'react-emotion';
 import MenuHeader from './MenuHeader';
 import MenuList from './MenuList';
 import MenuNotifications from './MenuNotifications';
+import MenuLinks from './MenuLinks';
 
 const Menu = ({ isOpen, close }) =>
   isOpen ? (
@@ -14,6 +15,7 @@ const Menu = ({ isOpen, close }) =>
         <MenuHeader />
         <MenuList />
         <MenuNotifications />
+        <MenuLinks />
       </InnerContainer>
     </Container>
   ) : null;
