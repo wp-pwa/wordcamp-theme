@@ -6,6 +6,7 @@ import Card from './Card';
 import Refresh from './Refresh';
 import NextPage from './NextPage';
 import TopBar from '../TopBar';
+import Menu from '../Menu';
 import { postsContext } from '../../contexts';
 
 const Announcements = ({ entities, list }) => {
@@ -13,6 +14,7 @@ const Announcements = ({ entities, list }) => {
   return (
     <Fragment>
       <TopBar />
+      <Menu key="menu" />
       <Container>
         <Refresh list={list} />
           {entities.map(entity => <Card key={entity.mstId} entity={entity} context={context} />)}

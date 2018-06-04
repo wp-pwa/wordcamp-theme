@@ -12,7 +12,7 @@ const TopBar = ({ contextTitle, contextName, contextColor }) => (
       <Logo />
       <Title>{contextTitle}</Title>
     </InnerContainer>
-    {contextName === 'home' ? <MenuButton /> : <CloseButton />}
+    {['home', 'announcements'].includes(contextName) ? <MenuButton /> : <CloseButton />}
   </Container>
 );
 

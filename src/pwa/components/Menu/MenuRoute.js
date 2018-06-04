@@ -2,13 +2,25 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { inject } from 'mobx-react';
 import styled from 'react-emotion';
-import { venueContext, announcementsContext, pageContext } from '../../contexts';
+import { homeContext, venueContext, announcementsContext, pageContext } from '../../contexts';
 import Link from '../Link';
+import {
+  PAGE_HOME_ON_NOW,
+  PAGE_VENUE_ALL,
+  PAGE_MENU_COC,
+  PAGE_MENU_MENUS,
+} from '../../consts'
 
 const routes = {
+  'schedule': {
+    type: 'page',
+    id: PAGE_HOME_ON_NOW,
+    context: homeContext,
+    text: 'Schedule',
+  },
   'venue-map': {
     type: 'page',
-    id: 23,
+    id: PAGE_VENUE_ALL,
     context: venueContext,
   },
   announcements: {
@@ -20,13 +32,13 @@ const routes = {
   },
   menus: {
     type: 'page',
-    id: 78,
-    context: pageContext({ id: 78, title: 'Menus' }),
+    id: PAGE_MENU_MENUS,
+    context: pageContext({ id: PAGE_MENU_MENUS, title: 'Menus' }),
   },
   'code-of-conduct': {
     type: 'page',
-    id: 76,
-    context: pageContext({ id: 76, title: 'Code of Conduct' }),
+    id: PAGE_MENU_COC,
+    context: pageContext({ id: PAGE_MENU_COC, title: 'Code of Conduct' }),
   },
 };
 
@@ -59,7 +71,7 @@ export default inject(({ connection, theme }, { name }) => {
     id,
     page,
     context,
-    text: connection.entity(type, id).title || text,
+    text: text || connection.entity(type, id).title,
     closeMenu: theme.menu.close,
   };
 })(MenuRoute);
