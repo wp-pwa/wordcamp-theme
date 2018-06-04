@@ -7,7 +7,7 @@ import FavoriteButton from './FavoriteButton';
 import Title from './CardTitle';
 import Speakers from './CardSpeakers';
 import VenueLink from './VenueLink';
-import Icon from '../Icons';
+import Icon from '../Icons/Schedule';
 
 const specialTracks = {
   'Opening remarks': 'Milky Way and Andromeda',

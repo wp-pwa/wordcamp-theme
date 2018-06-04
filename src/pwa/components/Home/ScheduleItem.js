@@ -5,7 +5,7 @@ import styled from 'react-emotion';
 import FavoriteButton from './FavoriteButton';
 import Title from './ScheduleItemTitle';
 import Speakers from './ScheduleItemSpeakers';
-import Icon from '../Icons';
+import Icon from '../Icons/Schedule';
 
 const ScheduleItem = ({ session, position, columns, isFavorite, isSpecial }) => (
   <Container position={position} isFavorite={isFavorite} isSpecial={isSpecial}>

@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { inject } from 'mobx-react';
 import styled from 'react-emotion';
-import MenuIcons from '../MenuIcons';
+import Icons from '../Icons/Menu';
 
 const MenuLink = ({ name, url, closeMenu }) => {
-  const Icon = MenuIcons[name];
+  const Icon = Icons[name];
 
   return (
     <Container onClick={closeMenu}>
