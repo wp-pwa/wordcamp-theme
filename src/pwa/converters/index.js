@@ -6,7 +6,6 @@ import twitter from './twitter';
 import instagram from './instagram';
 import facebookIframe from './facebookIframe';
 import iframe from './iframe';
-// import gallery from './gallery';
 import removeHidden from './removeHidden';
 import removeTagStyle from './removeTagStyle';
 import anchor from './anchor';
@@ -24,6 +23,5 @@ export default [
   instagram,
   facebookIframe,
   iframe,
-  // gallery,
   table,
 ];
