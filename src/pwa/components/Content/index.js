@@ -30,6 +30,10 @@ const Container = styled.div`
     margin-top: 0;
   }
 
+  & > *:last-child {
+    margin-bottom: 0;
+  }
+
   & > *:not(blockquote):not(.table) {
     padding: 0 ${({ padding }) => (typeof padding === 'number' ? `${padding}px` : padding)};
   }
