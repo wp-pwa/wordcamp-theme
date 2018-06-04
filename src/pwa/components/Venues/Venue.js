@@ -6,7 +6,13 @@ const Venue = ({ venue }) => (
   <Container>
     <Title>{venue.entity.title}</Title>
     <a href={venue.entity.media.featured.original.url}>
-      <Image alt={venue.entity.media.featured.alt} src={venue.entity.media.featured.original.url} />
+      <Image
+        alt={venue.entity.media.featured.alt}
+        src={venue.entity.media.featured.original.url}
+        srcSet={venue.entity.media.featured.sizes
+          .map(({ width, url }) => `${url} ${width}w`)
+          .join(', ')}
+      />
     </a>
   </Container>
 );
