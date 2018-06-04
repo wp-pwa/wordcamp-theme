@@ -118,7 +118,7 @@ export const speakersContext = memoize((columns = []) => ({
   },
 }));
 
-export const singlePageContext = ({ id, title, color = 'grey'}) => ({
+export const pageContext = memoize(({ id, title, color = 'grey' }) => ({
   columns: [[{ type: 'page', id }]],
-  options: { name: 'pages', title, color },
-});
+  options: { name: 'page', title, color },
+}));

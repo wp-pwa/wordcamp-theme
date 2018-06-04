@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { inject } from 'mobx-react';
 import styled from 'react-emotion';
-import { venueContext, announcementsContext, singlePageContext } from '../../contexts';
+import { venueContext, announcementsContext, pageContext } from '../../contexts';
 import Link from '../Link';
 
 const routes = {
@@ -21,12 +21,12 @@ const routes = {
   menus: {
     type: 'page',
     id: 78,
-    context: singlePageContext({ id: 78, title: 'Menus' }),
+    context: pageContext({ id: 78, title: 'Menus' }),
   },
   'code-of-conduct': {
     type: 'page',
     id: 76,
-    context: singlePageContext({ id: 76, title: 'Code of Conduct' }),
+    context: pageContext({ id: 76, title: 'Code of Conduct' }),
   },
 };
 

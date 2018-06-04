@@ -34,12 +34,12 @@ const Container = styled.div`
     margin-bottom: 0;
   }
 
-  &
-    > *:not(.ad):not(.carousel):not(.gallery):not(.wp-video):not(.wpappbox):not(blockquote):not(.table) {
+  & > *:not(blockquote):not(.table) {
     padding: 0 ${({ padding }) => (typeof padding === 'number' ? `${padding}px` : padding)};
   }
 
-  a, a:visited {
+  a,
+  a:visited {
     color: ${({ theme }) => theme.color.blue};
   }
 
@@ -48,41 +48,31 @@ const Container = styled.div`
     display: block;
   }
 
-  & > a,
-  *:not(.carousel):not(.ad) a,
-  & > a:visited,
-  *:not(.carousel):not(.ad) a:visited {
+  a,
+  a:visited {
     font-size: inherit;
   }
 
-  & > h1,
-  *:not(.carousel):not(.ad) h1,
-  & > h2,
-  :not(.carousel):not(.ad) h2 {
+  h1,
+  h2 {
     font-size: 1.5rem;
     margin: 15px 0;
     margin-top: 30px;
   }
 
-  & > h3,
-  *:not(.carousel):not(.ad) h3,
-  & > h4,
-  *:not(.carousel):not(.ad) h4,
-  & > h5,
-  *:not(.carousel):not(.ad) h5,
-  & > h6,
-  *:not(.carousel):not(.ad) h6 {
+  h3,
+  h4,
+  h5,
+  h6 {
     margin: 15px 0;
     margin-top: 30px;
   }
 
-  & > p,
-  *:not(.carousel):not(.ad) p {
+  p {
     hyphens: auto;
   }
 
-  & > strong,
-  *:not(.carousel):not(.ad) strong {
+  strong {
     font-size: inherit;
   }
 
@@ -120,8 +110,7 @@ const Container = styled.div`
     }
   }
 
-  & > figure,
-  *:not(.carousel):not(.ad) figure {
+  figure {
     box-sizing: border-box;
     margin: 15px 0;
     width: 100%;
@@ -132,14 +121,12 @@ const Container = styled.div`
     }
   }
 
-  & > figcaption,
-  *:not(.carousel):not(.ad) figcaption {
+  figcaption {
     padding-top: 5px;
     font-size: 0.8rem;
   }
 
-  & > blockquote,
-  *:not(.carousel):not(.ad) blockquote {
+  blockquote {
     display: block;
     position: relative;
     font-style: italic;
@@ -154,8 +141,7 @@ const Container = styled.div`
     }
   }
 
-  & > blockquote:after,
-  *:not(.carousel):not(.ad) blockquote:after {
+  blockquote:after {
     position: absolute;
     font-style: normal;
     font-size: 0.875rem;
@@ -165,16 +151,14 @@ const Container = styled.div`
     content: '';
   }
 
-  & > aside,
-  *:not(.carousel):not(.ad) aside {
+  aside {
     box-sizing: border-box;
     box-shadow: 0 0 3px 0 #333;
     margin: 30px 15px;
     display: flex;
   }
 
-  & > pre,
-  *:not(.carousel):not(.ad) pre {
+  pre {
     box-sizing: border-box;
     border-left: 5px solid steelblue;
     margin: 15px;

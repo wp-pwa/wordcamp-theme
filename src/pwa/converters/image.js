@@ -16,13 +16,20 @@ export default {
   },
   converter: element => {
     const { attributes } = element;
-    const { alt, srcset } = attributes;
+    const { alt, srcset, width, height } = attributes;
 
     // Return an Image component with id if image has attachedId.
     if (attributes.dataset && attributes.dataset.attachmentId) {
       const attachmentId = parseInt(attributes.dataset.attachmentId, 10);
 
-      return <Image content key={attachmentId} id={attachmentId} />;
+      return (
+        <Image
+          key={attachmentId}
+          id={attachmentId}
+          width={width ? `${width}px` : null}
+          height={height ? `${height}px` : null}
+        />
+      );
     }
 
     let src;
@@ -40,24 +47,14 @@ export default {
       src = '';
     }
 
-    let height;
-
-    // Calculate width and height.
-    if (attributes.height && attributes.width) {
-      height = `${(attributes.height * 100) / attributes.width}vw`; // prettier-ignore
-    } else {
-      height = 'auto';
-    }
-
     return (
       <Image
         key={src}
-        content
-        width="100vw"
-        height={height}
         alt={alt}
         src={he.decode(src)}
         srcSet={srcset ? he.decode(srcset) : null}
+        width={width ? `${width}px` : null}
+        height={height ? `${height}px` : null}
       />
     );
   },

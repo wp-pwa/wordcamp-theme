@@ -5,28 +5,17 @@ import { parse } from 'url';
 import IconImage from 'react-icons/lib/fa/image';
 import styled from 'react-emotion';
 
-const Image = ({ alt, width, height, content, src, srcSet, isAmp }) => {
-  if (isAmp) {
-    return (
-      // content.toString() -> Avoids a warning from emotion.
-      <Container content={content.toString()} styles={{ height, width }}>
-        {src && srcSet ? <amp-img alt={alt} src={src} srcSet={srcSet} layout="fill" /> : null}
-      </Container>
-    );
-  }
-
-  return (
-    // content.toString() -> Avoids a warning from emotion.
-    <Container content={content.toString()} styles={{ height, width }}>
-      <Icon content={content.toString()} styles={{ height, width }}>
-        <IconImage size={40} />
-      </Icon>
-      {src || srcSet ? (
-        <img alt={alt} sizes={`${parseInt(width, 10)}vw`} src={src} srcSet={srcSet} />
-      ) : null}
-    </Container>
-  );
-};
+const Image = ({ alt, width, height, content, src, srcSet }) => (
+  // content.toString() -> Avoids a warning from emotion.
+  <Container content={content.toString()} styles={{ height, width }}>
+    <Icon content={content.toString()} styles={{ height, width }}>
+      <IconImage size={40} />
+    </Icon>
+    {src || srcSet ? (
+      <img alt={alt} sizes={`${parseInt(width, 10)}vw`} src={src} srcSet={srcSet} />
+    ) : null}
+  </Container>
+);
 
 Image.propTypes = {
   content: PropTypes.bool, // Indicates that Image will be rendered inside Content
@@ -35,7 +24,6 @@ Image.propTypes = {
   alt: PropTypes.string, // Alt from HtmlToReactConverter or getAlt selector.
   src: PropTypes.string, // Src from HtmlToReactConverter or getSrc selector.
   srcSet: PropTypes.string, // SrcSet from HtmlToReactConverter or getSrcSet selector.
-  isAmp: PropTypes.bool, // Indicates if the component will be used in the AMP version.
 };
 
 Image.defaultProps = {
@@ -45,14 +33,10 @@ Image.defaultProps = {
   alt: '',
   src: '',
   srcSet: '',
-  isAmp: false,
 };
 
-export default inject(({ connection, settings, build }, { id, content, width, height }) => {
-  if (!id)
-    return {
-      isAmp: build.isAmp,
-    };
+export default inject(({ connection, settings }, { id, width, height }) => {
+  if (!id) return {};
 
   const media = connection.entity('media', id);
   const originalPath = parse(media.original.url).path;
@@ -66,8 +50,6 @@ export default inject(({ connection, settings, build }, { id, content, width, he
   const src = cdn && originalPath ? `${cdn}${originalPath}` : media.original.url;
 
   return {
-    isAmp: build.isAmp,
-    content: !!content,
     alt: media.alt,
     src,
     srcSet:
@@ -94,21 +76,17 @@ export default inject(({ connection, settings, build }, { id, content, width, he
 })(Image);
 
 const Container = styled.span`
-  display: ${({ content }) => (content === 'true' ? 'block' : 'flex')};
-  ${({ content }) => (content === 'true' ? '' : 'align-items: stretch')};
+  display: block;
+  align-items: stretch;
   box-sizing: border-box;
-  width: ${({ styles }) => styles.width};
   height: ${({ styles }) => styles.height};
   position: relative;
-  margin: ${({ content }) => (content === 'true' ? '15px 0' : '')};
-  ${({ content }) => content === 'true' && 'left: -15px'};
 
   img {
-    ${({ content, styles }) =>
-      content === 'true' && styles.height === 'auto' ? 'position: static' : 'position: absolute'};
+    position: absolute;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     object-position: center;
     color: transparent;
     border: none;
@@ -124,5 +102,4 @@ const Icon = styled.span`
   display: flex;
   justify-content: center;
   align-items: center;
-  ${({ content, styles }) => (content === 'true' && styles.height === 'auto' ? 'z-index: -1' : '')};
 `;

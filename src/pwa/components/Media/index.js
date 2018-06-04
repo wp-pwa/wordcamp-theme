@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'react-emotion';
 import IconImage from 'react-icons/lib/fa/image';
-import Image from './image';
+import Image from './Image';
 
 const Media = ({ entity, isRounded }) => (
   <Container isRounded={isRounded}>
