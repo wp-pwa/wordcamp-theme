@@ -38,7 +38,7 @@ class Refresh extends Component {
     return (
       <Button onClick={this.getFirstPage} isFetching={isFetching}>
         <Text>{isFetching ? 'Refreshing' : 'Refresh'}</Text>
-        <Icon isFetching={isFetching} />
+        <Icon />
       </Button>
     );
   }
@@ -58,6 +58,11 @@ export default inject(({ connection }, { list }) => ({
   fetchListPage: connection.fetchListPage,
 }))(Refresh);
 
+const spinner = keyframes`
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+`;
+
 const Button = styled.div`
   box-sizing: border-box;
   width: 100%;
@@ -69,11 +74,10 @@ const Button = styled.div`
   align-items: center;
   margin-bottom: 24px;
   box-shadow: ${({ isFetching }) => (isFetching ? 'none' : 'inset 0 -1px 0 0 #E9E9E6')};
-`;
 
-const spinner = keyframes`
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  svg {
+    animation: ${({ isFetching }) => (isFetching ? `${spinner} 1s ease infinite` : 'none')};
+  }
 `;
 
 const Text = styled.div`
@@ -88,5 +92,4 @@ const Icon = styled(FetchingIcon)`
   width: 20px;
   height: 20px;
   color: #5566c3;
-  animation: ${({ isFetching }) => (isFetching ? `${spinner} 1s ease infinite` : 'none')};
 `;
