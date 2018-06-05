@@ -1,23 +1,24 @@
 import memoize from 'lodash/memoize';
+import * as consts from '../consts';
 
 export const homeContext = {
   columns: [
     [
       {
         type: 'page',
-        id: 13,
+        id: consts.PAGE_HOME_ON_NOW,
       },
     ],
     [
       {
         type: 'page',
-        id: 15,
+        id: consts.PAGE_HOME_UP_NEXT,
       },
     ],
     [
       {
         type: 'page',
-        id: 17,
+        id: consts.PAGE_HOME_SCHEDULE,
       },
     ],
   ],
@@ -33,37 +34,37 @@ export const venueContext = {
     [
       {
         type: 'page',
-        id: 23,
+        id: consts.PAGE_VENUE_ALL,
       },
     ],
     [
       {
         type: 'page',
-        id: 26,
+        id: consts.PAGE_VENUE_MILKY_WAY,
       },
     ],
     [
       {
         type: 'page',
-        id: 28,
+        id: consts.PAGE_VENUE_ANDROMEDA,
       },
     ],
     [
       {
         type: 'page',
-        id: 30,
+        id: consts.PAGE_VENUE_HAYABUSA,
       },
     ],
     [
       {
         type: 'page',
-        id: 32,
+        id: consts.PAGE_VENUE_CASSINI,
       },
     ],
     [
       {
         type: 'page',
-        id: 34,
+        id: consts.PAGE_VENUE_ROSETTA,
       },
     ],
   ],
