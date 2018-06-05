@@ -72,6 +72,11 @@ export default self =>
     self.connection.routeChangeSucceed(action);
 
     yield Promise.all([
+      self.connection.fetchListPage({
+        type: 'latest',
+        id: 'post',
+        page: 1,
+      }),
       self.connection.fetchCustomPage({
         name: 'sessions',
         type: 'wcb_session',

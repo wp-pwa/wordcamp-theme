@@ -11,12 +11,15 @@ class Refresh extends Component {
     this.getFirstPage = this.getFirstPage.bind(this);
     this.unclick = this.unclick.bind(this);
   }
+
   componentDidMount() {
     this.getFirstPage();
   }
+
   componentWillUnmount() {
     clearTimeout(this.timeout);
   }
+
   getFirstPage() {
     const { type, id, fetchListPage, isFetching } = this.props;
     if (!isFetching) fetchListPage({ type, id, page: 1, force: true });
@@ -25,9 +28,11 @@ class Refresh extends Component {
     clearTimeout(this.timeout);
     this.timeout = setTimeout(this.unclick, 500);
   }
+
   unclick() {
     this.setState({ isClicked: false });
   }
+
   render() {
     const isFetching = this.props.isFetching || this.state.isClicked;
     return (
@@ -57,8 +62,8 @@ const Button = styled.div`
   box-sizing: border-box;
   width: 100%;
   height: 40px;
-  color: ${({ isFetching }) => isFetching ? '#282409' : '#5566C3'};
-  background: ${({ isFetching }) => isFetching ? '#FCF8D7' : 'white'};
+  color: ${({ isFetching }) => (isFetching ? '#282409' : '#5566C3')};
+  background: ${({ isFetching }) => (isFetching ? '#FCF8D7' : 'white')};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -82,6 +87,6 @@ const Text = styled.div`
 const Icon = styled(FetchingIcon)`
   width: 20px;
   height: 20px;
-  color: #5566C3;
+  color: #5566c3;
   animation: ${({ isFetching }) => (isFetching ? `${spinner} 1s ease infinite` : 'none')};
 `;
