@@ -4,15 +4,11 @@ import { inject } from 'mobx-react';
 import styled from 'react-emotion';
 import { homeContext, venueContext, announcementsContext, pageContext } from '../../contexts';
 import Link from '../Link';
-import {
-  PAGE_HOME_ON_NOW,
-  PAGE_VENUE_ALL,
-  PAGE_MENU_COC,
-  PAGE_MENU_MENUS,
-} from '../../consts'
+import AnnouncementsCount from './AnnouncementsCount';
+import { PAGE_HOME_ON_NOW, PAGE_VENUE_ALL, PAGE_MENU_COC, PAGE_MENU_MENUS } from '../../consts';
 
 const routes = {
-  'schedule': {
+  schedule: {
     type: 'page',
     id: PAGE_HOME_ON_NOW,
     context: homeContext,
@@ -47,6 +43,7 @@ const MenuRoute = ({ type, id, page, context, text, closeMenu }) => (
     <Link type={type} id={id} page={page} context={context}>
       <A>{text}</A>
     </Link>
+    {type === 'latest' && <AnnouncementsCount />}
   </Container>
 );
 
@@ -82,6 +79,8 @@ const Container = styled.div`
   box-shadow: inset 0 -1px 0 0 rgba(40, 36, 9, 0.1);
   font-size: 20px;
   line-height: 20px;
+  display: flex;
+  align-items: center;
 `;
 
 const A = styled.a`
