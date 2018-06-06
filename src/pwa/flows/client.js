@@ -2,8 +2,15 @@ import { values } from 'mobx';
 import { onSnapshot, applySnapshot, addMiddleware } from 'mobx-state-tree';
 
 const announcementsMiddleware = theme => (call, next) => {
-  if (call.name === 'addEntity' && call.args[0].entity.type === 'post') {
-    theme.announcements.set(call.args[0].entity.id, false);
+  if (call.name === 'addEntity') {
+    const { id, type } = call.args[0].entity;
+    const strId = id.toString();
+
+    if (type === 'post') {
+      if (!theme.announcements.map.has(strId)) {
+        theme.announcements.set(strId, true);
+      }
+    }
   }
 
   next(call);

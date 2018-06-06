@@ -6,7 +6,7 @@ import Media from '../Media';
 import Link from '../Link';
 import { formatDate } from '../../utils';
 
-const Card = ({ type, id, title, creationDate, authorName, featured, context }) => (
+const Card = ({ type, id, title, creationDate, authorName, featured, context, isNew }) => (
   <Link type={type} id={id} context={context}>
     <Container>
       <Media entity={featured} isRounded />
@@ -16,6 +16,7 @@ const Card = ({ type, id, title, creationDate, authorName, featured, context }) 
         <Dash>―</Dash>
         <Author>{authorName}</Author>
       </Info>
+      {isNew && <New>New</New>}
     </Container>
   </Link>
 );
@@ -28,20 +29,23 @@ Card.propTypes = {
   authorName: PropTypes.string.isRequired,
   featured: PropTypes.shape({}).isRequired,
   context: PropTypes.shape({}).isRequired,
+  isNew: PropTypes.bool.isRequired,
 };
 
-export default inject((_, { entity }) => ({
+export default inject(({ theme }, { entity }) => ({
   type: entity.type,
   id: entity.id,
   title: entity.title,
   creationDate: formatDate(new Date(entity.creationDate), 'MMMM Do'),
   authorName: entity.author.name,
   featured: entity.media.featured,
+  isNew: theme.announcements.isNew(entity.id),
 }))(Card);
 
 const Container = styled.div`
   box-sizing: border-box;
   padding: 0 24px 16px 24px;
+  position: relative;
 `;
 
 const Title = styled.h2`
@@ -76,4 +80,15 @@ const Dash = styled.p`
 
 const Author = styled.p`
   margin: 0;
+`;
+
+const New = styled.div`
+  background-color: ${({ theme }) => theme.color.red};
+  color: ${({ theme }) => theme.color.white};
+  text-transform: uppercase;
+  position: absolute;
+  top: 24px;
+  left: calc(16px - 8px);
+  border-radius: 3px;
+  padding: 4px 8px;
 `;

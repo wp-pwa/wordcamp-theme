@@ -8,16 +8,18 @@ export default types
   .views(self => ({
     get totalNew() {
       return Array.from(self.map.values()).reduce(
-        (total, current) => (!current ? total + 1 : total),
+        (total, current) => (current ? total + 1 : total),
         0,
       );
     },
     isNew(id) {
-      return self.map.has(id) ? self.map.get(id) : false;
+      const strId = id.toString();
+      return self.map.has(strId) ? self.map.get(strId) : false;
     },
   }))
   .actions(self => ({
     set(id, value) {
-      self.map.set(id, value);
+      const strId = id.toString();
+      self.map.set(strId, value);
     },
   }));
