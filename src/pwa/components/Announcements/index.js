@@ -17,7 +17,7 @@ const Announcements = ({ entities, list }) => {
       <Menu key="menu" />
       <Container>
         <Refresh list={list} />
-          {entities.map(entity => <Card key={entity.mstId} entity={entity} context={context} />)}
+        {entities.map(entity => <Card key={entity.mstId} entity={entity} context={context} />)}
         <NextPage list={list} />
       </Container>
     </Fragment>
@@ -25,12 +25,12 @@ const Announcements = ({ entities, list }) => {
 };
 
 Announcements.propTypes = {
-  entities: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  entities: PropTypes.shape({}).isRequired,
   list: PropTypes.shape({}).isRequired,
 };
 
 export default inject(({ connection }) => ({
-  entities: connection.list('latest', 'post').entities.peek(),
+  entities: connection.list('latest', 'post').entities,
   list: connection.list('latest', 'post'),
 }))(Announcements);
 
