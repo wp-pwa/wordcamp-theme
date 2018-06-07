@@ -83,12 +83,19 @@ const Author = styled.p`
 `;
 
 const New = styled.div`
+  box-sizing: border-box;
+  height: 24px;
+  padding: 0 8px;
   background-color: ${({ theme }) => theme.color.red};
   color: ${({ theme }) => theme.color.white};
   text-transform: uppercase;
   position: absolute;
-  top: 24px;
-  left: calc(16px - 8px);
+  top: 8px;
+  left: calc(24px - 8px);
   border-radius: 3px;
-  padding: 4px 8px;
+  font-size: 14px;
+  line-height: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
