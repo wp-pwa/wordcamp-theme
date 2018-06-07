@@ -8,21 +8,22 @@ class Refresh extends Component {
   constructor() {
     super();
     this.state = { isClicked: false };
-    this.getFirstPage = this.getFirstPage.bind(this);
+    this.getCurrentPages = this.getCurrentPages.bind(this);
     this.unclick = this.unclick.bind(this);
-  }
-
-  componentDidMount() {
-    this.getFirstPage();
   }
 
   componentWillUnmount() {
     clearTimeout(this.timeout);
   }
 
-  getFirstPage() {
-    const { type, id, fetchListPage, isFetching } = this.props;
-    if (!isFetching) fetchListPage({ type, id, page: 1, force: true });
+  getCurrentPages() {
+    const { type, id, fetchListPage, isFetching, fetchedPages } = this.props;
+    if (!isFetching) {
+      for (let i = 1; i <= fetchedPages; i += 1) {
+        fetchListPage({ type, id, page: i, force: true });
+      }
+    }
+
     this.setState({ isClicked: true });
 
     clearTimeout(this.timeout);
@@ -35,8 +36,9 @@ class Refresh extends Component {
 
   render() {
     const isFetching = this.props.isFetching || this.state.isClicked;
+
     return (
-      <Button onClick={this.getFirstPage} isFetching={isFetching}>
+      <Button onClick={this.getCurrentPages} isFetching={isFetching}>
         <Text>{isFetching ? 'Refreshing' : 'Refresh'}</Text>
         <Icon />
       </Button>
@@ -49,6 +51,11 @@ Refresh.propTypes = {
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   isFetching: PropTypes.bool.isRequired,
   fetchListPage: PropTypes.func.isRequired,
+  fetchedPages: PropTypes.number,
+};
+
+Refresh.defaultProps = {
+  fetchedPages: 0,
 };
 
 export default inject(({ connection }, { list }) => ({
@@ -56,6 +63,7 @@ export default inject(({ connection }, { list }) => ({
   id: list.id,
   isFetching: list.isFetching,
   fetchListPage: connection.fetchListPage,
+  fetchedPages: list.total.fetched.pages,
 }))(Refresh);
 
 const spinner = keyframes`
