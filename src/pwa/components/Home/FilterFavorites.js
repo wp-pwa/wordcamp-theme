@@ -6,7 +6,7 @@ import Switch from 'rc-switch';
 
 const FilterFavorites = ({ isFiltered, toggleFilter }) => (
   <Container onClick={toggleFilter}>
-    <Label>Only Favorites</Label>
+    <Label>Only Favourites</Label>
     <SwitchWrapper>
       <Switch checked={isFiltered} />
     </SwitchWrapper>
