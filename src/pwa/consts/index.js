@@ -22,6 +22,7 @@ export const PAGE_SESSION_AFTER = 62;
 
 export const PAGE_MENU_COC = 76;
 export const PAGE_MENU_MENUS = 78;
+export const PAGE_MENU_FAVOURITES = 206;
 
 export const TRACK_NETWORKING = 5551;
 export const TRACK_MILKY_WAY = 13411;

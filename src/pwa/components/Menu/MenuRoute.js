@@ -2,10 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { inject } from 'mobx-react';
 import styled from 'react-emotion';
-import { homeContext, venueContext, announcementsContext, pageContext } from '../../contexts';
+import {
+  homeContext,
+  venueContext,
+  announcementsContext,
+  pageContext,
+  favouritesContext,
+} from '../../contexts';
 import Link from '../Link';
 import AnnouncementsCount from './AnnouncementsCount';
-import { PAGE_HOME_ON_NOW, PAGE_VENUE_ALL, PAGE_MENU_COC, PAGE_MENU_MENUS } from '../../consts';
+import {
+  PAGE_HOME_ON_NOW,
+  PAGE_VENUE_ALL,
+  PAGE_MENU_COC,
+  PAGE_MENU_MENUS,
+  PAGE_MENU_FAVOURITES,
+} from '../../consts';
 
 const routes = {
   schedule: {
@@ -13,6 +25,12 @@ const routes = {
     id: PAGE_HOME_ON_NOW,
     context: homeContext,
     text: 'Schedule',
+  },
+  favourites: {
+    type: 'page',
+    id: PAGE_MENU_FAVOURITES,
+    context: favouritesContext,
+    text: 'Favourites',
   },
   'venue-map': {
     type: 'page',
