@@ -8,6 +8,10 @@ Finally, use `npm run start:pwa` to start the development environment.
 
 ## Changelog
 
+#### 1.1.2
+
+- Change Image name to solve uppercase conflict
+
 #### 1.1.1
 
 - Changes Refresh to fetch all rendered pages
