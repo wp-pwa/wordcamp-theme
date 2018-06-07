@@ -1,4 +1,4 @@
-import { types } from 'mobx-state-tree';
+import { types, getParent } from 'mobx-state-tree';
 
 export default types
   .model('Announcements')
@@ -7,10 +7,9 @@ export default types
   })
   .views(self => ({
     get totalNew() {
-      return Array.from(self.map.values()).reduce(
-        (total, current) => (current ? total + 1 : total),
-        0,
-      );
+      return getParent(self, 2)
+        .connection.list('latest', 'post')
+        .entities.reduce((total, current) => (self.isNew(current.id) ? total + 1 : total), 0);
     },
     isNew(id) {
       const strId = id.toString();
