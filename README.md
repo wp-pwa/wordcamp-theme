@@ -8,6 +8,11 @@ Finally, use `npm run start:pwa` to start the development environment.
 
 ## Changelog
 
+#### 1.1.3
+
+- Add Favorites
+- Remove srcSet from Venue
+
 #### 1.1.2
 
 - Change Image name to solve uppercase conflict
