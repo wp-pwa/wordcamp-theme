@@ -24,4 +24,5 @@ const Container = styled.span`
   border-radius: 3px;
   font-size: 16px;
   text-align: center;
+  margin-left: 8px;
 `;

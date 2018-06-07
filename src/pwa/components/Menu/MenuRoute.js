@@ -41,9 +41,11 @@ const routes = {
 const MenuRoute = ({ type, id, page, context, text, closeMenu }) => (
   <Container onClick={closeMenu}>
     <Link type={type} id={id} page={page} context={context}>
-      <A>{text}</A>
+      <A>
+        {text}
+        {type === 'latest' && <AnnouncementsCount />}
+      </A>
     </Link>
-    {type === 'latest' && <AnnouncementsCount />}
   </Container>
 );
 
@@ -79,8 +81,6 @@ const Container = styled.div`
   box-shadow: inset 0 -1px 0 0 rgba(40, 36, 9, 0.1);
   font-size: 20px;
   line-height: 20px;
-  display: flex;
-  align-items: center;
 `;
 
 const A = styled.a`
