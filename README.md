@@ -8,6 +8,10 @@ Finally, use `npm run start:pwa` to start the development environment.
 
 ## Changelog
 
+#### 1.1.1
+
+- Changes Refresh to fetch all rendered pages
+
 #### 1.1.0
 
 - Some css fixes
