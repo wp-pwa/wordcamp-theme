@@ -30,8 +30,8 @@ export default types
     isRealTime: false,
   })
   .views(self => {
-    const filterSessions = mapFunction =>
-      self.tracks
+    const filterSessions = (mapFunction, favorites = false) => {
+      const result = self.tracks
         .sort((a, b) => a.id - b.id) // sorts tracks by id
         .slice(1) // removes "Networking" track
         .map(mapFunction)
@@ -46,6 +46,16 @@ export default types
           if (!all.includes(s)) all.push(s);
           return all;
         }, []);
+
+      return favorites
+        ? result
+            .reduce((final, current) => {
+              final = final.concat(current);
+              return final;
+            }, [])
+            .sort((a, b) => a.timestamp - b.timestamp)
+        : result;
+    };
 
     return {
       get sessions() {
@@ -71,6 +81,12 @@ export default types
       },
       get sessionsUpNext() {
         return filterSessions(track => track.sessionUpNext(self.currentTime));
+      },
+      get firstDayFavouriteSessions() {
+        return filterSessions(track => track.firstDayFavouriteSessions, true);
+      },
+      get secondDayFavouriteSessions() {
+        return filterSessions(track => track.secondDayFavouriteSessions, true);
       },
     };
   })

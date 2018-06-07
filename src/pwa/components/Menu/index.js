@@ -7,9 +7,8 @@ import MenuList from './MenuList';
 import MenuNotifications from './MenuNotifications';
 import MenuLinks from './MenuLinks';
 
-const Menu = ({ isOpen, close }) => {
-  console.log('rendering menu');
-  return isOpen ? (
+const Menu = ({ isOpen, close }) =>
+  isOpen ? (
     <Container>
       <Overlay onClick={close} onTouchMove={close} />
       <InnerContainer>
@@ -20,7 +19,6 @@ const Menu = ({ isOpen, close }) => {
       </InnerContainer>
     </Container>
   ) : null;
-};
 
 Menu.propTypes = {
   isOpen: PropTypes.bool.isRequired,

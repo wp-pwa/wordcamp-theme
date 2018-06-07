@@ -24,6 +24,12 @@ const Track = types
       get secondDaySessions() {
         return self.sessionsByWithFilter(new Date('2018-06-16T08:00:00+02:00'));
       },
+      get firstDayFavouriteSessions() {
+        return self.sessionsBy(new Date('2018-06-15T08:00:00+02:00'), true);
+      },
+      get secondDayFavouriteSessions() {
+        return self.sessionsBy(new Date('2018-06-16T08:00:00+02:00'), true);
+      },
       sessionsByWithFilter(date) {
         const onlyFavorites = getParent(self, 2).schedule.isFiltered;
 

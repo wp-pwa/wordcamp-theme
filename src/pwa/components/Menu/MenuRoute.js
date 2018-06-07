@@ -30,7 +30,7 @@ const routes = {
     type: 'page',
     id: PAGE_MENU_FAVOURITES,
     context: favouritesContext,
-    text: 'Favourites',
+    text: 'My Favourites',
   },
   'venue-map': {
     type: 'page',

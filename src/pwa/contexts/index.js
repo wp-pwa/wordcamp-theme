@@ -103,7 +103,7 @@ export const favouritesContext = {
   ],
   options: {
     name: 'favourites',
-    title: 'Favourites',
+    title: 'My Favourites',
     color: 'grey',
   },
 };
