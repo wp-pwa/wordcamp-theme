@@ -22,4 +22,9 @@ export default types
       const strId = id.toString();
       self.map.set(strId, value);
     },
+    markAllAsRead() {
+      Array.from(self.map.entries()).forEach(entries => {
+        self.set(entries[0], false);
+      });
+    },
   }));
