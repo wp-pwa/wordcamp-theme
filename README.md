@@ -8,6 +8,13 @@ Finally, use `npm run start:pwa` to start the development environment.
 
 ## Changelog
 
+#### 1.1.0
+
+- Some css fixes
+- Replaced FA icons (now Pro!)
+- Added announcements notifications
+- Change announcements navbar close for menu
+
 #### 1.0.4
 
 - Add links to venues
