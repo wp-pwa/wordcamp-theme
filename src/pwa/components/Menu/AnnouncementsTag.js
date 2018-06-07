@@ -21,11 +21,11 @@ const Container = styled.span`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 12px;
-  width: 12px;
-  font-size: 8px;
-  line-height: 8px;
+  height: 16px;
+  width: 16px;
+  font-size: 10px;
+  line-height: 10px;
   border-radius: 50%;
-  top: 6px;
-  right: 12px;
+  top: 8px;
+  right: 10px;
 `;

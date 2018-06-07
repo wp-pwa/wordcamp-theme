@@ -7,10 +7,13 @@ const announcementsMiddleware = theme => (call, next) => {
     const strId = id.toString();
 
     if (type === 'post') {
-      if (!theme.announcements.map.has(strId)) {
-        theme.announcements.set(strId, true);
-      }
+      if (!theme.announcements.map.has(strId)) theme.announcements.set(strId, true);
     }
+  } else if (call.name === 'routeChangeSucceed') {
+    const { type, id } = call.args[0].selectedItem;
+    const strId = id.toString();
+
+    if (type === 'post') theme.announcements.set(strId, false);
   }
 
   next(call);
@@ -44,8 +47,12 @@ export default self => () => {
     entity => entity.id,
   );
   announcementsIds.forEach(id => {
-    if (!self.theme.announcements.map.has(id)) {
-      self.theme.announcements.set(id, true);
+    const strId = id.toString();
+
+    if (self.connection.selectedItem.type === 'post' && self.connection.selectedItem.id === id) {
+      self.theme.announcements.set(strId, false);
+    } else if (!self.theme.announcements.map.has(strId)) {
+      self.theme.announcements.set(strId, true);
     }
   });
 

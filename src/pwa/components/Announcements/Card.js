@@ -44,8 +44,12 @@ export default inject(({ theme }, { entity }) => ({
 
 const Container = styled.div`
   box-sizing: border-box;
-  padding: 0 24px 16px 24px;
   position: relative;
+  width: calc(100vw - 48px);
+
+  &:not(:last-child) {
+    margin-bottom: 16px;
+  }
 `;
 
 const Title = styled.h2`
@@ -91,7 +95,7 @@ const New = styled.div`
   text-transform: uppercase;
   position: absolute;
   top: 8px;
-  left: calc(24px - 8px);
+  left: -8px;
   border-radius: 3px;
   font-size: 14px;
   line-height: 14px;

@@ -38,8 +38,8 @@ const Container = styled.div`
   box-sizing: border-box;
   width: 100vw;
   min-height: 100vh;
-  padding: 56px 0 0 0;
+  padding: 56px 0 24px 0;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
+  align-items: center;
 `;
