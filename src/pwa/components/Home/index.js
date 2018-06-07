@@ -21,8 +21,8 @@ const Home = ({ columns, selectedColumnIndex, handleOnTransitionEnd }) => (
       })}
     </Slider>
     <TopBar />
-    <Menu key="menu" />
-    <Nav key="nav" />
+    <Menu />
+    <Nav />
   </Fragment>
 );
 

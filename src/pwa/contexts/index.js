@@ -92,6 +92,22 @@ export const announcementsContext = {
   },
 };
 
+export const favouritesContext = {
+  columns: [
+    [
+      {
+        type: 'page',
+        id: 206,
+      },
+    ],
+  ],
+  options: {
+    name: 'favourites',
+    title: 'My Favourites',
+    color: 'grey',
+  },
+};
+
 export const postsContext = memoize((columns = []) => ({
   columns,
   options: {

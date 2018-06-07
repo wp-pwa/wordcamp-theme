@@ -6,6 +6,7 @@ import {
   creditsContext,
   pageContext,
   postsContext,
+  favouritesContext,
 } from '../contexts';
 
 const extractId = href => /\/(\d+)$/g.exec(href)[1];
@@ -52,6 +53,7 @@ export default self =>
       else if (id === 36) action.context = creditsContext;
       else if (id === 76) action.context = pageContext({ id, title: 'Code of Conduct' });
       else if (id === 78) action.context = pageContext({ id, title: 'Menus' });
+      else if (id === 206) action.context = favouritesContext;
       else action.context = homeContext;
     } else if (type === 'latest' && id === 'post') {
       action.context = announcementsContext;
@@ -95,7 +97,8 @@ export default self =>
         params: {
           per_page: 100,
           _embed: false,
-          include: '13, 15, 17, 19, 23, 26, 28, 30, 32, 34, 36, 50, 52, 56, 58, 60, 62, 76, 78',
+          include:
+            '13, 15, 17, 19, 23, 26, 28, 30, 32, 34, 36, 50, 52, 56, 58, 60, 62, 76, 78, 206',
         },
       }),
     ]);

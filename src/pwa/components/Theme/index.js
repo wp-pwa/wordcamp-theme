@@ -13,6 +13,7 @@ import Venues from '../Venues';
 import Posts from '../Posts';
 import Pages from '../Pages';
 import Announcements from '../Announcements';
+import Favourites from '../Favourites';
 
 import '../../styles';
 
@@ -118,6 +119,7 @@ class Theme extends Component {
           )}
           {contextName === 'page' && <Pages />}
           {contextName === 'announcements' && <Announcements />}
+          {contextName === 'favourites' && <Favourites />}
         </Fragment>
       </ThemeProvider>
     );

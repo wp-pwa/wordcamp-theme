@@ -14,7 +14,7 @@ const Announcements = ({ entities, list }) => {
   return (
     <Fragment>
       <TopBar />
-      <Menu key="menu" />
+      <Menu />
       <Container>
         <Refresh list={list} />
         {entities.map(entity => <Card key={entity.mstId} entity={entity} context={context} />)}
