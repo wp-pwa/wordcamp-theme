@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 import { inject } from 'mobx-react';
 import styled from 'react-emotion';
 import MenuIcon from './MenuIcon';
+import AnnouncementsTag from './AnnouncementsTag';
 
 const MenuButton = ({ openMenu }) => (
   <Container onClick={openMenu}>
     <MenuIcon />
     <Label>Menu</Label>
+    <AnnouncementsTag />
   </Container>
 );
 
@@ -28,6 +30,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   padding: 14px 16px;
+  position: relative;
 `;
 
 const Label = styled.div`
