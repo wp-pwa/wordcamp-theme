@@ -50,7 +50,12 @@ export default types
       return favorites
         ? result
             .reduce((final, current) => {
-              final = final.concat(current);
+              current.forEach(session => {
+                if (!final.includes(session)) {
+                  console.log('session:', session);
+                  final.push(session);
+                }
+              });
               return final;
             }, [])
             .sort((a, b) => a.timestamp - b.timestamp)

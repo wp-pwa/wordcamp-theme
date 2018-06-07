@@ -18,12 +18,17 @@ const specialTracks = {
 
 const Card = ({ isFavorite, isSpecial, session, columns }) => (
   <Container isFavorite={isFavorite}>
-    <Header isSpecial={isSpecial} track={session.tracks[0].name}>
+    <Header
+      isSpecial={isSpecial}
+      track={session.tracks.length > 1 ? session.tracks[3].name : session.tracks[0].name}
+    >
       <Track>
         {isSpecial ? (
           <VenueLink name={specialTracks[session.title]} />
         ) : (
-          <VenueLink trackId={session.tracks[0].id} />
+          <VenueLink
+            trackId={session.tracks.length > 1 ? session.tracks[3].id : session.tracks[0].id}
+          />
         )}
       </Track>
       {!isSpecial && <FavoriteButton session={session} />}
@@ -102,7 +107,8 @@ const Track = styled.div`
   font-weight: lighter;
   text-transform: uppercase;
 
-  a, a:visited {
+  a,
+  a:visited {
     color: inherit;
   }
 `;
