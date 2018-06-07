@@ -7,6 +7,7 @@ import Notifications from './notifications';
 import Session from './session';
 import Track from './track';
 import Speaker from './speaker';
+import Announcements from './announcements';
 
 const NOW_INTERVAL = 60000; // One minute
 
@@ -24,6 +25,7 @@ export default types
     tracksMap: types.optional(types.map(Track), {}),
     speakersMap: types.optional(types.map(Speaker), {}),
     favoritesMap: types.optional(types.map(Favorite), {}),
+    announcements: types.optional(Announcements, {}),
     time: types.optional(types.Date, Date.now()),
     isRealTime: false,
   })

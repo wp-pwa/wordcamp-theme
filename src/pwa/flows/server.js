@@ -11,16 +11,13 @@ import {
 const extractId = href => /\/(\d+)$/g.exec(href)[1];
 const extractGravatar = url => (/gravatar\.com\/avatar\/([0-9A-Fa-f]+)/.exec(url) || [])[1];
 
-const wcbMiddleware = (call, next) => {
+const wcbMiddleware = theme => (call, next) => {
   if (call.name === 'addEntity') {
     const [{ entity }] = call.args;
+    const { id, type } = entity;
 
-    if (entity.type === 'wcb_session') {
-      const { theme } = call.tree;
-
+    if (type === 'wcb_session') {
       const {
-        type,
-        id,
         session_track: tracks,
         session_category: categories,
         _links: { speakers: speakerHrefs = [] },
@@ -29,14 +26,10 @@ const wcbMiddleware = (call, next) => {
       const speakers = speakerHrefs.map(({ href }) => parseInt(extractId(href), 10));
 
       theme.createSession({ type, id, tracks, categories, speakers });
-    } else if (entity.type === 'wcb_track') {
-      const { theme } = call.tree;
-      const { id } = entity;
+    } else if (type === 'wcb_track') {
       if (!theme.track(id)) theme.createTrack({ id });
-    } else if (entity.type === 'wcb_speaker') {
-      const { theme } = call.tree;
+    } else if (type === 'wcb_speaker') {
       const {
-        id,
         avatar_urls: { 96: avatarUrl },
       } = entity;
       const gravatar = avatarUrl ? extractGravatar(avatarUrl) : null;
@@ -49,7 +42,7 @@ const wcbMiddleware = (call, next) => {
 
 export default self =>
   flow(function* ThemeServer({ selectedItem }) {
-    addMiddleware(self, wcbMiddleware);
+    addMiddleware(self.connection, wcbMiddleware(self.theme));
 
     const { type, id, page } = selectedItem;
     const action = { selectedItem: { type, id, page } };
