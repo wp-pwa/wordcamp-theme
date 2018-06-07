@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { inject } from 'mobx-react';
-import styled from 'react-emotion';
+import styled, { keyframes } from 'react-emotion';
 import Waypoint from 'react-waypoint';
 import FetchingIcon from 'react-icons/lib/fa/refresh';
 
@@ -12,14 +12,15 @@ class NextPage extends Component {
   }
   getNextPage() {
     const { type, id, fetchedPages, totalPages, fetchListPage, isFetching } = this.props;
-    if (!isFetching && totalPages && fetchedPages < totalPages)
-      fetchListPage({ type, id, page: totalPages + 1 });
+    if (!isFetching && totalPages && fetchedPages < totalPages) {
+      fetchListPage({ type, id, page: fetchedPages + 1 });
+    }
   }
   render() {
     const { fetchedPages, totalPages, isFetching } = this.props;
-    return fetchedPages < totalPages ? (
-      <Waypoint onEnter={this.getNextPage} bottomOffset={-500} scrollableAncestor="window">
-        <Container>{isFetching ? <Fetching /> : ''}</Container>
+    return fetchedPages < totalPages || (fetchedPages === totalPages && isFetching) ? (
+      <Waypoint onEnter={this.getNextPage} bottomOffset={-200} scrollableAncestor="window">
+        <Container>{isFetching ? <Fetching /> : null}</Container>
       </Waypoint>
     ) : null;
   }
@@ -43,6 +44,11 @@ export default inject(({ connection }, { list }) => ({
   fetchListPage: connection.fetchListPage,
 }))(NextPage);
 
+const spinner = keyframes`
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+`;
+
 const Container = styled.div`
   box-sizing: border-box;
   width: 100vw;
@@ -51,8 +57,10 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
 const Fetching = styled(FetchingIcon)`
-  width: 28px;
-  height: 28px;
-  color: #5566c3;
+  width: 24px;
+  height: 24px;
+  color: ${({ theme }) => theme.color.blue};
+  animation: ${spinner} 1s ease infinite;
 `;
