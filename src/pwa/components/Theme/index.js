@@ -26,7 +26,7 @@ const theme = {
     red: '#F95758',
     yellow: '#EFDC39',
     blue: '#5566C3',
-    text: '#282409',
+    text: '#222222',
     whiteText: '#FFFFFF',
     greyText: '#757361',
     lightGreyText: '#7E7C6B',

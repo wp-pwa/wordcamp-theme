@@ -22,9 +22,9 @@ const Container = styled.div`
   box-sizing: border-box;
   margin: 0;
 
-  font-size: 14px;
+  font-size: 16px;
   line-height: 20px;
-  color: ${({ theme }) => theme.color.darkGrey};
+  color: ${({ theme }) => theme.color.text};
 
   & > *:first-child {
     margin-top: 0;
