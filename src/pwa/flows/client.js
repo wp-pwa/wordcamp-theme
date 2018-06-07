@@ -16,6 +16,8 @@ const announcementsMiddleware = theme => (call, next) => {
     if (call.tree.connection.selectedItem.type === 'latest') {
       if (type === 'post') theme.announcements.set(strId, false);
       else theme.announcements.markAllAsRead();
+    } else if (type === 'post') {
+      theme.announcements.set(strId, false);
     }
   }
 
