@@ -51,10 +51,7 @@ export default types
         ? result
             .reduce((final, current) => {
               current.forEach(session => {
-                if (!final.includes(session)) {
-                  console.log('session:', session);
-                  final.push(session);
-                }
+                if (!final.includes(session)) final.push(session);
               });
               return final;
             }, [])
