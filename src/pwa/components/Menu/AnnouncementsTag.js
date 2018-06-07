@@ -24,7 +24,7 @@ const Container = styled.span`
   height: 16px;
   width: 16px;
   font-size: 10px;
-  line-height: 10px;
+  line-height: 16px;
   border-radius: 50%;
   top: 8px;
   right: 8px;
