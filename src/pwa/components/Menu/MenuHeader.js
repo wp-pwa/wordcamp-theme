@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { inject } from 'mobx-react';
 import styled from 'react-emotion';
-import CloseIcon from '../CloseIcon';
+import Close from '../Icons/Close';
 import Logo from '../TopBar/Logo';
 
 const MenuHeader = ({ close }) => (
@@ -12,7 +12,7 @@ const MenuHeader = ({ close }) => (
       <Title>Menu</Title>
     </InnerContainer>
     <CloseButton onClick={close}>
-      <CloseIcon />
+      <Close />
     </CloseButton>
   </Container>
 );

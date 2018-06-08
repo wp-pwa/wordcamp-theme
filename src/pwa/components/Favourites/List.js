@@ -2,38 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { inject } from 'mobx-react';
 import styled from 'react-emotion';
-import Card from '../Home/Card';
+import DayList from './DayList';
 
 const List = ({ firstDayFavouriteSessions, secondDayFavouriteSessions }) => (
   <Container>
-    <SessionDay>Friday, June 15th</SessionDay>
-    {firstDayFavouriteSessions.length ? (
-      firstDayFavouriteSessions.map(session => (
-        <Card
-          key={session.id}
-          session={session}
-          columns={firstDayFavouriteSessions.map(({ type, id, page }) => [{ type, id, page }])}
-          isFavorite={!!session.isFavorite}
-          isSpecial={!session.hasSpeakers}
-        />
-      ))
-    ) : (
-      <NoFavourites>No favourite sessions this day</NoFavourites>
-    )}
-    <SessionDay>Saturday, June 16th</SessionDay>
-    {secondDayFavouriteSessions.length ? (
-      secondDayFavouriteSessions.map(session => (
-        <Card
-          key={session.id}
-          session={session}
-          columns={secondDayFavouriteSessions.map(({ type, id, page }) => [{ type, id, page }])}
-          isFavorite={!!session.isFavorite}
-          isSpecial={!session.hasSpeakers}
-        />
-      ))
-    ) : (
-      <NoFavourites>No favourite sessions this day</NoFavourites>
-    )}
+    <Day>Friday, June 15th</Day>
+    <DayList sessions={firstDayFavouriteSessions} />
+    <Day>Saturday, June 16th</Day>
+    <DayList sessions={secondDayFavouriteSessions} />
   </Container>
 );
 
@@ -54,16 +30,11 @@ const Container = styled.div`
   padding: 0 24px;
 `;
 
-const SessionDay = styled.h2`
+const Day = styled.h2`
   margin: 0;
   margin-top: 24px;
   font-size: 22px;
   color: ${({ theme }) => theme.color.text};
   align-self: flex-start;
   line-height: 22px;
-`;
-
-const NoFavourites = styled.p`
-  font-size: 16px;
-  color: ${({ theme }) => theme.color.greyText};
 `;

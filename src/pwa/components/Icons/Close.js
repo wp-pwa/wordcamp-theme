@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'react-emotion';
 
-const CloseIcon = () => (
+const Close = () => (
   <Container>
     <Svg
       width="12px"
@@ -48,7 +48,7 @@ const CloseIcon = () => (
   </Container>
 );
 
-export default CloseIcon;
+export default Close;
 
 const Container = styled.div`
   box-sizing: border-box;
