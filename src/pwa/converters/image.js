@@ -23,12 +23,7 @@ export default {
       const attachmentId = parseInt(attributes.dataset.attachmentId, 10);
 
       return (
-        <Image
-          key={attachmentId}
-          id={attachmentId}
-          width={width ? `${width}px` : null}
-          height={height ? `${height}px` : null}
-        />
+        <Image key={attachmentId} id={attachmentId} width={width || null} height={height || null} />
       );
     }
 
@@ -53,8 +48,8 @@ export default {
         alt={alt}
         src={he.decode(src)}
         srcSet={srcset ? he.decode(srcset) : null}
-        width={width ? `${width}px` : null}
-        height={height ? `${height}px` : null}
+        width={width || null}
+        height={height || null}
       />
     );
   },
