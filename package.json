@@ -21,6 +21,7 @@
     "he": "^1.1.1",
     "himalaya": "^1.1.0",
     "moment-timezone": "^0.5.17",
+    "pulltorefreshjs": "git+https://git@github.com/BoxFactura/pulltorefresh.js.git",
     "rc-switch": "^1.6.0",
     "react-image-lightbox": "^5.0.0",
     "react-select": "^2.0.0-beta.5",
