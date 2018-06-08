@@ -8,6 +8,11 @@ Finally, use `npm run start:pwa` to start the development environment.
 
 ## Changelog
 
+#### 1.1.5
+
+- Image styling
+- Remove announcements author and add hour
+
 #### 1.1.4
 
 - Add menu NavBar to all the items in the menu
