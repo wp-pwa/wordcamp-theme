@@ -4,8 +4,6 @@ import { inject } from 'mobx-react';
 import Slider from '../Slider';
 import NowNext from './NowNext';
 import Schedule from './Schedule';
-import TopBar from '../TopBar';
-import Menu from '../Menu';
 import Nav from './Nav';
 
 const OnNow = inject(({ theme }) => ({ sessions: theme.sessionsOnNow }))(NowNext);
@@ -20,8 +18,6 @@ const Home = ({ columns, selectedColumnIndex, handleOnTransitionEnd }) => (
         return <Schedule key={mstId} />;
       })}
     </Slider>
-    <TopBar />
-    <Menu />
     <Nav />
   </Fragment>
 );

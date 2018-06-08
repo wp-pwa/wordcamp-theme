@@ -1,14 +1,10 @@
 import React from 'react';
 import styled from 'react-emotion';
 import List from './List';
-import TopBar from '../TopBar';
-import Menu from '../Menu';
 
 const Favourites = () => (
   <Container>
     <List />
-    <TopBar />
-    <Menu />
   </Container>
 );
 

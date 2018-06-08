@@ -14,6 +14,8 @@ import Posts from '../Posts';
 import Pages from '../Pages';
 import Announcements from '../Announcements';
 import Favourites from '../Favourites';
+import TopBar from '../TopBar';
+import Menu from '../Menu';
 
 import '../../styles';
 
@@ -120,6 +122,8 @@ class Theme extends Component {
           {contextName === 'page' && <Pages />}
           {contextName === 'announcements' && <Announcements />}
           {contextName === 'favourites' && <Favourites />}
+          <TopBar />
+          <Menu />
         </Fragment>
       </ThemeProvider>
     );

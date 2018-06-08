@@ -5,16 +5,12 @@ import styled from 'react-emotion';
 import Card from './Card';
 import Refresh from './Refresh';
 import NextPage from './NextPage';
-import TopBar from '../TopBar';
-import Menu from '../Menu';
 import { postsContext } from '../../contexts';
 
 const Announcements = ({ entities, list }) => {
   const context = postsContext(entities.map(({ type, id }) => [{ type, id }]));
   return (
     <Fragment>
-      <TopBar />
-      <Menu />
       <Container>
         <Refresh list={list} />
         {entities.map(entity => <Card key={entity.mstId} entity={entity} context={context} />)}

@@ -2,8 +2,6 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Slider from '../Slider';
 import Post from './Post';
-import TopBar from '../TopBar';
-import Nav from '../Nav';
 
 const Posts = ({ columns, selectedColumnIndex, handleOnTransitionEnd }) => (
   <Fragment>
@@ -15,8 +13,6 @@ const Posts = ({ columns, selectedColumnIndex, handleOnTransitionEnd }) => (
         return <Post key={selectedItem.mstId} post={selectedItem} />;
       })}
     </Slider>
-    <TopBar />
-    <Nav />
   </Fragment>
 );
 
