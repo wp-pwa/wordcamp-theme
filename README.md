@@ -8,6 +8,15 @@ Finally, use `npm run start:pwa` to start the development environment.
 
 ## Changelog
 
+#### 1.1.4
+
+- Add menu NavBar to all the items in the menu
+- Fix for repeated sessions
+- Fix for announcements not marked as read in swipe
+- Add link to topbar logo
+- Add sync icons to My Favourites SSR
+- Fixes for scroll on pages
+
 #### 1.1.3
 
 - Add Favorites
