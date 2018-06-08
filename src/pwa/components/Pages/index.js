@@ -1,30 +1,29 @@
-import React, { Component, Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { inject } from 'mobx-react';
-import Page from './Page';
-import Nav from '../Nav';
+import styled from 'react-emotion';
+import Content from '../Content';
 
-class Pages extends Component {
-  componentDidMount() {
-    window.scrollTo(0, 0);
-  }
+const Page = ({ content }) => (
+  <Container>
+    <Content content={content} padding={24} />
+  </Container>
+);
 
-  render() {
-    const { selectedItem } = this.props;
-
-    return (
-      <Fragment>
-        <Page key={selectedItem.mstId} entity={selectedItem.entity} />
-        <Nav />
-      </Fragment>
-    );
-  }
-}
-
-Pages.propTypes = {
-  selectedItem: PropTypes.shape({}).isRequired,
+Page.propTypes = {
+  content: PropTypes.string.isRequired,
 };
 
-export default inject(({ connection }) => ({
-  selectedItem: connection.selectedItem,
-}))(Pages);
+export default inject((_, { entity }) => ({
+  content: entity.content,
+}))(Page);
+
+const Container = styled.div`
+  box-sizing: border-box;
+  padding: 80px 0;
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+`;

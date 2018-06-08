@@ -11,9 +11,10 @@ import Sessions from '../Sessions';
 import Speakers from '../Speakers';
 import Venues from '../Venues';
 import Posts from '../Posts';
-import Pages from '../Pages';
 import Announcements from '../Announcements';
 import Favourites from '../Favourites';
+import Menus from '../Menus';
+import CodeOfConduct from '../CodeOfConduct';
 import TopBar from '../TopBar';
 import Menu from '../Menu';
 
@@ -119,9 +120,10 @@ class Theme extends Component {
               handleOnTransitionEnd={this.handleOnTransitionEnd}
             />
           )}
-          {contextName === 'page' && <Pages />}
           {contextName === 'announcements' && <Announcements />}
           {contextName === 'favourites' && <Favourites />}
+          {contextName === 'menus' && <Menus />}
+          {contextName === 'code-of-conduct' && <CodeOfConduct />}
           <TopBar />
           <Menu />
         </Fragment>

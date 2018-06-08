@@ -97,13 +97,45 @@ export const favouritesContext = {
     [
       {
         type: 'page',
-        id: 206,
+        id: consts.PAGE_MENU_FAVOURITES,
       },
     ],
   ],
   options: {
     name: 'favourites',
     title: 'My Favourites',
+    color: 'grey',
+  },
+};
+
+export const menusContext = {
+  columns: [
+    [
+      {
+        type: 'page',
+        id: consts.PAGE_MENU_MENUS,
+      },
+    ],
+  ],
+  options: {
+    name: 'menus',
+    title: 'Menus',
+    color: 'grey',
+  },
+};
+
+export const cocContext = {
+  columns: [
+    [
+      {
+        type: 'page',
+        id: consts.PAGE_MENU_COC,
+      },
+    ],
+  ],
+  options: {
+    name: 'code-of-conduct',
+    title: 'Code Of Conduct',
     color: 'grey',
   },
 };
@@ -133,9 +165,4 @@ export const speakersContext = memoize((columns = []) => ({
     title: 'Speaker',
     color: 'lightGrey',
   },
-}));
-
-export const pageContext = memoize(({ id, title, color = 'grey' }) => ({
-  columns: [[{ type: 'page', id }]],
-  options: { name: 'page', title, color },
 }));

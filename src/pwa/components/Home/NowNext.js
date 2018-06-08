@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import CardsList from './CardsList';
-import Page from '../Pages/Page';
+import Page from '../Pages';
 
 const NowNext = ({ sessions }) =>
   sessions.some(s => s.type === 'page') ? (

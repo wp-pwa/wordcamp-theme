@@ -4,10 +4,12 @@ import {
   venueContext,
   announcementsContext,
   creditsContext,
-  pageContext,
   postsContext,
   favouritesContext,
+  menusContext,
+  cocContext,
 } from '../contexts';
+import * as consts from '../consts';
 
 const extractId = href => /\/(\d+)$/g.exec(href)[1];
 const extractGravatar = url => (/gravatar\.com\/avatar\/([0-9A-Fa-f]+)/.exec(url) || [])[1];
@@ -50,10 +52,10 @@ export default self =>
 
     if (type === 'page') {
       if ([23, 26, 28, 30, 32, 34].includes(id)) action.context = venueContext;
-      else if (id === 36) action.context = creditsContext;
-      else if (id === 76) action.context = pageContext({ id, title: 'Code of Conduct' });
-      else if (id === 78) action.context = pageContext({ id, title: 'Menus' });
-      else if (id === 206) action.context = favouritesContext;
+      else if (id === consts.PAGE_CREDITS) action.context = creditsContext;
+      else if (id === consts.PAGE_MENU_FAVOURITES) action.context = favouritesContext;
+      else if (id === consts.PAGE_MENU_MENUS) action.context = menusContext;
+      else if (id === consts.PAGE_MENU_COC) action.context = cocContext;
       else action.context = homeContext;
     } else if (type === 'latest' && id === 'post') {
       action.context = announcementsContext;

@@ -6,7 +6,8 @@ import {
   homeContext,
   venueContext,
   announcementsContext,
-  pageContext,
+  menusContext,
+  cocContext,
   favouritesContext,
 } from '../../contexts';
 import Link from '../Link';
@@ -47,12 +48,12 @@ const routes = {
   menus: {
     type: 'page',
     id: PAGE_MENU_MENUS,
-    context: pageContext({ id: PAGE_MENU_MENUS, title: 'Menus' }),
+    context: menusContext,
   },
   'code-of-conduct': {
     type: 'page',
     id: PAGE_MENU_COC,
-    context: pageContext({ id: PAGE_MENU_COC, title: 'Code of Conduct' }),
+    context: cocContext,
   },
 };
 
