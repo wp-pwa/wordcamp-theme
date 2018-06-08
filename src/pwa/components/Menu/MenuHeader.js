@@ -7,7 +7,7 @@ import Logo from '../TopBar/Logo';
 
 const MenuHeader = ({ close }) => (
   <Container>
-    <InnerContainer>
+    <InnerContainer onClick={close}>
       <Logo />
       <Title>Menu</Title>
     </InnerContainer>
