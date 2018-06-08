@@ -122,28 +122,28 @@ export default self =>
       type: 'page',
       id: 52,
       sessionTitle: 'CONTRIBUTORS',
-      sessionTimestamp: new Date('2018-06-14T08:00:00+02:00').getTime(), // check time
+      sessionTimestamp: new Date('2018-06-14T08:00:00+02:00').getTime(),
       tracks: allTrackIds,
     };
     const thursdayNight = {
       type: 'page',
       id: 56,
       sessionTitle: 'THURSDAY NIGHT',
-      sessionTimestamp: new Date('2018-06-14T18:00:00+02:00').getTime(), // check time
+      sessionTimestamp: new Date('2018-06-14T18:00:00+02:00').getTime(),
       tracks: allTrackIds,
     };
     const fridayNight = {
       type: 'page',
       id: 58,
       sessionTitle: 'FRIDAY NIGHT',
-      sessionTimestamp: new Date('2018-06-15T18:00:00+02:00').getTime(), // check time
+      sessionTimestamp: new Date('2018-06-15T18:00:00+02:00').getTime(),
       tracks: allTrackIds,
     };
     const afterParty = {
       type: 'page',
       id: 60,
       sessionTitle: 'AFTER PARTY',
-      sessionTimestamp: new Date('2018-06-16T20:00:00+02:00').getTime(), // check time
+      sessionTimestamp: new Date('2018-06-16T18:30:00+02:00').getTime(),
       tracks: allTrackIds,
     };
     const after = {
@@ -158,7 +158,7 @@ export default self =>
       type: 'page',
       id: 62,
       sessionTitle: 'AFTER',
-      sessionTimestamp: new Date('2019-06-17T02:00:00+02:00').getTime(),
+      sessionTimestamp: new Date('2029-06-17T02:00:00+02:00').getTime(),
       tracks: allTrackIds,
     };
 
