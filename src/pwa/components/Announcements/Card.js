@@ -6,15 +6,13 @@ import Media from '../Media';
 import Link from '../Link';
 import { formatDate } from '../../utils';
 
-const Card = ({ type, id, title, creationDate, authorName, featured, context, isNew }) => (
+const Card = ({ type, id, title, creationDate, featured, context, isNew }) => (
   <Link type={type} id={id} context={context}>
     <Container>
       <Media entity={featured} isRounded />
       <Title>{title}</Title>
       <Info>
         <Fecha>{creationDate}</Fecha>
-        <Dash>―</Dash>
-        <Author>{authorName}</Author>
       </Info>
       {isNew && <New>New</New>}
     </Container>
@@ -26,7 +24,6 @@ Card.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   creationDate: PropTypes.string.isRequired,
-  authorName: PropTypes.string.isRequired,
   featured: PropTypes.shape({}).isRequired,
   context: PropTypes.shape({}).isRequired,
   isNew: PropTypes.bool.isRequired,
@@ -36,8 +33,7 @@ export default inject(({ theme }, { entity }) => ({
   type: entity.type,
   id: entity.id,
   title: entity.title,
-  creationDate: formatDate(new Date(entity.creationDate), 'MMMM Do'),
-  authorName: entity.author.name,
+  creationDate: formatDate(new Date(entity.creationDate), 'MMMM Do, H:mm'),
   featured: entity.media.featured,
   isNew: theme.announcements.isNew(entity.id),
 }))(Card);
