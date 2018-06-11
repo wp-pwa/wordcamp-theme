@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'react-emotion';
 import List from './List';
 
-const Favourites = () => (
-  <Container>
-    <List />
-  </Container>
-);
+class Favourites extends Component {
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
+
+  render() {
+    return (
+      <Container>
+        <List />
+      </Container>
+    );
+  }
+}
 
 export default Favourites;
 
