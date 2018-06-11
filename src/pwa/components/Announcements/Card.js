@@ -46,6 +46,10 @@ const Container = styled.div`
   &:not(:last-child) {
     margin-bottom: 16px;
   }
+
+  &:first-child {
+    margin-top: 24px;
+  }
 `;
 
 const Title = styled.h2`
@@ -70,15 +74,6 @@ const Info = styled.div`
 `;
 
 const Fecha = styled.p`
-  margin: 0;
-`;
-
-const Dash = styled.p`
-  margin: 0;
-  padding: 0 8px;
-`;
-
-const Author = styled.p`
   margin: 0;
 `;
 

@@ -14,6 +14,10 @@ class Announcements extends Component {
     this.getCurrentPages = this.getCurrentPages.bind(this);
   }
 
+  componentDidMount() {
+    this.getCurrentPages();
+  }
+
   getCurrentPages() {
     const { type, id, fetchListPage, isFetching, fetchedPages } = this.props;
 
@@ -28,7 +32,7 @@ class Announcements extends Component {
     const { entities, list, context } = this.props;
     return (
       <Container>
-        <PullToRefresh onRefresh={this.getCurrentPages}>
+        <PullToRefresh onInit={this.getCurrentPages} onRefresh={this.getCurrentPages}>
           {entities.map(entity => <Card key={entity.mstId} entity={entity} context={context} />)}
         </PullToRefresh>
         <NextPage list={list} />
@@ -72,7 +76,7 @@ const Container = styled.div`
   box-sizing: border-box;
   width: 100vw;
   min-height: 100vh;
-  padding: 80px 0 24px 0;
+  padding: 56px 0 24px 0;
   display: flex;
   flex-direction: column;
   align-items: center;

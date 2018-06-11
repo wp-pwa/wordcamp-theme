@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Pull from 'pulltorefreshjs';
 
+import '../../styles/pullToRefresh';
+
 class PullToRefresh extends Component {
   constructor() {
     super();
@@ -12,6 +14,7 @@ class PullToRefresh extends Component {
   componentDidMount() {
     this.ptr = Pull.init({
       mainElement: '.pull-to-refresh',
+      triggerElement: '.pull-to-refresh',
       onRefresh: this.props.onRefresh,
     });
   }
