@@ -8,6 +8,12 @@ Finally, use `npm run start:pwa` to start the development environment.
 
 ## Changelog
 
+#### 1.1.6
+
+- Fix missing share bar
+- Add pull to refresh
+- Fix scroll on My Favorites
+
 #### 1.1.5
 
 - Image styling
