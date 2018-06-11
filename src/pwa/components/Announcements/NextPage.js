@@ -10,14 +10,23 @@ class NextPage extends Component {
     super();
     this.getNextPage = this.getNextPage.bind(this);
   }
-  getNextPage() {
-    const { type, id, fetchedPages, totalPages, fetchListPage, isFetching } = this.props;
-    if (!isFetching && totalPages && fetchedPages < totalPages) {
-      fetchListPage({ type, id, page: fetchedPages + 1 });
+
+  state = { isFetching: false };
+
+  async getNextPage() {
+    const { type, id, fetchedPages, totalPages, fetchListPage } = this.props;
+
+    if (!this.state.isFetching && totalPages && fetchedPages < totalPages) {
+      this.setState({ isFetching: true });
+      await fetchListPage({ type, id, page: fetchedPages + 1 });
+      this.setState({ isFetching: false });
     }
   }
+
   render() {
-    const { fetchedPages, totalPages, isFetching } = this.props;
+    const { fetchedPages, totalPages } = this.props;
+    const { isFetching } = this.state;
+
     return fetchedPages < totalPages || (fetchedPages === totalPages && isFetching) ? (
       <Waypoint onEnter={this.getNextPage} bottomOffset={-200} scrollableAncestor="window">
         <Container>{isFetching ? <Fetching /> : null}</Container>
@@ -29,7 +38,6 @@ class NextPage extends Component {
 NextPage.propTypes = {
   type: PropTypes.string.isRequired,
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  isFetching: PropTypes.bool.isRequired,
   fetchedPages: PropTypes.number.isRequired,
   totalPages: PropTypes.number.isRequired,
   fetchListPage: PropTypes.func.isRequired,
@@ -38,7 +46,6 @@ NextPage.propTypes = {
 export default inject(({ connection }, { list }) => ({
   type: list.type,
   id: list.id,
-  isFetching: list.isFetching,
   fetchedPages: list.total.fetched.pages || 0,
   totalPages: list.total.pages || 0,
   fetchListPage: connection.fetchListPage,
