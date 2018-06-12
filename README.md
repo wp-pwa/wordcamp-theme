@@ -8,6 +8,10 @@ Finally, use `npm run start:pwa` to start the development environment.
 
 ## Changelog
 
+#### 1.1.7
+
+- Use content images for Venues 
+
 #### 1.1.6
 
 - Fix missing share bar
