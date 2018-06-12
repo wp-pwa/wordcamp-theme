@@ -7,18 +7,17 @@ import MenuList from './MenuList';
 import MenuNotifications from './MenuNotifications';
 import MenuLinks from './MenuLinks';
 
-const Menu = ({ isOpen, close }) =>
-  isOpen ? (
-    <Container>
-      <Overlay onClick={close} onTouchMove={close} />
-      <InnerContainer>
-        <MenuHeader />
-        <MenuList />
-        <MenuNotifications />
-        <MenuLinks />
-      </InnerContainer>
-    </Container>
-  ) : null;
+const Menu = ({ isOpen, close }) => (
+  <Container isOpen={isOpen}>
+    <Overlay onClick={close} onTouchMove={close} isOpen={isOpen} />
+    <InnerContainer isOpen={isOpen}>
+      <MenuList />
+      <MenuNotifications />
+      <MenuLinks />
+    </InnerContainer>
+    <MenuHeader />
+  </Container>
+);
 
 Menu.propTypes = {
   isOpen: PropTypes.bool.isRequired,
@@ -38,19 +37,24 @@ const Container = styled.div`
   left: 0;
   color: ${({ theme }) => theme.color.text};
   z-index: 100;
+  visibility: ${({ isOpen }) => (isOpen ? 'visible' : 'hidden')};
+  transition: ${({ isOpen }) => (isOpen ? '' : 'visibility 0s ease-in 150ms')};
 `;
 
 const Overlay = styled.div`
+  filter: ${({ isOpen }) => (isOpen ? 'opacity(50%)' : 'opacity(0%)')};
+  transition: filter 150ms ease;
   width: 100%;
   height: 100%;
   background-color: ${({ theme }) => theme.color.black};
-  opacity: 0.5;
 `;
 
 const InnerContainer = styled.div`
   width: 100%;
   position: absolute;
-  top: 0;
+  top: ${({ theme }) => theme.size.button};
   left: 0;
   background-color: #fff;
+  transform: ${({ isOpen }) => (isOpen ? 'translateY(0%)' : 'translateY(-100%)')};
+  transition: transform 150ms ease-out;
 `;

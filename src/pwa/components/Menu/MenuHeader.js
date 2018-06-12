@@ -31,6 +31,9 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   background: #e9e9e6;
+  position: absolute;
+  top: 0;
+  left: 0;
 `;
 
 const InnerContainer = styled.div`
