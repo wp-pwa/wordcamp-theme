@@ -1,21 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'react-emotion';
+import { inject } from 'mobx-react';
 
-const Venue = ({ venue }) => (
+const Venue = ({ title, href }) => (
   <Container>
-    <Title>{venue.entity.title}</Title>
-    <a href={venue.entity.media.featured.original.url}>
-      <Image alt={venue.entity.media.featured.alt} src={venue.entity.media.featured.original.url} />
+    <Title>{title}</Title>
+    <a
+      target="_blank"
+      href={href}
+    >
+      <Image src={href} />
     </a>
   </Container>
 );
 
 Venue.propTypes = {
-  venue: PropTypes.shape({}).isRequired,
+  title: PropTypes.string.isRequired,
+  href: PropTypes.string.isRequired,
 };
 
-export default Venue;
+export default inject((_, { venue }) => ({
+  title: venue.entity.title,
+  href: /<p>(.+)</.exec(venue.entity.content)[1],
+}))(Venue);
 
 const Container = styled.div`
   box-sizing: border-box;
