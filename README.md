@@ -8,9 +8,15 @@ Finally, use `npm run start:pwa` to start the development environment.
 
 ## Changelog
 
+#### 1.1.8
+
+- Add animation menu
+- Fix server time
+- Reduce now interval to 10 secs
+
 #### 1.1.7
 
-- Use content images for Venues 
+- Use content images for Venues
 
 #### 1.1.6
 
