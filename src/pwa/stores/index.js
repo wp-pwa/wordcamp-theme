@@ -26,7 +26,7 @@ export default types
     speakersMap: types.optional(types.map(Speaker), {}),
     favoritesMap: types.optional(types.map(Favorite), {}),
     announcements: types.optional(Announcements, {}),
-    time: types.optional(types.Date, Date.now()),
+    time: types.optional(types.Date, () => Date.now()),
     isRealTime: false,
   })
   .views(self => {
