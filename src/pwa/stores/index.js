@@ -9,7 +9,7 @@ import Track from './track';
 import Speaker from './speaker';
 import Announcements from './announcements';
 
-const NOW_INTERVAL = 60000; // One minute
+const NOW_INTERVAL = 10000; // Ten seconds
 
 const Favorite = types.model('Favorite', {
   val: true,
